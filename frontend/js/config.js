@@ -2,7 +2,7 @@
 // ⚠️ IMPORTANT: Remplace ces valeurs avec tes propres clés avant de déployer en production
 const API_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api'
-    : 'https://ton-domaine.com/api'; // ← Remplace par ton URL de production
+    : 'https://french-connexion-ebook-2e0xd2y05-streetdrives-projects.vercel.app/api'; // Production URL
 
 // Stripe publishable key - MODE LIVE PRODUCTION ⚠️
 const STRIPE_PUBLISHABLE_KEY = 'pk_live_51Safd5FKeI89dgT28Zwt8FznPowY2Z7N0Mdls0AeSn3WEjIgULBlwcYfvFDousgjPEk7Zxl9ssqNlCcImPOmx5LC00yH2Djj9g';
