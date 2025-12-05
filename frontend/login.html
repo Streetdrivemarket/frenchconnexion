@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - French Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .fleur-de-lys {
+            font-size: 32px;
+            color: #ffffff;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 400px;
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #000000;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 45px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            user-select: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .toggle-password:hover {
+            opacity: 1;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 11px;
+            cursor: pointer;
+            text-transform: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .error-message {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #000000;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .auth-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        .auth-footer a {
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid #ffffff;
+            transition: opacity 0.3s;
+        }
+
+        .auth-footer a:hover {
+            opacity: 0.7;
+        }
+
+        .auth-footer p {
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .fleur-de-lys {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .login-box {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <span class="fleur-de-lys">⚜</span>
+        <div class="logo">French Connexion</div>
+        <span class="fleur-de-lys">⚜</span>
+    </div>
+
+    <div class="login-box">
+        <h1>Connexion</h1>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="ton@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" required placeholder="••••••••">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password', this)">🙈</span>
+                </div>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Se souvenir de moi</label>
+            </div>
+
+            <button type="submit" class="btn-submit">Se connecter</button>
+
+            <div id="error-message" class="error-message" style="display: none;"></div>
+        </form>
+
+        <div class="auth-footer">
+            <p><a href="forgot-password.html">Mot de passe oublié ?</a></p>
+            <p>Pas encore de compte ? <a href="register.html">Inscription</a></p>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script>
+        // Fonction pour afficher/masquer le mot de passe
+        function togglePasswordVisibility(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = '👁️'; // Œil ouvert = visible
+            } else {
+                input.type = 'password';
+                icon.textContent = '🙈'; // Œil fermé = masqué
+            }
+        }
+    </script>
+    <script src="js/login.js"></script>
+</body>
+</html>

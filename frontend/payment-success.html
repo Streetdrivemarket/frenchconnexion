@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement Réussi - French Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .fleur-de-lys {
+            font-size: 32px;
+            color: #ffffff;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .success-box {
+            width: 100%;
+            max-width: 600px;
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .checkmark {
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke: #ffffff;
+            fill: none;
+            animation: stroke-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark-check {
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            stroke-width: 3;
+            stroke: #ffffff;
+            fill: none;
+            animation: stroke-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke-circle {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes stroke-check {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            border: 1px solid #ffffff;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .info-box h2 {
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ffffff;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item strong {
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .email-notice {
+            background-color: #1a1a1a;
+            border: 1px solid #ffffff;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+        }
+
+        .email-notice strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .fleur-de-lys {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .success-box {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <span class="fleur-de-lys">⚜</span>
+        <div class="logo">French Connexion</div>
+        <span class="fleur-de-lys">⚜</span>
+    </div>
+
+    <div class="success-box">
+        <div class="success-icon">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+        </div>
+        <h1>Paiement Réussi !</h1>
+        <p class="subtitle">
+            Bienvenue dans la French Connexion™<br>
+            Ton investissement en toi commence maintenant.
+        </p>
+
+        <div class="info-box">
+            <h2>Récapitulatif</h2>
+            <div class="info-item">
+                <span>Produit</span>
+                <strong>French Connexion™ Ebook</strong>
+            </div>
+            <div class="info-item">
+                <span>Montant payé</span>
+                <strong>19,99€</strong>
+            </div>
+            <div class="info-item">
+                <span>Date</span>
+                <strong id="payment-date">-</strong>
+            </div>
+            <div class="info-item">
+                <span>Email</span>
+                <strong id="user-email">-</strong>
+            </div>
+        </div>
+
+        <a href="reader.html" class="btn-primary">Accéder à mon Ebook</a>
+
+        <div class="email-notice">
+            <strong>📧 Email de confirmation envoyé</strong>
+            <p>Un email de confirmation avec ton reçu de paiement a été envoyé à ton adresse email.</p>
+            <p>Vérifie également tes spams si tu ne le trouves pas.</p>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script>
+        // Vérifier que l'utilisateur est connecté et a payé
+        if (!isAuthenticated()) {
+            window.location.href = 'login.html';
+        }
+
+        // Afficher les infos utilisateur
+        const user = getUser();
+        if (user) {
+            document.getElementById('user-email').textContent = user.email;
+        }
+
+        // Afficher la date du jour
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('fr-FR', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        document.getElementById('payment-date').textContent = dateStr;
+    </script>
+</body>
+</html>

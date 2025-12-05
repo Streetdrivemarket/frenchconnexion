@@ -1,0 +1,3601 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - French Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        /* HEADER */
+        .dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background-color: #000000;
+            border-bottom: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            color: #ffffff;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+        }
+
+        .btn-logout {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-logout:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        /* MAIN SIDEBAR MENU (LEFT) */
+        .main-sidebar {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 80px;
+            height: calc(100vh - 80px);
+            background-color: #000000;
+            border-right: 2px solid #ffffff;
+            padding: 20px 0;
+            z-index: 999;
+            transition: width 0.3s ease;
+            overflow: hidden;
+        }
+
+        .main-sidebar:hover {
+            width: 280px;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        /* Menu Section (rabattable) */
+        .menu-section {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-section-header {
+            padding: 18px 25px;
+            color: #ffffff;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .menu-section-header:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-section-header .menu-icon {
+            font-size: 18px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .menu-section-header .menu-text {
+            margin-left: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .main-sidebar:hover .menu-section-header .menu-text {
+            opacity: 1;
+        }
+
+        .menu-section-icon {
+            font-size: 12px;
+            transition: transform 0.3s;
+            margin-left: auto;
+            opacity: 0;
+        }
+
+        .main-sidebar:hover .menu-section-icon {
+            opacity: 1;
+        }
+
+        .menu-section.open .menu-section-icon {
+            transform: rotate(180deg);
+        }
+
+        .menu-section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .menu-section.open .menu-section-content {
+            max-height: 500px;
+        }
+
+        .menu-item {
+            padding: 15px 25px 15px 25px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .menu-item .menu-icon {
+            font-size: 16px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .menu-item .menu-text {
+            margin-left: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .main-sidebar:hover .menu-item .menu-text {
+            opacity: 1;
+        }
+
+        .menu-item:hover {
+            opacity: 1;
+            border-left: 4px solid #ffffff;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-item.active {
+            opacity: 1;
+            border-left: 4px solid #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+            font-weight: 500;
+        }
+
+        /* MAIN CONTENT AREA */
+        .main-content {
+            margin-left: 80px;
+            margin-top: 80px;
+            padding: 60px 80px;
+            min-height: calc(100vh - 80px);
+            background-color: #000000;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* DASHBOARD HOME */
+        .dashboard-home {
+            text-align: center;
+            padding: 100px 40px;
+        }
+
+        .dashboard-home h1 {
+            font-size: 48px;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .dashboard-home p {
+            font-size: 16px;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+
+        .welcome-box {
+            border: 2px solid #ffffff;
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 700px;
+        }
+
+        .welcome-box p {
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        /* EBOOK SECTION */
+        .ebook-container {
+            position: relative;
+        }
+
+        .ebook-sidebar {
+            position: fixed;
+            top: 80px;
+            left: 80px;
+            width: 70px;
+            height: calc(100vh - 80px);
+            background-color: #000000;
+            border-right: 2px solid #ffffff;
+            padding: 20px 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 998;
+            transition: width 0.3s ease;
+        }
+
+        .ebook-sidebar:hover {
+            width: 250px;
+        }
+
+        .ebook-sidebar h3 {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #ffffff;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ebook-sidebar:hover h3 {
+            opacity: 1;
+        }
+
+        .chapters-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .chapter-link {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .chapter-link .chapter-icon {
+            font-size: 16px;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .chapter-link .chapter-text {
+            margin-left: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ebook-sidebar:hover .chapter-link .chapter-text {
+            opacity: 1;
+        }
+
+        .chapter-link:hover {
+            border-left: 4px solid #ffffff;
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .chapter-link.active {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 500;
+            opacity: 1;
+            border-left: 4px solid #ffffff;
+        }
+
+        .chapter-link.active .chapter-icon {
+            filter: invert(1);
+        }
+
+        .ebook-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .ebook-sidebar::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        .ebook-sidebar::-webkit-scrollbar-thumb {
+            background: #ffffff;
+        }
+
+        .ebook-content {
+            margin-left: 70px;
+            padding: 40px 60px 120px;
+            max-width: 1000px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.03);
+            font-weight: bold;
+            pointer-events: none;
+            z-index: 1;
+            white-space: nowrap;
+        }
+
+        .chapter {
+            display: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .chapter.active {
+            display: block;
+        }
+
+        .chapter h1 {
+            font-size: 36px;
+            color: #ffffff;
+            margin-bottom: 30px;
+            line-height: 1.4;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .chapter h2 {
+            font-size: 28px;
+            color: #ffffff;
+            margin: 40px 0 20px;
+            line-height: 1.4;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .chapter h3 {
+            font-size: 20px;
+            color: #ffffff;
+            margin: 30px 0 15px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .chapter p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        .chapter ul, .chapter ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .chapter li {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter strong {
+            font-weight: 700;
+        }
+
+        .chapter em {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Special Styles */
+        .quote-highlight {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 30px;
+            border: 2px solid #ffffff;
+            margin: 30px 0;
+            font-size: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .emphasis-box {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .emphasis-box strong {
+            font-size: 18px;
+        }
+
+        .big-text {
+            font-size: 24px !important;
+            font-weight: 700;
+            text-align: center;
+            margin: 30px 0;
+            letter-spacing: 2px;
+        }
+
+        .truth-box {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 30px;
+            border: 2px solid #ffffff;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .truth-box p {
+            font-size: 20px;
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .truth-box strong {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .final-truth {
+            font-size: 22px !important;
+            font-weight: 700;
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+        }
+
+        /* ==========================================
+           OUTILS INTERACTIFS
+           ========================================== */
+
+        .tool-section {
+            margin: 40px 0;
+            border: 2px solid #ffffff;
+            background-color: #000000;
+        }
+
+        .tool-toggle-btn {
+            width: 100%;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-toggle-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .tool-icon {
+            font-size: 24px;
+        }
+
+        .tool-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .tool-content.active {
+            padding: 40px;
+            max-height: 2000px;
+        }
+
+        .tool-content h3 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .tool-form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group textarea::placeholder {
+            color: #666666;
+            font-size: 11px;
+        }
+
+        .tool-save-btn {
+            width: 100%;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tool-save-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .tool-saved-message {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #1a1a1a;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tool-saved-message.show {
+            opacity: 1;
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #ffffff;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================
+           MES NOTES SECTION
+           ========================================== */
+
+        .notes-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .notes-container h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .note-card {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .note-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .note-card-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .note-edit-btn {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .note-edit-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .note-card-content {
+            padding: 30px;
+        }
+
+        .note-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #ffffff;
+            opacity: 0.7;
+        }
+
+        .note-empty p {
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .note-filled {
+            color: #ffffff;
+        }
+
+        .note-field {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .note-field:last-of-type {
+            border-bottom: none;
+        }
+
+        .note-field strong {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+
+        .note-field p {
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .note-meta {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: right;
+        }
+
+        .note-meta small {
+            font-size: 11px;
+            opacity: 0.5;
+            letter-spacing: 0.5px;
+        }
+
+        .process-intro {
+            font-size: 16px !important;
+            font-style: italic;
+            text-align: center;
+            opacity: 0.8;
+            margin: 30px 0;
+        }
+
+        .highlight-text {
+            font-weight: 700;
+            font-size: 16px !important;
+        }
+
+        .key-point {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 25px;
+            border: 2px solid #ffffff;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .key-point p {
+            font-size: 18px;
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .transformation {
+            font-style: italic;
+            font-size: 18px !important;
+            text-align: center;
+            margin: 30px 0;
+            font-weight: 500;
+        }
+
+        .purpose {
+            font-size: 18px !important;
+            font-weight: 700;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .reality-check {
+            font-size: 20px !important;
+            font-weight: 700;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .critical-moment {
+            background-color: #000000;
+            border: 3px solid #ffffff;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .critical-moment p {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .transformation-final {
+            font-size: 20px !important;
+            font-weight: 700;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .chess-metaphor {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 30px;
+            border: 2px solid #ffffff;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .chess-metaphor p {
+            font-size: 16px;
+            color: #000000;
+            font-weight: 500;
+        }
+
+        .final-revelation {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 40px;
+            border: 2px solid #ffffff;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .final-revelation p {
+            font-size: 16px;
+            color: #000000;
+            margin: 15px 0;
+        }
+
+        .the-key {
+            font-size: 24px !important;
+            margin-top: 30px !important;
+            font-weight: 700;
+        }
+
+        .the-key strong {
+            font-size: 28px;
+        }
+
+        .action-challenge {
+            background-color: #000000;
+            border: 3px solid #ffffff;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .action-challenge h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .action-challenge p {
+            font-size: 16px;
+        }
+
+        .signature {
+            text-align: center;
+            margin: 60px 0 40px;
+            font-size: 20px;
+        }
+
+        /* NAVIGATION BUTTONS */
+        .reader-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .reader-nav.show {
+            display: flex;
+        }
+
+        .nav-btn {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #ffffff;
+            padding: 15px 30px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .main-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .main-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 40px 30px;
+            }
+
+            .ebook-sidebar {
+                left: 0;
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .ebook-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .ebook-content {
+                margin-left: 0;
+                padding: 30px 20px 120px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: 14px;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .dashboard-home h1 {
+                font-size: 32px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            .chapter h1 {
+                font-size: 28px;
+            }
+
+            .chapter h2 {
+                font-size: 22px;
+            }
+
+            .chapter p, .chapter li {
+                font-size: 13px;
+            }
+
+            .reader-nav {
+                flex-direction: column;
+                bottom: 20px;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 12px 25px;
+                font-size: 11px;
+            }
+        }
+
+        @media print {
+            body {
+                display: none !important;
+            }
+        }
+
+        /* Protection contre les screenshots */
+        .screenshot-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .screenshot-overlay.show {
+            display: flex;
+        }
+
+        /* ==========================================
+           PROGRESSION SECTION STYLES
+           ========================================== */
+
+        .progress-global {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .progress-percentage {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 30px;
+            background-color: #1a1a1a;
+            border: 2px solid #ffffff;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #ffffff;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-status {
+            font-size: 14px;
+            text-align: center;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .step-card {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .step-card.completed {
+            border-color: #4CAF50;
+            background-color: rgba(76, 175, 80, 0.05);
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        .step-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .step-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: #ffffff;
+        }
+
+        .step-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .step-number {
+            background-color: #ffffff;
+            color: #000000;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .step-card.completed .step-number {
+            background-color: #4CAF50;
+            color: #ffffff;
+        }
+
+        .step-name {
+            font-size: 16px;
+        }
+
+        .step-card.completed .step-name {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .step-expand-btn {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .step-expand-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .step-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .step-card.expanded .step-content {
+            max-height: 600px;
+            padding: 0 20px 20px;
+        }
+
+        .step-description {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #ffffff;
+        }
+
+        .step-notes {
+            width: 100%;
+            min-height: 120px;
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        .step-notes:focus {
+            outline: none;
+            border-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .step-save-btn {
+            width: 100%;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .step-save-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .step-message {
+            margin-top: 15px;
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            border: 2px solid #ffffff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .step-message.show {
+            opacity: 1;
+        }
+
+        .step-message.success {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+
+        .completion-message {
+            display: none;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 40px;
+            text-align: center;
+            border: 3px solid #ffffff;
+            margin-top: 40px;
+        }
+
+        .completion-message.show {
+            display: block;
+        }
+
+        .completion-message h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .completion-message p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .completion-message .highlight-text {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        /* Bouton de validation de progression */
+        .validate-progress-btn {
+            width: 100%;
+            max-width: 500px;
+            background-color: #ffffff;
+            color: #000000;
+            border: 3px solid #ffffff;
+            padding: 20px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .validate-progress-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        .validate-progress-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay de protection screenshot -->
+    <div class="screenshot-overlay" id="screenshot-overlay">
+        ⚠️ CAPTURE D'ÉCRAN DÉTECTÉE ⚠️<br><br>
+        Ce contenu est protégé.<br>
+        Merci de respecter les droits d'auteur.
+    </div>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <span style="font-size: 20px;">⚜</span>
+            <div class="logo">French Connexion</div>
+        </div>
+        <div class="header-right">
+            <span id="user-email" class="user-info"></span>
+            <button id="logout-btn" class="btn-logout">Déconnexion</button>
+        </div>
+    </header>
+
+    <!-- Main Menu Sidebar -->
+    <aside class="main-sidebar" id="main-sidebar">
+        <nav class="menu-items">
+            <!-- Dashboard Home -->
+            <a class="menu-item active" data-section="dashboard" style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                <span class="menu-icon">📊</span>
+                <span class="menu-text">Dashboard</span>
+            </a>
+
+            <!-- E-BOOK -->
+            <a class="menu-item" data-section="ebook">
+                <span class="menu-icon">📖</span>
+                <span class="menu-text">E-Book</span>
+            </a>
+
+            <!-- MA PROGRESSION -->
+            <a class="menu-item" data-section="progression">
+                <span class="menu-icon">📊</span>
+                <span class="menu-text">Ma Progression</span>
+            </a>
+
+            <!-- AFFILIATION -->
+            <a class="menu-item" href="affiliate-dashboard.html" style="border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 20px;">
+                <span class="menu-icon">💰</span>
+                <span class="menu-text">Affiliation</span>
+            </a>
+
+            <!-- CONTACT / TELEGRAM -->
+            <a class="menu-item" href="https://t.me/+f7WvDCHMszZkZmY0" target="_blank">
+                <span class="menu-icon">✈️</span>
+                <span class="menu-text">Telegram</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="main-content">
+
+        <!-- DASHBOARD HOME SECTION -->
+        <section class="content-section active" id="dashboard-section">
+            <div class="dashboard-home">
+                <h1>⚜ FÉLICITATIONS ⚜</h1>
+                <div class="welcome-box">
+                    <p style="font-size: 16px; font-weight: 700; margin-bottom: 20px; color: #ffffff;">
+                        Tu es là. Et ça change tout.
+                    </p>
+
+                    <p style="margin-bottom: 15px; color: #ffffff;">
+                        99% des gens ne passent jamais à l'action.<br>
+                        Ils lisent. Ils rêvent. Ils attendent.
+                    </p>
+
+                    <p style="font-weight: 700; margin-bottom: 25px; color: #ffffff;">
+                        Toi, tu as agi.
+                    </p>
+
+                    <p style="font-size: 15px; font-weight: 700; margin: 25px 0; color: #ffffff;">
+                        Maintenant, la vérité :
+                    </p>
+
+                    <p style="margin-bottom: 15px; color: #ffffff;">
+                        Personne ne viendra te sauver.<br>
+                        Pas tes parents. Pas ton boss. Pas un miracle.
+                    </p>
+
+                    <p style="font-weight: 700; margin-bottom: 25px; color: #ffffff;">
+                        Il n'y a que toi.
+                    </p>
+
+                    <p style="font-size: 16px; font-weight: 700; margin: 30px 0; padding: 20px; border: 2px solid #ffffff; background-color: #000000; color: #ffffff;">
+                        Clique sur "E-Book" dans le menu.<br>
+                        Lis. Applique. Construis.
+                    </p>
+                </div>
+
+                <!-- Section Affiliation -->
+                <div class="welcome-box" style="margin-top: 40px; background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 3px solid #fff;">
+                    <h2 style="font-size: 20px; font-weight: 900; margin-bottom: 20px; color: #ffffff;">💰 GAGNE DE L'ARGENT AVEC FRENCH CONNEXION™</h2>
+
+                    <p style="font-size: 15px; font-weight: 700; margin-bottom: 15px; color: #ffffff;">
+                        Tu as lu l'ebook. Tu as aimé.<br>
+                        Maintenant, transforme-le en revenus.
+                    </p>
+
+                    <div style="background: #000; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                        <p style="font-size: 14px; margin-bottom: 10px; color: #ffffff;">
+                            ✅ <strong>10€ par vente</strong> (50% de commission)<br>
+                            ✅ <strong>Lien unique</strong> de parrainage<br>
+                            ✅ <strong>Dashboard</strong> pour suivre tes ventes<br>
+                            ✅ <strong>Paiement automatique</strong> chaque mois
+                        </p>
+                    </div>
+
+                    <p style="font-size: 13px; margin-bottom: 20px; opacity: 0.8; color: #ffffff;">
+                        5 ventes = 50€ | 10 ventes = 100€ | 50 ventes = 500€
+                    </p>
+
+                    <a href="affiliate-dashboard.html" style="display: inline-block; padding: 15px 40px; background: #fff; color: #000; text-decoration: none; font-weight: 900; border-radius: 5px; font-size: 14px; letter-spacing: 1px; transition: all 0.3s;">
+                        REJOINDRE LE PROGRAMME →
+                    </a>
+
+                    <p style="font-size: 12px; margin-top: 20px; opacity: 0.6; color: #ffffff;">
+                        Pas de spam. Pas de bullshit. Juste partager ton expérience.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- E-BOOK SECTION -->
+        <section class="content-section" id="ebook-section">
+            <!-- E-Book Sidebar (Table des Matières) -->
+            <div class="ebook-sidebar" id="ebook-sidebar">
+                <h3>Table des Matières</h3>
+                <nav class="chapters-nav">
+                    <a href="#intro" class="chapter-link active" data-chapter="intro">
+                        <span class="chapter-icon">📌</span>
+                        <span class="chapter-text">Introduction</span>
+                    </a>
+                    <a href="#chapitre-1" class="chapter-link" data-chapter="1">
+                        <span class="chapter-icon">💡</span>
+                        <span class="chapter-text">1. Une idée</span>
+                    </a>
+                    <a href="#chapitre-2" class="chapter-link" data-chapter="2">
+                        <span class="chapter-icon">✍️</span>
+                        <span class="chapter-text">2. L'écrire</span>
+                    </a>
+                    <a href="#chapitre-3" class="chapter-link" data-chapter="3">
+                        <span class="chapter-icon">📚</span>
+                        <span class="chapter-text">3. Apprendre</span>
+                    </a>
+                    <a href="#chapitre-4" class="chapter-link" data-chapter="4">
+                        <span class="chapter-icon">🧠</span>
+                        <span class="chapter-text">4. Comprendre</span>
+                    </a>
+                    <a href="#chapitre-5" class="chapter-link" data-chapter="5">
+                        <span class="chapter-icon">🎯</span>
+                        <span class="chapter-text">5. Écrire tes objectifs</span>
+                    </a>
+                    <a href="#chapitre-6" class="chapter-link" data-chapter="6">
+                        <span class="chapter-icon">⚠️</span>
+                        <span class="chapter-text">6. Pourquoi j'échouerai ?</span>
+                    </a>
+                    <a href="#chapitre-7" class="chapter-link" data-chapter="7">
+                        <span class="chapter-icon">🔍</span>
+                        <span class="chapter-text">7. Analyser</span>
+                    </a>
+                    <a href="#chapitre-8" class="chapter-link" data-chapter="8">
+                        <span class="chapter-icon">🛠️</span>
+                        <span class="chapter-text">8. Créer</span>
+                    </a>
+                    <a href="#chapitre-9" class="chapter-link" data-chapter="9">
+                        <span class="chapter-icon">🚀</span>
+                        <span class="chapter-text">9. Développer</span>
+                    </a>
+                    <a href="#schema" class="chapter-link" data-chapter="schema">
+                        <span class="chapter-icon">📊</span>
+                        <span class="chapter-text">Le Schéma</span>
+                    </a>
+                    <a href="#questions" class="chapter-link" data-chapter="questions">
+                        <span class="chapter-icon">🎯</span>
+                        <span class="chapter-text">20 Questions</span>
+                    </a>
+                    <a href="#revelation" class="chapter-link" data-chapter="revelation">
+                        <span class="chapter-icon">💥</span>
+                        <span class="chapter-text">Révélation & Action</span>
+                    </a>
+                    <a href="#conclusion" class="chapter-link" data-chapter="conclusion">
+                        <span class="chapter-icon">🏆</span>
+                        <span class="chapter-text">Conclusion</span>
+                    </a>
+                    <a href="#message-final" class="chapter-link" data-chapter="message-final">
+                        <span class="chapter-icon">🔥</span>
+                        <span class="chapter-text">Message Final</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- E-Book Content -->
+            <div class="ebook-content">
+                <div class="watermark" id="watermark"></div>
+
+                <div class="chapter active" id="intro">
+                    <h1>Introduction</h1>
+
+                    <p style="font-size: 20px; font-weight: 700; margin: 30px 0; color: #ffffff;">Voici le deal :</p>
+
+                    <p style="margin-bottom: 20px; font-size: 16px; color: #ffffff;">
+                        Je ne vais pas te motiver.<br>
+                        Je ne vais pas te faire rêver.
+                    </p>
+
+                    <p style="margin-bottom: 25px; font-size: 16px; color: #ffffff;">
+                        Je vais te donner un processus.<br>
+                        <strong style="font-size: 22px;">9 étapes.</strong>
+                    </p>
+
+                    <div class="emphasis-box">
+                        <p><strong>Tu les appliques = tu construis quelque chose.</strong></p>
+                        <p><strong>Tu ne les appliques pas = tu as gaspillé 20€.</strong></p>
+                    </div>
+
+                    <p class="big-text">Simple.</p>
+
+                    <div class="final-truth">On commence.</div>
+                </div>
+
+                <div class="chapter" id="chapitre-1">
+                    <h1>Chapitre 1 — L'IDÉE</h1>
+                    <p class="process-intro"><em>Le Processus French Connexion™</em></p>
+
+                    <p>Tout le monde demande :<br>
+                    "C'est quoi la meilleure idée business en 2026 ?"</p>
+
+                    <p>Mauvaise question.<br>
+                    Si quelqu'un l'avait, il serait déjà en train de la construire… pas en train de te la donner.</p>
+
+                    <p class="highlight-text">La vraie question :</p>
+
+                    <div class="emphasis-box">
+                        <p><strong>"Quelle idée peut marcher POUR MOI ?</strong></p>
+                        <p><strong>Avec mes forces, mes limites et ma réalité."</strong></p>
+                    </div>
+
+                    <p>Parce qu'une idée parfaite pour quelqu'un d'autre peut être un échec total pour toi.</p>
+
+                    <h2>🧩 La vérité</h2>
+
+                    <p>Une idée n'a pas besoin d'être brillante.<br>
+                    Seulement :</p>
+
+                    <ul>
+                        <li>simple à comprendre,</li>
+                        <li>assez claire pour être écrite,</li>
+                        <li>assez concrète pour être testée,</li>
+                        <li>assez tienne pour être portée jusqu'au bout.</li>
+                    </ul>
+
+                    <p>Les entrepreneurs ne commencent pas avec la meilleure idée.<br>
+                    Ils commencent avec leur idée.</p>
+
+                    <h2>🔥 Le principe French Connexion™</h2>
+
+                    <div class="key-point">
+                        <p>"Une idée non écrite = une idée morte."</p>
+                    </div>
+
+                    <p>Dans ta tête, elle n'existe pas.<br>
+                    Sur papier, elle devient réelle.<br>
+                    Et tout ce qui est réel peut être amélioré.</p>
+
+                    <p class="highlight-text">Écrire ton idée, c'est ton premier acte d'entrepreneur.</p>
+
+                    <h2>✨ Peu importe sa forme</h2>
+
+                    <p>Petite.<br>
+                    Folle.<br>
+                    Bancale.<br>
+                    Simpliste.</p>
+
+                    <p class="big-text">On s'en fout.</p>
+
+                    <p>Ce qui compte, c'est son potentiel, pas sa perfection.</p>
+
+                    <p class="transformation">Tu ne trouves pas une idée.<br>
+                    Tu la construis.</p>
+
+                    <h2>🦾 Message clé</h2>
+
+                    <div class="truth-box">
+                        <p>Tu n'as pas besoin de la meilleure idée.<br>
+                        Tu as besoin d'une idée adaptée à toi, que tu peux écrire, clarifier, analyser… puis transformer.</p>
+                    </div>
+
+                    <p class="purpose">C'est là que commence le vrai entrepreneuriat.</p>
+
+                    <h2>🔥 Ce que tu dois faire MAINTENANT</h2>
+
+                    <p>Arrête de lire.<br>
+                    Prends une feuille et un stylo.</p>
+
+                    <p>Pas demain.<br>
+                    Pas "quand tu seras prêt".<br>
+                    Maintenant.</p>
+
+                    <div class="critical-moment">
+                        <p><strong>Parce que si tu ne l'écris pas maintenant…<br>
+                        tu ne l'écriras jamais.</strong></p>
+                    </div>
+
+                    <h3>✍️ 1. Écris ton rêve en une phrase</h3>
+
+                    <p>Pas un roman.<br>
+                    Une phrase.</p>
+
+                    <p class="highlight-text">"Quel est le résultat final que je veux atteindre ?"</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>Ouvrir mon garage.</li>
+                        <li>Lancer ma marque de vêtements.</li>
+                        <li>Écrire mon premier livre.</li>
+                        <li>Devenir freelance en photo.</li>
+                    </ul>
+
+                    <p class="transformation">Simple. Direct. Réel.</p>
+
+                    <h3>⏱️ 2. Écris une date</h3>
+
+                    <div class="key-point">
+                        <p>Un rêve sans date = un fantasme.</p>
+                    </div>
+
+                    <p>"Quand est-ce que je veux avoir atteint cet objectif ?"</p>
+
+                    <p>1 an ?<br>
+                    6 mois ?<br>
+                    3 ans ?<br>
+                    Choisis. Pose-le.</p>
+
+                    <h3>🔍 3. Décris ta situation actuelle</h3>
+
+                    <p>Si tu veux aller quelque part, commence par où tu es.</p>
+
+                    <p><strong>Pose-toi ces questions :</strong></p>
+
+                    <ul>
+                        <li>Où j'en suis aujourd'hui ?</li>
+                        <li>Qu'est-ce que j'ai déjà ? (compétences, réseau, matériel, temps)</li>
+                        <li>Qu'est-ce qu'il me manque ?</li>
+                        <li>Qu'est-ce qui me bloque réellement ?</li>
+                    </ul>
+
+                    <div class="emphasis-box">
+                        <p><strong>Exemple pour le garage :</strong></p>
+                        <p>– Compétence mécanique : OK<br>
+                        – Local : NON<br>
+                        – Économies : 0 €<br>
+                        – Confiance : moyenne<br>
+                        – Réseau : 2 potes mécanos</p>
+                    </div>
+
+                    <p class="highlight-text">Écris en vrai. Pas pour faire beau. Pour être lucide.</p>
+
+                    <h3>💸 4. Calcule le gap</h3>
+
+                    <p>L'écart entre où tu veux aller<br>
+                    et où tu es maintenant.</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>"J'ai besoin d'environ 15 000€ pour ouvrir mon garage."</li>
+                        <li>"Aujourd'hui j'ai 0 €."</li>
+                        <li>→ Gap : 15 000 €</li>
+                    </ul>
+
+                    <div class="truth-box">
+                        <p><strong>C'est ce gap que tu vas apprendre à combler.<br>
+                        C'est ton plan de bataille.</strong></p>
+                    </div>
+
+                    <h3>🧠 5. Le but de cet exercice</h3>
+
+                    <p>Ce n'est pas d'écrire quelque chose de parfait.<br>
+                    C'est de t'obliger à sortir ton rêve de ta tête<br>
+                    et de le faire entrer dans la réalité.</p>
+
+                    <div class="final-revelation">
+                        <p>Parce qu'on ne construit pas sa vie dans sa tête.<br>
+                        On la construit sur papier.</p>
+                        <p class="the-key"><strong>Puis dans l'action.</strong></p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="chapitre-2">
+                    <h1>🔥 2 — L'ÉCRIRE</h1>
+
+                    <p>Maintenant que tu as posé ton idée sur papier, tu viens de faire quelque chose que 99 % des gens ne feront jamais :<br>
+                    <strong>tu l'as rendue réelle.</strong></p>
+
+                    <p>Parce que tout ce qui reste dans ta tête finit par mourir.</p>
+
+                    <div class="key-point">
+                        <p>Une idée dans ton esprit, c'est comme un rêve qui s'évapore au réveil.<br>
+                        Une idée sur papier… c'est un projet qui commence à respirer.</p>
+                    </div>
+
+                    <h2>🧠 Pourquoi c'est si important ?</h2>
+
+                    <p>Parce que tant que ton idée reste dans ta tête :</p>
+
+                    <ul>
+                        <li>elle change tout le temps,</li>
+                        <li>elle se déforme,</li>
+                        <li>elle te semble trop grande,</li>
+                        <li>elle te fait peur,</li>
+                        <li>elle n'existe pour personne… même pas pour toi.</li>
+                    </ul>
+
+                    <p class="highlight-text">L'écrire, c'est lui donner une forme.</p>
+
+                    <p>C'est ton premier acte de création.<br>
+                    Ton premier investissement.<br>
+                    Ton premier engagement.</p>
+
+                    <h2>🏗️ L'exemple qui résume tout</h2>
+
+                    <p class="transformation">Personne ne construit une villa en commençant par les briques.</p>
+
+                    <p>On commence par une vision.<br>
+                    → "Je veux cette maison."</p>
+
+                    <p>Puis on la met sur papier.<br>
+                    → Plans, dessins, mesures.</p>
+
+                    <p>Ensuite seulement, on commence à la bâtir.<br>
+                    → Fondations, murs, toit.</p>
+
+                    <div class="emphasis-box">
+                        <p><strong>Si tu sautes l'étape du dessin, tu ne construis rien.<br>
+                        Tu improvises, tu t'écroules, tu recommences.</strong></p>
+                    </div>
+
+                    <p class="highlight-text">Ton idée, c'est pareil.</p>
+
+                    <div class="truth-box">
+                        <p><strong>La vision</strong> → dans ta tête<br>
+                        <strong>Le plan</strong> → sur papier<br>
+                        <strong>La construction</strong> → dans la réalité</p>
+                    </div>
+
+                    <h2>🦾 Le principe French Connexion™</h2>
+
+                    <div class="final-revelation">
+                        <p class="the-key"><strong>"Si tu ne peux pas l'écrire, tu ne pourras jamais le construire."</strong></p>
+                        <p>Écrire, c'est matérialiser.<br>
+                        Écrire, c'est clarifier.<br>
+                        Écrire, c'est commencer.</p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="chapitre-3">
+                    <h1>🔥 3 — APPRENDRE</h1>
+
+                    <p>Maintenant que ton idée est écrite, tu dois apprendre.<br>
+                    Pas pour devenir un expert.<br>
+                    Pas pour devenir le meilleur.<br>
+                    Juste pour éviter d'être aveugle.</p>
+
+                    <div class="key-point">
+                        <p>Un entrepreneur qui n'apprend pas marche dans le noir.<br>
+                        Un entrepreneur qui apprend sait où poser ses pieds.</p>
+                    </div>
+
+                    <h2>🧠 Comment appliquer ce chapitre à TON projet ?</h2>
+
+                    <p>Voici ce que tu dois faire maintenant, tout de suite :</p>
+
+                    <h3>✅ Étape 1 — Va chercher 3 informations essentielles sur TON idée</h3>
+
+                    <p>Tu notes simplement :</p>
+
+                    <ul>
+                        <li><strong>Comment ça marche ?</strong><br>
+                        (les bases, le fonctionnement général)</li>
+                        <li><strong>Qu'est-ce qui fait échouer les gens dans ce domaine ?</strong><br>
+                        (pièges, erreurs classiques, arnaques)</li>
+                        <li><strong>Qu'est-ce qu'il faut absolument maîtriser pour commencer ?</strong><br>
+                        (les fondamentaux, pas tout le métier)</li>
+                    </ul>
+
+                    <div class="emphasis-box">
+                        <p><strong>Tu n'as pas besoin de lire un livre complet.<br>
+                        Tu n'as pas besoin d'un diplôme.<br>
+                        Juste 10 à 20 minutes de recherche intelligente.</strong></p>
+                    </div>
+
+                    <h2>🔥 Exemple concret : tu veux ouvrir un garage ?</h2>
+
+                    <p>Voici comment tu "apprends" sans te perdre :</p>
+
+                    <h3>1 — Comment ça marche ?</h3>
+                    <p>Tu recherches :</p>
+                    <ul>
+                        <li>les types de garages qui existent,</li>
+                        <li>les services les plus demandés,</li>
+                        <li>les prix moyens,</li>
+                        <li>les obligations (sécurité, assurances, etc.).</li>
+                    </ul>
+
+                    <h3>2 — Pourquoi les garages échouent ?</h3>
+                    <p>Tu regardes :</p>
+                    <ul>
+                        <li>mauvaise gestion,</li>
+                        <li>mauvais emplacement,</li>
+                        <li>manque de clients,</li>
+                        <li>prix mal calculés,</li>
+                        <li>mauvaise organisation.</li>
+                    </ul>
+
+                    <h3>3 — Qu'est-ce qu'il faut maîtriser au début ?</h3>
+                    <ul>
+                        <li>savoir calculer tes coûts,</li>
+                        <li>connaître ton équipement de base,</li>
+                        <li>comprendre comment trouver tes premiers clients,</li>
+                        <li>savoir communiquer clairement.</li>
+                    </ul>
+
+                    <div class="truth-box">
+                        <p><strong>Tu vois ?</strong><br>
+                        Pas besoin de tout savoir sur la mécanique ou la compta.<br>
+                        Tu apprends juste ce qui t'évite les erreurs de débutant.</p>
+                    </div>
+
+                    <h2>🧭 Le principe French Connexion™</h2>
+
+                    <div class="final-revelation">
+                        <p class="the-key"><strong>"Apprendre, ce n'est pas devenir un expert.<br>
+                        C'est allumer la lumière dans une pièce sombre."</strong></p>
+                        <p>Tu n'avances plus dans le noir.<br>
+                        Tu vois ce qui t'attend.<br>
+                        Tu comprends où tu vas.</p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="chapitre-4">
+                    <h1>🔥 4 — COMPRENDRE</h1>
+
+                    <p>Apprendre, c'est remplir ton cerveau.<br>
+                    Comprendre, c'est te regarder dans le miroir.</p>
+
+                    <p>Et c'est là que beaucoup s'arrêtent.<br>
+                    Parce que se connaître… ça pique un peu.</p>
+
+                    <h2>🧠 Comprendre, c'est répondre honnêtement à 4 questions :</h2>
+
+                    <h3>1️⃣ Qu'est-ce que je veux vraiment ?</h3>
+                    <p>Pas ce que les autres veulent.<br>
+                    Ce que toi, tu veux construire.</p>
+
+                    <h3>2️⃣ Où je suis fort ?</h3>
+                    <p>Ce que tu fais naturellement bien.<br>
+                    Ta zone de confort utile.</p>
+
+                    <h3>3️⃣ Où je suis nul ?</h3>
+                    <p>Pas une honte. Une donnée.<br>
+                    Tu ne peux pas tout faire.<br>
+                    Mieux vaut le savoir maintenant.</p>
+
+                    <h3>4️⃣ Qu'est-ce que je dois changer ?</h3>
+                    <p>Tes mauvaises habitudes.<br>
+                    Tes excuses.<br>
+                    Tes manques.<br>
+                    Tes blocages.<br>
+                    Ça, c'est ton vrai chantier.</p>
+
+                    <div class="key-point">
+                        <p>Comprendre tout ça → ça crée du focus.<br>
+                        Et le focus → ça déclenche l'action.</p>
+                    </div>
+
+                    <h2>✔️ Comment appliquer ce chapitre à TON projet ?</h2>
+
+                    <p>Tu prends une feuille.<br>
+                    Tu divises en 4 colonnes.<br>
+                    Et tu notes sans tricher.</p>
+
+                    <h2>🔧 Exemple concret : tu veux ouvrir un garage</h2>
+
+                    <p>Voici à quoi doit ressembler ton exercice :</p>
+
+                    <div class="emphasis-box">
+                        <p><strong>1 — Ce que je veux vraiment</strong></p>
+                        <p>– Avoir mon propre garage<br>
+                        – Être indépendant<br>
+                        – Avoir une vie stable<br>
+                        – Gagner de l'argent avec ma passion</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>2 — Mes forces</strong></p>
+                        <p>– Je suis bon en mécanique<br>
+                        – Je sais parler aux clients<br>
+                        – Je suis motivé<br>
+                        – Je suis régulier</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>3 — Mes faiblesses</strong></p>
+                        <p>– Je ne connais pas les démarches administratives<br>
+                        – Je ne maîtrise pas la gestion<br>
+                        – Je n'ai pas encore d'argent<br>
+                        – Je n'ai jamais géré une entreprise</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>4 — Ce que je dois changer</strong></p>
+                        <p>– Me former un minimum sur la gestion<br>
+                        – Arrêter de remettre à demain<br>
+                        – Me discipliner<br>
+                        – Chercher des solutions au lieu de penser aux problèmes</p>
+                    </div>
+
+                    <p class="highlight-text">Tu vois la puissance du truc ?</p>
+
+                    <div class="truth-box">
+                        <p>Grâce à ça, ton projet devient clair.<br>
+                        Tu sais ce que tu dois améliorer AVANT de te lancer.</p>
+                    </div>
+
+                    <h2>⚜️ Le principe French Connexion™ :</h2>
+
+                    <div class="final-revelation">
+                        <p class="the-key"><strong>"Ce que tu ne comprends pas te contrôle.<br>
+                        Ce que tu comprends, tu peux le changer."</strong></p>
+                        <p>Comprendre = reprendre le contrôle.<br>
+                        Reprendre le contrôle = avancer.</p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="chapitre-5">
+                    <h1>🔥 5 — Écrire tes objectifs</h1>
+
+                    <p>Là, tu arrêtes de penser.<br>
+                    Tu précises.</p>
+
+                    <div class="key-point">
+                        <p>Un objectif, c'est une coordonnée sur une carte :<br>
+                        tu dois savoir où tu vas, quand tu y arrives, et par quel chemin tu passes.</p>
+                    </div>
+
+                    <h2>🎯 Tes objectifs doivent répondre à 4 questions simples :</h2>
+
+                    <h3>1️⃣ Combien ?</h3>
+                    <p>Un chiffre. Un volume. Une quantité.<br>
+                    Sans nombre, c'est du vent.</p>
+
+                    <h3>2️⃣ Quand ?</h3>
+                    <p>Une date. Une deadline.<br>
+                    Sans échéance, tu repousses tout.</p>
+
+                    <h3>3️⃣ Comment ?</h3>
+                    <p>Les actions concrètes qui mènent au résultat.<br>
+                    Simple. Court. Réaliste.</p>
+
+                    <h3>4️⃣ Pourquoi ?</h3>
+                    <p>La raison qui te maintient debout quand tout devient chiant.<br>
+                    Sans "pourquoi", tu lâches.</p>
+
+                    <h2>⚡ Ce chapitre n'est pas là pour rêver.</h2>
+
+                    <p>Il est là pour verrouiller ton cap.</p>
+
+                    <div class="emphasis-box">
+                        <p><strong>Un rêve = vague.<br>
+                        Un objectif = précis.</strong></p>
+                        <p><strong>Un plan = faisable.<br>
+                        Et un objectif clair → crée un plan automatiquement.</strong></p>
+                    </div>
+
+                    <h2>🔧 Comment appliquer ce chapitre à TON projet ?</h2>
+
+                    <p>Tu écris UN objectif principal, pas quinze.<br>
+                    Puis tu le structures en 4 lignes :</p>
+
+                    <h2>📝 Exemple concret : projet d'ouvrir un garage</h2>
+
+                    <p class="highlight-text">Objectif principal : ouvrir mon garage.</p>
+
+                    <div class="emphasis-box">
+                        <p><strong>Combien ?</strong><br>
+                        → 15 000 € pour démarrer.<br>
+                        → 20 clients fixes dans les 3 premiers mois.</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>Quand ?</strong><br>
+                        → Ouvrir dans 8 mois, pas plus.</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>Comment ?</strong><br>
+                        → Mettre 500€ de côté chaque mois<br>
+                        → Trouver un local<br>
+                        → Acheter le matériel d'occasion<br>
+                        → Construire une petite clientèle avant l'ouverture</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>Pourquoi ?</strong><br>
+                        → Pour être indépendant<br>
+                        → Pour prouver que je peux réussir<br>
+                        → Pour arrêter de dépendre des autres</p>
+                    </div>
+
+                    <h2>🧨 La règle French Connexion™ :</h2>
+
+                    <div class="final-revelation">
+                        <p class="the-key"><strong>"Ce qui n'est pas écrit n'existe pas."</strong></p>
+                        <p>Quand c'est sur papier → ça devient réel.<br>
+                        Quand c'est réel → tu peux avancer.</p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="chapitre-6">
+                    <h1>🔥 6 — Pourquoi j'échouerai ?</h1>
+
+                    <div class="critical-moment">
+                        <p><strong>La question que personne ne pose.<br>
+                        La question qui sauve des vies.</strong></p>
+                    </div>
+
+                    <p>Tout le monde veut savoir comment réussir.<br>
+                    Personne ne veut savoir pourquoi il va échouer.</p>
+
+                    <p>Et c'est exactement pour ça que 90% des projets meurent avant 2 ans.</p>
+
+                    <div class="key-point">
+                        <p>Parce qu'ils n'ont jamais anticipé l'échec.<br>
+                        Ils l'ont subi.</p>
+                    </div>
+
+                    <h2>🧠 Pourquoi cette question est puissante ?</h2>
+
+                    <p>Parce qu'elle t'oblige à regarder tes faiblesses en face.<br>
+                    Pas pour te décourager.<br>
+                    <strong>Pour te préparer.</strong></p>
+
+                    <p>Un boxeur qui connaît ses points faibles peut les protéger.<br>
+                    Un boxeur qui les ignore se fait détruire.</p>
+
+                    <p class="highlight-text">Toi, tu ne seras pas celui qui se fait détruire.</p>
+
+                    <h2>⚠️ Les 2 angles d'attaque</h2>
+
+                    <p>Tu dois répondre à 2 questions différentes :</p>
+
+                    <h3>1️⃣ Pourquoi MOI je peux échouer ?</h3>
+
+                    <p>Tes défauts. Tes limites. Tes mauvaises habitudes.<br>
+                    Ce qui, EN TOI, peut faire couler ton projet.</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>Je procrastine tout le temps</li>
+                        <li>Je ne sais pas dire non</li>
+                        <li>Je me disperse facilement</li>
+                        <li>Je n'ose pas vendre</li>
+                        <li>Je manque de discipline</li>
+                    </ul>
+
+                    <h3>2️⃣ Pourquoi MON PROJET peut échouer ?</h3>
+
+                    <p>Les risques extérieurs. Le marché. La concurrence.<br>
+                    Ce qui, AUTOUR de toi, peut faire couler ton projet.</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>Pas assez de clients potentiels dans ma zone</li>
+                        <li>Concurrence trop agressive</li>
+                        <li>Coûts sous-estimés</li>
+                        <li>Besoin d'investissement trop élevé</li>
+                        <li>Mauvais timing (crise, saison, etc.)</li>
+                    </ul>
+
+                    <h2>🔧 Comment appliquer ce chapitre à TON projet ?</h2>
+
+                    <p>Tu prends une feuille.<br>
+                    Tu divises en 2 colonnes.<br>
+                    Et tu notes TOUT.</p>
+
+                    <h2>📝 Exemple concret : projet d'ouvrir un garage</h2>
+
+                    <div class="emphasis-box">
+                        <p><strong>Pourquoi MOI je peux échouer :</strong></p>
+                        <p>– Je suis mauvais en gestion d'argent<br>
+                        – Je suis trop gentil, je me fais avoir facilement<br>
+                        – Je déteste la paperasse, je vais procrastiner<br>
+                        – Je ne sais pas négocier<br>
+                        – Je peux abandonner si ça devient dur</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>Pourquoi MON PROJET peut échouer :</strong></p>
+                        <p>– Trop de garages dans le coin<br>
+                        – Pas assez de clients au début<br>
+                        – Local trop cher<br>
+                        – Équipement plus cher que prévu<br>
+                        – Mauvaise visibilité (pas de passage)</p>
+                    </div>
+
+                    <div class="truth-box">
+                        <p><strong>Maintenant tu sais où tu es vulnérable.</strong><br>
+                        Et quand tu sais où tu es vulnérable…<br>
+                        tu peux te protéger.</p>
+                    </div>
+
+                    <h2>⚜️ Le principe French Connexion™ :</h2>
+
+                    <div class="final-revelation">
+                        <p class="the-key"><strong>"Anticipe l'échec, tu évites l'échec."</strong></p>
+                        <p>Cette question n'est pas là pour te décourager.<br>
+                        Elle est là pour t'armer.<br>
+                        Pour que tu arrives préparé.</p>
+                    </div>
+
+                    <div class="critical-moment">
+                        <p><strong>Pas pour t'humilier.<br>
+                        Pour te rendre imbattable.</strong></p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="chapitre-7">
+                    <h1>🔥 7 — ANALYSER</h1>
+
+                    <p>Maintenant que tu sais où tu veux aller<br>
+                    et pourquoi tu pourrais échouer…</p>
+
+                    <p class="highlight-text">Il est temps de transformer tout ça en stratégie.</p>
+
+                    <div class="key-point">
+                        <p>Analyser, c'est prendre tes risques<br>
+                        et les transformer en plan d'action.</p>
+                    </div>
+
+                    <h2>🧠 Le principe : transformer les problèmes en solutions</h2>
+
+                    <p>Chaque faiblesse que tu as identifiée au chapitre 6<br>
+                    devient une mission à accomplir.</p>
+
+                    <p>Tu ne les ignores pas.<br>
+                    Tu ne les caches pas.<br>
+                    <strong>Tu les attaques de front.</strong></p>
+
+                    <h2>🔄 La formule de transformation</h2>
+
+                    <div class="emphasis-box">
+                        <p><strong>Risques → Solutions</strong><br>
+                        <strong>Faiblesses → Stratégies</strong><br>
+                        <strong>Peurs → Actions</strong></p>
+                    </div>
+
+                    <p class="transformation">Tu passes du fantasme au réel.<br>
+                    De la théorie à la pratique.</p>
+
+                    <h2>🔧 Comment appliquer ce chapitre à TON projet ?</h2>
+
+                    <p>Tu reprends ta feuille du chapitre 6.<br>
+                    Pour chaque point faible, tu écris une solution concrète.</p>
+
+                    <p><strong>La règle :</strong><br>
+                    1 problème = 1 solution minimum.</p>
+
+                    <h2>📝 Exemple concret : projet d'ouvrir un garage</h2>
+
+                    <p>Reprends les risques identifiés au chapitre 6.<br>
+                    Maintenant, tu les transformes :</p>
+
+                    <h3>⚠️ Problème : Je suis mauvais en gestion d'argent</h3>
+                    <div class="emphasis-box">
+                        <p><strong>✅ Solution :</strong><br>
+                        → Ouvrir un compte dédié pour le projet<br>
+                        → Utiliser une appli de gestion simple (Excel ou Google Sheets)<br>
+                        → Noter chaque euro dépensé/gagné<br>
+                        → Me faire aider par quelqu'un de compétent au début</p>
+                    </div>
+
+                    <h3>⚠️ Problème : Je suis trop gentil, je me fais avoir facilement</h3>
+                    <div class="emphasis-box">
+                        <p><strong>✅ Solution :</strong><br>
+                        → Créer une grille tarifaire claire et fixe<br>
+                        → Ne jamais négocier sans réfléchir<br>
+                        → Préparer mes réponses pour dire non poliment<br>
+                        → Demander 50% d'acompte avant toute intervention</p>
+                    </div>
+
+                    <h3>⚠️ Problème : Je déteste la paperasse, je vais procrastiner</h3>
+                    <div class="emphasis-box">
+                        <p><strong>✅ Solution :</strong><br>
+                        → Bloquer 1h par semaine dans mon agenda (dimanche soir)<br>
+                        → Faire une checklist administrative simple<br>
+                        → Déléguer à un comptable si je peux me le permettre<br>
+                        → Automatiser ce qui peut l'être (factures, relances)</p>
+                    </div>
+
+                    <h3>⚠️ Problème : Trop de garages dans le coin</h3>
+                    <div class="emphasis-box">
+                        <p><strong>✅ Solution :</strong><br>
+                        → Me spécialiser (ex : uniquement mécanique allemande)<br>
+                        → Offrir un service différent (réparation à domicile ?)<br>
+                        → Travailler ma réputation (avis Google, bouche-à-oreille)<br>
+                        → Proposer des prix plus justes ou des services bonus</p>
+                    </div>
+
+                    <h3>⚠️ Problème : Pas assez de clients au début</h3>
+                    <div class="emphasis-box">
+                        <p><strong>✅ Solution :</strong><br>
+                        → Commencer en micro-entreprise à domicile<br>
+                        → Prospecter mes amis/famille/collègues<br>
+                        → Créer une page Facebook/Instagram locale<br>
+                        → Distribuer des flyers dans les parkings<br>
+                        → Offrir une réduction pour les 10 premiers clients</p>
+                    </div>
+
+                    <div class="truth-box">
+                        <p><strong>Tu vois la différence ?</strong><br>
+                        Avant : tu avais peur.<br>
+                        Maintenant : tu as un plan.</p>
+                    </div>
+
+                    <h2>💡 Ce que tu dois retenir</h2>
+
+                    <p>Chaque obstacle a une solution.<br>
+                    Chaque faiblesse a une stratégie.<br>
+                    Chaque peur a une action.</p>
+
+                    <div class="critical-moment">
+                        <p><strong>Analyser, ce n'est pas réfléchir pendant des heures.<br>
+                        C'est transformer tes doutes en décisions.</strong></p>
+                    </div>
+
+                    <h2>⚜️ Le principe French Connexion™ :</h2>
+
+                    <div class="final-revelation">
+                        <p class="the-key"><strong>"Un problème sans solution est une excuse.<br>
+                        Un problème avec solution est un défi."</strong></p>
+                        <p>Maintenant, tu n'as plus d'excuses.<br>
+                        Tu as un plan d'attaque.<br>
+                        Il ne reste plus qu'à agir.</p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="chapitre-8">
+                    <h1>🔥 8 — CRÉER</h1>
+
+                    <p>Maintenant, tout ce que tu as écrit, analysé, préparé…<br>
+                    <strong>tu le fais passer dans la réalité.</strong></p>
+
+                    <div class="key-point">
+                        <p>Créer, c'est le moment où tu arrêtes de réfléchir<br>
+                        et où tu commences à construire.</p>
+                    </div>
+
+                    <p>C'est le moment le plus dur.<br>
+                    Parce que c'est là que les excuses meurent.<br>
+                    Et que la vérité apparaît.</p>
+
+                    <h2>🧠 Ce que "Créer" signifie vraiment</h2>
+
+                    <p>Créer, ce n'est pas attendre d'être prêt.<br>
+                    Ce n'est pas attendre d'avoir assez d'argent.<br>
+                    Ce n'est pas attendre le bon moment.</p>
+
+                    <p class="highlight-text">Créer, c'est commencer avec ce que tu as.</p>
+
+                    <div class="emphasis-box">
+                        <p><strong>Tu n'as pas besoin :</strong><br>
+                        – d'un local parfait<br>
+                        – d'un site web professionnel<br>
+                        – d'un gros budget<br>
+                        – d'une équipe</p>
+                        <p><strong>Tu as juste besoin de bouger.</strong></p>
+                    </div>
+
+                    <h2>🔄 Le cycle de création</h2>
+
+                    <p>Voici comment tu crées réellement :</p>
+
+                    <h3>1️⃣ Tu montes ton projet</h3>
+                    <p>Même version MVP (Minimum Viable Product).<br>
+                    La version la plus simple qui fonctionne.</p>
+
+                    <h3>2️⃣ Tu parles avec des gens</h3>
+                    <p>Tu montres ce que tu fais.<br>
+                    Tu demandes des avis.<br>
+                    Tu proposes tes services.</p>
+
+                    <h3>3️⃣ Tu testes</h3>
+                    <p>Tu essaies.<br>
+                    Tu vois ce qui marche.<br>
+                    Tu vois ce qui ne marche pas.</p>
+
+                    <h3>4️⃣ Tu rates</h3>
+                    <p>Normal.<br>
+                    Tout le monde rate au début.<br>
+                    C'est pas un échec, c'est une donnée.</p>
+
+                    <h3>5️⃣ Tu recommences</h3>
+                    <p>Tu prends ce que tu as appris.<br>
+                    Tu ajustes.<br>
+                    Tu retentes.</p>
+
+                    <h3>6️⃣ Tu corriges</h3>
+                    <p>Encore. Et encore.<br>
+                    Jusqu'à ce que ça fonctionne.</p>
+
+                    <div class="critical-moment">
+                        <p><strong>C'est ici que 99% des gens abandonnent.</strong><br>
+                        Parce qu'ils attendent la perfection.<br>
+                        Parce qu'ils ont peur de l'échec.<br>
+                        Parce qu'ils veulent tout contrôler.</p>
+                    </div>
+
+                    <div class="truth-box">
+                        <p><strong>Toi, tu continues.</strong><br>
+                        Parce que tu sais que chaque échec<br>
+                        te rapproche du succès.</p>
+                    </div>
+
+                    <h2>🔧 Comment appliquer ce chapitre à TON projet ?</h2>
+
+                    <p>Tu définis la version la plus simple de ton projet.<br>
+                    Celle que tu peux lancer MAINTENANT.</p>
+
+                    <h2>📝 Exemple concret : projet d'ouvrir un garage</h2>
+
+                    <div class="emphasis-box">
+                        <p><strong>❌ Ce que tu N'AS PAS besoin de faire maintenant :</strong><br>
+                        – Louer un local<br>
+                        – Acheter tout l'équipement<br>
+                        – Créer une SARL<br>
+                        – Faire un site web professionnel<br>
+                        – Embaucher quelqu'un</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>✅ Ce que tu PEUX faire maintenant :</strong><br>
+                        – Déclarer une micro-entreprise (gratuit, en ligne, 15 min)<br>
+                        – Proposer des réparations à domicile<br>
+                        – Commencer avec ton matériel actuel<br>
+                        – Poster sur Facebook/Instagram que tu fais de la mécanique<br>
+                        – Demander à 10 personnes si elles ont besoin d'aide avec leur voiture<br>
+                        – Faire ta première intervention (même gratuite pour tester)</p>
+                    </div>
+
+                    <p class="highlight-text">Tu vois la différence ?</p>
+
+                    <p>Avant : "Je dois attendre d'avoir 15 000€"<br>
+                    Maintenant : "Je peux commencer demain avec 0€"</p>
+
+                    <h2>💡 La vérité sur la création</h2>
+
+                    <p>Les grands projets ne naissent pas parfaits.<br>
+                    Ils naissent imparfaits, et ils s'améliorent.</p>
+
+                    <div class="chess-metaphor">
+                        <p>Facebook a commencé dans une chambre d'étudiant.<br>
+                        Amazon vendait juste des livres.<br>
+                        Apple a démarré dans un garage.</p>
+                        <p><strong>Tous ont commencé petit.<br>
+                        Tous ont créé avec ce qu'ils avaient.</strong></p>
+                    </div>
+
+                    <h2>⚜️ Le principe French Connexion™ :</h2>
+
+                    <div class="final-revelation">
+                        <p class="the-key"><strong>"L'action imparfaite vaut mieux<br>
+                        que la perfection imaginaire."</strong></p>
+                        <p>Crée maintenant.<br>
+                        Améliore après.<br>
+                        Mais ne reste jamais immobile.</p>
+                    </div>
+
+                    <div class="critical-moment">
+                        <p><strong>Ce chapitre est le point de rupture.<br>
+                        Soit tu passes à l'action.<br>
+                        Soit tu restes spectateur.</strong></p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="chapitre-9">
+                    <h1>🔥 9 — DÉVELOPPER</h1>
+
+                    <p>Tu as fait le plus dur.<br>
+                    Tu as créé.<br>
+                    Tu as commencé.</p>
+
+                    <p class="highlight-text">Maintenant, tu développes.</p>
+
+                    <div class="key-point">
+                        <p>Développer, ce n'est pas tout changer.<br>
+                        C'est améliorer ce qui marche.<br>
+                        Et éliminer ce qui ne marche pas.</p>
+                    </div>
+
+                    <h2>🧠 La différence entre Créer et Développer</h2>
+
+                    <div class="emphasis-box">
+                        <p><strong>Créer :</strong> tu lances, tu testes, tu apprends.<br>
+                        <strong>Développer :</strong> tu optimises, tu accélères, tu grandis.</p>
+                    </div>
+
+                    <p>Au chapitre 8, tu as prouvé que ton idée peut exister.<br>
+                    Au chapitre 9, tu prouves qu'elle peut durer.</p>
+
+                    <h2>🚀 Les 5 piliers du développement</h2>
+
+                    <h3>1️⃣ Améliorer</h3>
+
+                    <p>Tu regardes ce que tu as fait.<br>
+                    Tu identifies ce qui fonctionne bien.<br>
+                    Et tu le rends encore meilleur.</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>Ton service est bon ? Rends-le excellent.</li>
+                        <li>Tes clients sont contents ? Demande-leur des témoignages.</li>
+                        <li>Tu as une méthode efficace ? Documente-la pour la répéter.</li>
+                    </ul>
+
+                    <h3>2️⃣ Optimiser</h3>
+
+                    <p>Tu élimines ce qui te fait perdre du temps ou de l'argent.</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>Automatise les tâches répétitives (factures, relances, planning)</li>
+                        <li>Arrête les actions qui ne rapportent rien</li>
+                        <li>Négocie de meilleurs prix avec tes fournisseurs</li>
+                        <li>Organise mieux ton temps</li>
+                    </ul>
+
+                    <h3>3️⃣ Trouver des clients</h3>
+
+                    <p>Tu as prouvé que ça marche.<br>
+                    Maintenant, tu en veux plus.</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>Demande à tes clients actuels de te recommander</li>
+                        <li>Investis (un peu) dans la pub (Facebook Ads, Google, flyers)</li>
+                        <li>Crée un système de parrainage (réduction pour chaque nouveau client amené)</li>
+                        <li>Sois présent là où sont tes clients (forums, réseaux sociaux, événements locaux)</li>
+                    </ul>
+
+                    <h3>4️⃣ Collaborer</h3>
+
+                    <p>Tu ne peux pas tout faire seul.<br>
+                    Et tu n'as pas besoin de tout faire seul.</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>Trouve un partenaire complémentaire (tu fais la mécanique, lui fait la carrosserie)</li>
+                        <li>Délègue ce que tu détestes ou ce que tu fais mal</li>
+                        <li>Rejoins un réseau d'entrepreneurs locaux</li>
+                        <li>Embauche un apprenti si tu peux te le permettre</li>
+                    </ul>
+
+                    <h3>5️⃣ Avancer</h3>
+
+                    <p>Ne reste jamais immobile.<br>
+                    Même quand ça marche.</p>
+
+                    <p><strong>Exemples :</strong></p>
+                    <ul>
+                        <li>Ajoute un nouveau service</li>
+                        <li>Teste une nouvelle zone géographique</li>
+                        <li>Augmente progressivement tes tarifs si tu as trop de demandes</li>
+                        <li>Économise pour investir (local, équipement, formation)</li>
+                    </ul>
+
+                    <div class="truth-box">
+                        <p><strong>À ce stade, tu n'es plus un débutant.<br>
+                        Tu es un entrepreneur qui construit.</strong></p>
+                    </div>
+
+                    <h2>🔧 Comment appliquer ce chapitre à TON projet ?</h2>
+
+                    <p>Tu fais un bilan tous les mois :</p>
+
+                    <h2>📝 Exemple concret : ton garage après 3 mois</h2>
+
+                    <div class="emphasis-box">
+                        <p><strong>✅ Ce qui marche :</strong><br>
+                        – J'ai 8 clients réguliers<br>
+                        – Le bouche-à-oreille fonctionne<br>
+                        – Les gens apprécient que je me déplace à domicile<br>
+                        – Je gagne 1 200€/mois en complément</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>❌ Ce qui ne marche pas :</strong><br>
+                        – Je perds du temps dans les trajets<br>
+                        – Certains clients ne paient pas à temps<br>
+                        – Je n'ai pas assez de visibilité en ligne<br>
+                        – Je refuse des clients par manque de temps</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>🎯 Actions pour développer :</strong><br>
+                        – Regrouper les interventions par zone<br>
+                        – Exiger 50% d'acompte avant chaque intervention<br>
+                        – Créer une page Facebook professionnelle<br>
+                        – Former un apprenti ou m'associer avec un autre mécanicien</p>
+                    </div>
+
+                    <p class="highlight-text">Tu vois ? Tu ne pars pas de zéro.<br>
+                    Tu construis sur ce qui existe déjà.</p>
+
+                    <h2>💡 La règle des petits pas</h2>
+
+                    <p>Le développement, ce n'est pas x10 du jour au lendemain.<br>
+                    C'est +10% chaque mois.</p>
+
+                    <div class="chess-metaphor">
+                        <p><strong>Mois 1 :</strong> 1 000€<br>
+                        <strong>Mois 6 :</strong> 1 600€<br>
+                        <strong>Mois 12 :</strong> 3 000€</p>
+                        <p>Pas spectaculaire.<br>
+                        Mais constant.<br>
+                        Et c'est ça qui tue la concurrence.</p>
+                    </div>
+
+                    <h2>⚜️ Le principe French Connexion™ :</h2>
+
+                    <div class="final-revelation">
+                        <p class="the-key"><strong>"Un business qui stagne meurt.<br>
+                        Un business qui avance survit."</strong></p>
+                        <p>Développer, ce n'est pas devenir riche en 3 mois.<br>
+                        C'est construire quelque chose de solide.<br>
+                        Quelque chose qui dure.</p>
+                    </div>
+
+                    <div class="critical-moment">
+                        <p><strong>Tu transformes ton idée en argent.<br>
+                        Ton ambition en réalité.<br>
+                        Ton rêve en projet rentable.</strong></p>
+                    </div>
+
+                    <div class="truth-box">
+                        <p class="the-key"><strong>Et maintenant ?<br>
+                        Tu recommences le cycle.</strong></p>
+                        <p>Améliorer → Optimiser → Trouver des clients → Collaborer → Avancer</p>
+                        <p>Encore. Et encore.<br>
+                        Jusqu'à ce que ton projet devienne<br>
+                        ce que tu avais imaginé.</p>
+                    </div>
+
+                </div>
+
+                <div class="chapter" id="schema">
+                    <h1>📊 LE SCHÉMA FRENCH CONNEXION™</h1>
+
+                    <p class="highlight-text">Voici ton plan directeur.</p>
+
+                    <p>Chaque étape est un bloc que tu complètes dans ton bloc-notes.<br>
+                    C'est ton guide pour transformer une idée vague en projet concret et actionnable.</p>
+
+                    <!-- Schéma moderne et futuriste -->
+                    <div style="background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); padding: 60px 40px; margin: 40px 0; border: 3px solid #fff; box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);">
+
+                        <!-- Header -->
+                        <div style="text-align: center; margin-bottom: 60px; padding-bottom: 30px; border-bottom: 2px solid #fff;">
+                            <h2 style="font-size: 36px; margin: 0; letter-spacing: 4px; text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);">FRENCH CONNEXION™</h2>
+                            <p style="margin: 10px 0 0 0; opacity: 0.8; font-size: 14px; letter-spacing: 2px;">LE PROCESSUS EN 9 ÉTAPES</p>
+                        </div>
+
+                        <!-- Grille des étapes -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px;">
+
+                            <!-- Étape 1 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); transition: all 0.3s;">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">1</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">L'IDÉE</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"Quelle idée peut marcher POUR MOI ?"</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: Écrire ton idée
+                                </div>
+                            </div>
+
+                            <!-- Étape 2 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">2</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">L'ÉCRIRE</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"Une idée non écrite meurt."</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: Problème, solution, clients
+                                </div>
+                            </div>
+
+                            <!-- Étape 3 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">3</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">APPRENDRE</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"Comprendre le terrain."</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: Ce qu'il faut faire + éviter
+                                </div>
+                            </div>
+
+                            <!-- Étape 4 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">4</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">COMPRENDRE</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"Se regarder en face."</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: Forces, faiblesses, peurs
+                                </div>
+                            </div>
+
+                            <!-- Étape 5 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">5</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">OBJECTIFS</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"Un rêve devient un plan."</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: Combien ? Quand ? Pourquoi ?
+                                </div>
+                            </div>
+
+                            <!-- Étape 6 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">6</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">PLAN D'ACTION</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"Ce que tu fais lundi 9h."</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: Plan 30 jours + 3 actions/sem
+                                </div>
+                            </div>
+
+                            <!-- Étape 7 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">7</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">LE MVP</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"Tester avant d'investir."</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: Comment tester AVANT dépenser
+                                </div>
+                            </div>
+
+                            <!-- Étape 8 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">8</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">PREMIERS CLIENTS</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"Pas de business sans vente."</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: 10 prospects + 3 messages
+                                </div>
+                            </div>
+
+                            <!-- Étape 9 -->
+                            <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #fff; padding: 25px; position: relative; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);">
+                                <div style="position: absolute; top: -15px; left: 20px; background: #fff; color: #000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);">9</div>
+                                <h3 style="margin: 20px 0 15px 0; font-size: 22px; color: #fff;">DISCIPLINE</h3>
+                                <p style="opacity: 0.8; font-size: 13px; line-height: 1.6; margin-bottom: 15px;">"La guerre quotidienne."</p>
+                                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-left: 3px solid #fff; font-size: 11px; opacity: 0.7;">
+                                    📝 EXERCICE: Routine + bloc-notes + priorité
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Étape finale -->
+                        <div style="background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); border: 3px solid #fff; padding: 40px; text-align: center; box-shadow: 0 0 30px rgba(255, 0, 0, 0.5); margin-top: 40px;">
+                            <div style="display: inline-block; background: #fff; color: #ff0000; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 24px; margin: 0 auto 20px auto; box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);">🔥</div>
+                            <h3 style="margin: 0 0 15px 0; font-size: 28px; color: #fff; text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);">LE RÉVEIL</h3>
+                            <p style="font-size: 16px; margin: 0 0 20px 0; color: #fff; opacity: 0.95;">"Rallume ton feu. Étonne-toi."</p>
+                            <div style="background: rgba(0,0,0,0.3); padding: 15px; border-left: 4px solid #fff; font-size: 13px; color: #fff;">
+                                📝 EXERCICE FINAL: Engagement écrit + signature + date + objectif
+                            </div>
+                        </div>
+
+                        <!-- Flèche vers le bas -->
+                        <div style="text-align: center; margin-top: 40px; font-size: 48px; opacity: 0.5; animation: bounce 2s infinite;">
+                            ▼
+                        </div>
+
+                    </div>
+
+                    <div class="truth-box">
+                        <p class="the-key"><strong>Ce schéma est ta feuille de route.</strong></p>
+                        <p>Imprime-le. Mets-le au mur.<br>
+                        Coche chaque étape quand tu l'as complétée.<br>
+                        C'est ton contrat avec toi-même.</p>
+                    </div>
+
+                    <h2>📝 Exemple concret d'exercice</h2>
+
+                    <div class="emphasis-box">
+                        <p><strong>EXERCICE: Écrire ton idée</strong></p>
+                        <p style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05);">
+                            <strong>📝 Exemple:</strong><br>
+                            "Je veux ouvrir un garage mobile qui répare les voitures à domicile.<br>
+                            Je cible les particuliers qui n'ont pas le temps d'aller au garage.<br>
+                            Mon avantage: je me déplace, donc pas de frais de local."
+                        </p>
+                        <p style="margin-top: 20px;">
+                            <strong>✍️ Maintenant, écris la tienne:</strong><br>
+                            _________________________________________________<br>
+                            _________________________________________________<br>
+                            _________________________________________________
+                        </p>
+                    </div>
+
+                    <div class="critical-moment">
+                        <p><strong>Chaque exercice te rapproche de ton objectif.<br>
+                        Chaque exercice sauté te rapproche de l'échec.</strong></p>
+                    </div>
+                </div>
+
+                <div class="chapter" id="questions">
+                    <h1>🎯 LE TEST DES 20 QUESTIONS</h1>
+
+                    <p class="highlight-text">Ces questions ne sont pas juste un questionnaire.</p>
+
+                    <p>C'est un miroir ultra précis de ton projet, ton engagement, ta réalité.<br>
+                    Réponds dans ton bloc-notes. <strong>Honnêtement.</strong><br>
+                    Chaque absence de réponse = point faible à travailler.</p>
+
+                    <h2>Partie 1 — Clarté</h2>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>1. Pourquoi cette idée ?</strong><br>
+                        <span style="opacity: 0.7; font-size: 14px;">(Si tu réponds "pour l'argent", tu as déjà échoué. Creuse plus profond.)</span></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>2. Quel problème précis résout-elle ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>3. Pour qui exactement ?</strong><br>
+                        <span style="opacity: 0.7; font-size: 14px;">(Décris une personne réelle, pas "tout le monde")</span></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>4. Qu'est-ce qu'elle apporte de nouveau ou de différent ?</strong></p>
+                    </div>
+
+                    <h2>Partie 2 — Viabilité</h2>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>5. Comment cette idée peut générer de l'argent ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>6. Qui va payer et pourquoi serait-il prêt à payer ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>7. Combien puis-je facturer ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>8. Combien coûte le démarrage ?</strong><br>
+                        <span style="opacity: 0.7; font-size: 14px;">(Argent, temps, énergie)</span></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>9. Combien de temps avant la première vente réaliste ?</strong></p>
+                    </div>
+
+                    <h2>Partie 3 — Risques</h2>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>10. Pourquoi mon idée peut échouer ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>11. Pourquoi moi je peux échouer ?</strong><br>
+                        <span style="opacity: 0.7; font-size: 14px;">(Sois brutal avec toi-même)</span></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>12. Quels sont les 3 obstacles les plus probables ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>13. Quelle solution pour chaque obstacle ?</strong></p>
+                    </div>
+
+                    <h2>Partie 4 — Réalité</h2>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>14. Ai-je les compétences nécessaires ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>15. Est-ce que quelqu'un d'autre le fait déjà ?</strong><br>
+                        <span style="opacity: 0.7; font-size: 14px;">Si oui, comment me différencier ?</span></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>16. Puis-je lancer un test (MVP) en moins de 7 jours ?</strong></p>
+                    </div>
+
+                    <h2>Partie 5 — Énergie & Exécution</h2>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>17. Qu'est-ce que je suis prêt à sacrifier pour que ça marche ?</strong><br>
+                        <span style="opacity: 0.7; font-size: 14px;">(Temps libre ? Soirées ? Confort ? Week-ends ?)</span></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>18. Quel est mon plan d'action sur 30 jours ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>19. Quelle est la première action que je peux faire DÈS AUJOURD'HUI ?</strong></p>
+                    </div>
+
+                    <div class="question-box" style="background: #1a1a1a; padding: 20px; margin: 20px 0; border-left: 4px solid #fff;">
+                        <p><strong>20. Suis-je prêt à continuer même sans soutien de personne ?</strong><br>
+                        <span style="opacity: 0.7; font-size: 14px;">Même si ma famille me dit que je perds mon temps ?<br>
+                        Même si mes amis se moquent ?<br>
+                        Même si personne ne me soutient pendant 6 mois ?</span></p>
+                    </div>
+
+                    <div class="critical-moment">
+                        <p><strong>Si tu ne peux pas répondre à ces 20 questions,<br>
+                        tu n'es pas prêt à lancer ton business.</strong></p>
+                    </div>
+
+                    <div class="truth-box">
+                        <p class="the-key"><strong>Et c'est OK.</strong></p>
+                        <p>Parce que maintenant tu SAIS ce qui te manque.<br>
+                        Et tu peux aller le chercher.</p>
+                    </div>
+                </div>
+
+                <div class="chapter" id="revelation">
+                    <h1>💥 RÉVÉLATION ET ACTION</h1>
+
+                    <p class="highlight-text">Répondre à ces 20 questions te révèle la vérité brute sur ton projet et toi-même.</p>
+
+                    <h2>1️⃣ Clarté de l'idée</h2>
+                    <ul>
+                        <li>Tu sais exactement ce que tu veux créer, pour qui et pourquoi.</li>
+                        <li>Tu identifies les faiblesses avant de perdre du temps ou de l'argent.</li>
+                    </ul>
+
+                    <h2>2️⃣ Viabilité</h2>
+                    <ul>
+                        <li>Tu comprends si ton idée peut générer de l'argent.</li>
+                        <li>Tu sais qui sont tes clients et comment les convaincre.</li>
+                        <li>Tu mesures tes investissements en temps, argent et énergie.</li>
+                    </ul>
+
+                    <h2>3️⃣ Risques et obstacles</h2>
+                    <ul>
+                        <li>Tu identifies ce qui peut échouer avant que ça arrive.</li>
+                        <li>Tu prends conscience de tes limites et des obstacles externes.</li>
+                        <li>Tu trouves des solutions avant même de commencer, ce qui te rend plus confiant.</li>
+                    </ul>
+
+                    <h2>4️⃣ Niveau de préparation</h2>
+                    <ul>
+                        <li>Tu sais quelles compétences tu possèdes et lesquelles il faut acquérir.</li>
+                        <li>Tu évalues ton engagement réel : es-tu prêt à agir malgré peur et solitude ?</li>
+                    </ul>
+
+                    <h2>5️⃣ Discipline et action</h2>
+                    <ul>
+                        <li>Tu passes de la réflexion à un plan concret.</li>
+                        <li>Tu sais quelle action réaliser aujourd'hui, pas demain.</li>
+                        <li>Tu crées ta routine d'entrepreneur et tu t'engages envers toi-même.</li>
+                    </ul>
+
+                    <h2>6️⃣ Vérité sur toi-même</h2>
+                    <ul>
+                        <li>Tu découvres tes forces, faiblesses et ce qui te bloque.</li>
+                        <li>Tu réalises si tu peux sortir de ta zone de confort et te battre pour ton rêve.</li>
+                        <li>Tu exposes ton mindset : peur, excuses, détermination, résilience.</li>
+                    </ul>
+
+                    <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); border: 4px solid #ff0000; padding: 50px; margin: 60px 0; box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);">
+                        <h2 style="font-size: 36px; margin-bottom: 30px; text-align: center; color: #ff0000;">⚠️ LA VÉRITÉ BRUTALE</h2>
+
+                        <p style="font-size: 20px; line-height: 1.8; margin-bottom: 30px;">
+                            Tout ce qui manque ici, c'est <strong>TA PARTIE</strong>.
+                        </p>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 25px;">
+                            <strong>Ce n'est pas le monde des bisounours.</strong><br>
+                            Ce n'est pas papa qui va acheter le vélo.<br>
+                            Ce n'est pas mamie qui va payer tes factures.<br>
+                            Ce n'est pas ton pote qui va construire ton business.
+                        </p>
+
+                        <div class="truth-box" style="border-color: #ff0000; margin: 40px 0;">
+                            <p class="the-key" style="font-size: 28px;"><strong>C'est TOI qui dois trouver comment acheter le vélo.</strong></p>
+                        </div>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 25px;">
+                            Tu dois être <strong>organisé</strong>.<br>
+                            Tu dois être <strong>discipliné</strong>.<br>
+                            Tu dois être <strong>ambitieux</strong>.<br>
+                            Tu dois être <strong>rêveur</strong>.<br>
+                            Et surtout, tu dois <strong>passer à l'action</strong>.
+                        </p>
+
+                        <div style="text-align: center; padding: 40px; background: #ff0000; color: #000; margin: 40px 0;">
+                            <p style="font-size: 32px; font-weight: 700; margin: 0;">
+                                LA CLÉ DE LA RÉUSSITE,<br>
+                                <span style="font-size: 48px;">C'EST L'ACTION !</span>
+                            </p>
+                        </div>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 25px;">
+                            Pas demain.<br>
+                            Pas "quand je serai prêt".<br>
+                            Pas "quand j'aurai l'argent".<br>
+                            Pas "quand les conditions seront parfaites".
+                        </p>
+
+                        <p style="font-size: 22px; font-weight: 700; text-align: center; margin: 30px 0;">
+                            <strong>MAINTENANT.</strong>
+                        </p>
+                    </div>
+
+                    <h2 style="font-size: 32px; margin: 60px 0 30px 0; text-align: center;">🔥 LE DÉFI 7 JOURS FRENCH CONNEXION™</h2>
+
+                    <p style="text-align: center; font-size: 18px; margin-bottom: 40px;">
+                        Tu as lu. Tu as compris. Maintenant <strong>PROUVE-LE</strong>.
+                    </p>
+
+                    <div class="day-box" style="background: #1a1a1a; padding: 30px; margin: 20px 0; border-left: 6px solid #fff;">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">📅 JOUR 1 (AUJOURD'HUI)</h3>
+                        <p>☐ Réponds aux 20 questions dans ton bloc-notes</p>
+                        <p>☐ Identifie tes 3 plus gros trous noirs</p>
+                        <p>☐ Écris ton idée en 3 lignes maximum</p>
+                    </div>
+
+                    <div class="day-box" style="background: #1a1a1a; padding: 30px; margin: 20px 0; border-left: 6px solid #fff;">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">📅 JOUR 2</h3>
+                        <p>☐ Cherche 3 concurrents et analyse ce qu'ils font</p>
+                        <p>☐ Note leurs prix, leurs offres, leurs points faibles</p>
+                        <p>☐ Écris comment tu peux être différent</p>
+                    </div>
+
+                    <div class="day-box" style="background: #1a1a1a; padding: 30px; margin: 20px 0; border-left: 6px solid #fff;">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">📅 JOUR 3</h3>
+                        <p>☐ Crée ton MVP sur papier (dessine-le, décris-le)</p>
+                        <p>☐ Liste ce qu'il faut pour le créer</p>
+                        <p>☐ Identifie ce que tu as déjà</p>
+                    </div>
+
+                    <div class="day-box" style="background: #1a1a1a; padding: 30px; margin: 20px 0; border-left: 6px solid #fff;">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">📅 JOUR 4</h3>
+                        <p>☐ Liste 10 personnes qui pourraient être intéressées</p>
+                        <p>☐ Prépare 1 message pour les contacter</p>
+                        <p>☐ Envoie-le à 3 d'entre elles</p>
+                    </div>
+
+                    <div class="day-box" style="background: #1a1a1a; padding: 30px; margin: 20px 0; border-left: 6px solid #fff;">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">📅 JOUR 5</h3>
+                        <p>☐ Analyse les réponses (ou l'absence de réponse)</p>
+                        <p>☐ Ajuste ton message</p>
+                        <p>☐ Envoie à 5 autres personnes</p>
+                    </div>
+
+                    <div class="day-box" style="background: #1a1a1a; padding: 30px; margin: 20px 0; border-left: 6px solid #fff;">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">📅 JOUR 6</h3>
+                        <p>☐ Crée un plan de 30 jours</p>
+                        <p>☐ 3 actions par semaine</p>
+                        <p>☐ 1 objectif mesurable</p>
+                    </div>
+
+                    <div class="day-box" style="background: #1a1a1a; padding: 30px; margin: 20px 0; border-left: 6px solid #fff;">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">📅 JOUR 7</h3>
+                        <p>☐ Relis tes 20 réponses</p>
+                        <p>☐ Identifie ce qui a changé en 7 jours</p>
+                        <p>☐ Signe ton engagement: "Je continue."</p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); padding: 50px; margin: 60px 0; text-align: center; border: 4px solid #fff; box-shadow: 0 0 50px rgba(255, 0, 0, 0.7);">
+                        <h2 style="font-size: 42px; margin: 0 0 30px 0; color: #000;">🔥 À LA FIN DE CES 7 JOURS</h2>
+                        <p style="font-size: 22px; line-height: 1.8; margin: 0; color: #000; font-weight: 700;">
+                            Tu auras fait plus que 99% des rêveurs.<br>
+                            Tu ne seras plus dans ta tête.<br>
+                            <span style="font-size: 28px;">TU SERAS DANS L'ACTION.</span>
+                        </p>
+                    </div>
+
+                    <div class="truth-box">
+                        <p class="the-key"><strong>Le moment, c'est maintenant.</strong></p>
+                        <p>Pas après avoir fini l'ebook.<br>
+                        Pas demain matin.<br>
+                        MAINTENANT.</p>
+                    </div>
+
+                    <div class="critical-moment">
+                        <p><strong>Ferme cet ebook.<br>
+                        Prends ton bloc-notes.<br>
+                        Et commence.</strong></p>
+                    </div>
+                </div>
+
+                <div class="chapter" id="conclusion">
+                    <h1>🏆 CONCLUSION</h1>
+
+                    <p class="highlight-text">Tu es arrivé au bout.</p>
+
+                    <p>Tu as maintenant en main le processus complet :<br>
+                    9 étapes pour transformer une idée en réalité.</p>
+
+                    <div class="emphasis-box">
+                        <p><strong>1. Une idée</strong> — tu l'as posée sur papier<br>
+                        <strong>2. L'écrire</strong> — tu l'as matérialisée<br>
+                        <strong>3. Apprendre</strong> — tu as allumé la lumière<br>
+                        <strong>4. Comprendre</strong> — tu t'es regardé en face<br>
+                        <strong>5. Écrire tes objectifs</strong> — tu as fixé ton cap<br>
+                        <strong>6. Pourquoi j'échouerai ?</strong> — tu as anticipé<br>
+                        <strong>7. Analyser</strong> — tu as transformé tes peurs en plan<br>
+                        <strong>8. Créer</strong> — tu es passé à l'action<br>
+                        <strong>9. Développer</strong> — tu construis quelque chose qui dure</p>
+                    </div>
+
+                    <p class="transformation">Maintenant, tu sais exactement quoi faire.</p>
+
+                    <h2>🧩 Le Message Clé</h2>
+
+                    <p>Les gens attendent d'avoir de l'argent pour investir.<br>
+                    <strong>Erreur.</strong></p>
+
+                    <div class="critical-moment">
+                        <p><strong>Investir sans savoir → tu perds ton argent.</strong></p>
+                    </div>
+
+                    <p>Un business n'a pas besoin d'argent au début.</p>
+
+                    <p>Il a besoin de :</p>
+                    <ul>
+                        <li>structure,</li>
+                        <li>vision,</li>
+                        <li>discipline,</li>
+                        <li>ambition,</li>
+                        <li>créativité.</li>
+                    </ul>
+
+                    <div class="key-point">
+                        <p>L'argent vient APRÈS.<br>
+                        Quand tu sais comment le faire grandir.<br>
+                        Pas avant.</p>
+                    </div>
+
+                    <div class="chess-metaphor">
+                        <p>Un business, c'est un jeu d'échecs.<br>
+                        Chaque coup compte.<br>
+                        Chaque erreur te rapproche du bon mouvement.</p>
+                    </div>
+
+                    <h2>⚡ La Vérité Que Personne Ne Te Dit</h2>
+
+                    <p>La vie ne va pas te faire de cadeau.<br>
+                    Rien n'est facile.<br>
+                    Mais celui qui s'accroche, qui apprend, qui réfléchit...<br>
+                    <strong>celui-là finit par réussir.</strong></p>
+
+                    <div class="truth-box">
+                        <p>Tu ne réussis pas parce que tu es le meilleur.<br>
+                        Tu réussis parce que tu ne lâches jamais.</p>
+                    </div>
+
+                    <h2>🔑 La Clé de la Réussite</h2>
+
+                    <div class="final-revelation">
+                        <p>La clé de la réussite n'existe pas.<br>
+                        Elle ne s'achète pas.<br>
+                        On ne te la donnera jamais.</p>
+
+                        <p class="the-key">👉 La clé de la réussite... <strong>c'est toi.</strong></p>
+                    </div>
+
+                    <p>C'est ta capacité à :</p>
+                    <ul>
+                        <li>Te lever après chaque échec</li>
+                        <li>Apprendre de chaque erreur</li>
+                        <li>Avancer même quand c'est dur</li>
+                        <li>Rester fidèle à ton objectif</li>
+                        <li>Transformer tes faiblesses en forces</li>
+                    </ul>
+
+                    <p class="highlight-text">Personne ne peut faire ça à ta place.</p>
+
+                    <h2>🎯 Ce que tu dois faire MAINTENANT</h2>
+
+                    <p>Tu as lu cet ebook.<br>
+                    Maintenant, tu dois l'appliquer.</p>
+
+                    <div class="critical-moment">
+                        <p><strong>Un ebook lu = 0 résultat.<br>
+                        Un ebook appliqué = tout change.</strong></p>
+                    </div>
+
+                    <p>Voici ton plan d'action immédiat :</p>
+
+                    <div class="emphasis-box">
+                        <p><strong>✅ Demain matin :</strong><br>
+                        Relis le chapitre 1.<br>
+                        Reprends ta feuille.<br>
+                        Écris ton idée.</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>✅ Cette semaine :</strong><br>
+                        Applique les chapitres 1 à 5.<br>
+                        Pose les fondations de ton projet.<br>
+                        Écris tout sur papier.</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>✅ Ce mois-ci :</strong><br>
+                        Applique les chapitres 6 à 8.<br>
+                        Anticipe. Analyse. Crée.<br>
+                        Lance la première version de ton projet.</p>
+                    </div>
+
+                    <div class="emphasis-box">
+                        <p><strong>✅ Les 6 prochains mois :</strong><br>
+                        Applique le chapitre 9 encore et encore.<br>
+                        Développe. Améliore. Avance.<br>
+                        Construis quelque chose qui dure.</p>
+                    </div>
+
+                    <h2>🔥 Le Défi Final</h2>
+
+                    <div class="action-challenge">
+                        <h3>Maintenant que tu as compris ça...</h3>
+
+                        <p><strong>Défi #1 : Relis cet ebook tous les matins pendant 7 jours.</strong><br>
+                        Pas pour te motiver.<br>
+                        Pour ancrer le processus dans ta tête.</p>
+
+                        <p><strong>Défi #2 : Rejoins le programme d'affiliation French Connexion™.</strong></p>
+
+                        <p>Pourquoi ?<br>
+                        Parce que si tu partages cet ebook avec d'autres et qu'ils achètent...<br>
+                        <strong>tu gagneras une commission sur chaque vente.</strong></p>
+
+                        <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 3px solid #fff; padding: 30px; margin: 20px 0; box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);">
+                            <h4 style="margin: 0 0 15px 0; font-size: 20px; color: #fff;">💰 Programme d'Affiliation</h4>
+                            <p style="margin: 0 0 10px 0;"><strong>Commission:</strong> 50% par vente (10€ sur chaque ebook vendu à 20€)</p>
+                            <p style="margin: 0 0 10px 0;"><strong>Ton lien:</strong> Tu reçois un lien unique de parrainage</p>
+                            <p style="margin: 0 0 10px 0;"><strong>Tracking:</strong> Dashboard pour suivre tes ventes</p>
+                            <p style="margin: 0 0 20px 0;"><strong>Paiement:</strong> Virement automatique chaque mois</p>
+                            <p style="margin: 0; padding: 15px; background: #000; border-left: 4px solid #ff0000;">
+                                <strong>➡️ Contacte-nous sur Telegram pour recevoir ton lien d'affilié</strong>
+                            </p>
+                        </div>
+
+                        <p>Et si tu arrives à générer des ventes par affiliation...<br>
+                        <strong>tu prouveras que tu sais créer de la valeur et vendre.</strong></p>
+
+                        <p>Et si tu sais vendre...<br>
+                        tu peux tout construire.</p>
+
+                        <p class="highlight-text">C'est ton premier business. Commence maintenant.</p>
+                    </div>
+
+                    <h2>⚜️ Le Message Final</h2>
+
+                    <div class="final-revelation">
+                        <p>Tu n'es pas ici par hasard.<br>
+                        Tu es ici parce que tu veux changer ta vie.</p>
+
+                        <p>Tu as acheté cet ebook.<br>
+                        Tu l'as lu jusqu'au bout.<br>
+                        Tu as fait plus que 99% des gens.</p>
+
+                        <p class="the-key"><strong>Maintenant, ne t'arrête pas là.</strong></p>
+
+                        <p>Applique.<br>
+                        Crée.<br>
+                        Construis.<br>
+                        Avance.</p>
+
+                        <p>Encore. Et encore.<br>
+                        Jusqu'à ce que ton rêve devienne ta réalité.</p>
+                    </div>
+
+                    <div class="truth-box">
+                        <p class="the-key"><strong>Personne ne viendra te sauver.<br>
+                        Il n'y a que toi.</strong></p>
+                        <p>Mais maintenant, tu sais quoi faire.<br>
+                        Et ça change tout.</p>
+                    </div>
+
+                    <div class="signature">
+                        <p style="font-size: 24px; margin-bottom: 20px;">⚜️</p>
+                        <p><strong>By FRENCH CONNEXION</strong></p>
+                        <p style="font-size: 12px; opacity: 0.7; margin-top: 20px;">2026</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <div class="chapter" id="message-final">
+                    <h1 style="text-align: center; font-size: 42px; margin-bottom: 40px;">🔥 Le message que tu dois entendre maintenant</h1>
+
+                    <div style="background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); border: 3px solid #ff0000; padding: 40px; margin: 40px 0; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);">
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                            <strong>Écoute-moi bien.</strong> Ce que tu lis là, ce n'est pas juste un texte. Ce n'est pas pour faire joli. <strong>C'est pour te réveiller.</strong>
+                        </p>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                            Parce que <strong>je sais</strong>. Je sais que t'es là, peut-être au bout du rouleau. Que t'as l'impression que le monde te regarde tomber et qu'il s'en fiche. Que tes rêves semblent trop lourds, trop grands, trop loin. Que personne ne t'aide. Que même toi, parfois, t'as envie de laisser tomber.
+                        </p>
+
+                        <div class="truth-box" style="margin: 40px 0;">
+                            <p class="the-key" style="font-size: 28px;"><strong>Mais laisse-moi te dire une chose :<br>tu n'as besoin de personne pour te relever.</strong></p>
+                            <p style="font-size: 20px; margin-top: 20px;">Pas de papa, pas de mamie, pas de prof.<br><strong>Toi seul peux rallumer cette flamme.</strong></p>
+                        </div>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                            <strong>Regarde-toi en face.</strong> Oui, toi. Le gars, la fille, qui lit ça et qui pense "je peux pas".<br>
+                            Tu crois que le monde va te donner quelque chose ? Que les gens vont te tendre la main parce que t'as de la peine ou peur ? <strong>Non.</strong><br>
+                            Tout le monde croit que t'es éteint. Que t'as rien à donner.
+                        </p>
+
+                        <div class="emphasis-box" style="background: #ff0000; color: #000; padding: 30px; margin: 40px 0;">
+                            <p style="font-size: 22px; font-weight: 700; margin: 0;">
+                                Et c'est exactement ça qui doit te faire bouillir.<br>
+                                C'est exactement ça qui doit te pousser à te lever et te battre,<br>
+                                <strong>pour toi, rien que pour toi.</strong>
+                            </p>
+                        </div>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                            Tu commences avec <strong>0</strong>. Zéro euro, zéro contact, zéro chance apparente.<br>
+                            Alors ? <strong>Alors c'est maintenant que ça se joue.</strong><br>
+                            Tout ce que tu feras, tu le feras pour toi. Pas pour impressionner, pas pour être aimé.<br>
+                            <strong>Pour te prouver que tu peux.</strong><br>
+                            Pour te prouver que tu n'es pas qu'un numéro, qu'un fantôme qu'on oublie.
+                        </p>
+
+                        <h2 style="font-size: 32px; margin: 50px 0 30px 0; text-align: center;">💥 Tu dois choquer ton propre esprit</h2>
+
+                        <div class="action-list" style="padding: 20px; background: rgba(255, 255, 255, 0.05); margin: 30px 0;">
+                            <p style="font-size: 20px; margin-bottom: 15px;">✓ Fais quelque chose que tu croyais impossible.</p>
+                            <p style="font-size: 20px; margin-bottom: 15px;">✓ Va au-delà de tes limites.</p>
+                            <p style="font-size: 20px; margin-bottom: 15px;">✓ Ne laisse pas le passé te définir.</p>
+                            <p style="font-size: 20px; margin: 0;">✓ Ne laisse pas la peur décider pour toi.</p>
+                        </div>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                            Regarde autour de toi. <strong>Ceux qui ont réussi n'avaient pas plus de ressources que toi.</strong><br>
+                            Ils avaient juste la rage, la discipline et la volonté de ne jamais abandonner.<br>
+                            C'est ça que tu dois allumer. <strong>Ton feu intérieur.</strong><br>
+                            Celui qui brûle même quand tout le monde a arrêté d'y croire.
+                        </p>
+
+                        <div class="truth-box" style="margin: 40px 0; border-color: #ff0000;">
+                            <p class="the-key" style="font-size: 32px;"><strong>Alors relève-toi. Tout de suite.</strong></p>
+                            <p style="font-size: 20px; margin-top: 20px;">
+                                Prends ce que t'as, même si c'est rien. Et fais-le grandir.<br>
+                                Chaque petit pas compte. Chaque action te rapproche de ton objectif.
+                            </p>
+                        </div>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                            Tu ne dois plus attendre que quelqu'un te donne la permission de réussir.<br>
+                            <strong>Tu as la permission, tu l'as toujours eue : c'est toi qui te la donnes.</strong>
+                        </p>
+
+                        <h2 style="font-size: 32px; margin: 50px 0 30px 0; text-align: center;">💪 Rappelle-toi</h2>
+
+                        <p style="font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
+                            Ceux qui réussissent ne sont pas des surhommes.<br>
+                            <strong>Ce sont des guerriers avec un lourd passé.</strong><br>
+                            Ils ont appris à marcher seuls.<br>
+                            Ils ont acheté leur propre vélo, construit leur propre route, et ont tout raflé.
+                        </p>
+
+                        <div class="emphasis-box" style="background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%); color: #fff; padding: 40px; margin: 40px 0; text-align: center;">
+                            <p style="font-size: 24px; font-weight: 700; margin: 0;">
+                                Alors toi aussi, choisis de tout donner pour toi-même.<br>
+                                <strong style="font-size: 32px;">Tout.</strong><br>
+                                Pas demain. Pas "quand je serai prêt".<br>
+                                <strong style="font-size: 36px;">MAINTENANT.</strong>
+                            </p>
+                        </div>
+
+                        <p style="font-size: 20px; line-height: 1.8; margin-bottom: 30px; text-align: center;">
+                            Parce que si tu ne le fais pas, personne ne le fera à ta place.
+                        </p>
+
+                        <div style="text-align: center; margin: 60px 0 40px 0; padding: 50px; background: linear-gradient(135deg, #000 0%, #1a1a1a 100%); border: 4px solid #ff0000; box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);">
+                            <h2 style="font-size: 48px; margin: 0 0 30px 0; color: #ff0000; text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);">🔥 RALLUME TON FEU</h2>
+                            <p style="font-size: 28px; font-weight: 700; margin: 0; line-height: 1.6;">
+                                Deviens ce guerrier.<br>
+                                Celui qui frappe, celui qui construit,<br>
+                                <strong style="font-size: 36px; color: #ff0000;">celui qui ne recule jamais.</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="signature" style="margin-top: 80px;">
+                        <p style="font-size: 24px; margin-bottom: 20px;">⚜️</p>
+                        <p><strong>FRENCH CONNEXION</strong></p>
+                        <p style="font-size: 14px; opacity: 0.7; margin-top: 15px; font-style: italic;">"Ne recule jamais."</p>
+                    </div>
+                </div>
+
+        <!-- MA PROGRESSION SECTION -->
+        <section class="content-section" id="progression-section">
+            <div class="notes-container">
+                <h1>📊 MA PROGRESSION</h1>
+                <p style="font-size: 14px; opacity: 0.8; margin-bottom: 40px;">
+                    Suis ton avancement dans le processus French Connexion™.<br>
+                    Coche chaque étape quand tu l'as complétée.
+                </p>
+
+                <!-- Les cases se sauvegardent automatiquement -->
+
+                <!-- Liste des étapes -->
+                <div class="steps-container">
+                    <div class="step-card" data-step="1">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-1" data-step="1">
+                                <label for="step-1" class="step-title">
+                                    <span class="step-number">1</span>
+                                    <span class="step-name">Une idée</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="1">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Trouve une idée adaptée à toi et pose-la sur papier.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="1"></textarea>
+                            <button class="step-save-btn" data-step="1">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step-card" data-step="2">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-2" data-step="2">
+                                <label for="step-2" class="step-title">
+                                    <span class="step-number">2</span>
+                                    <span class="step-name">L'écrire</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="2">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Matérialise ton idée en l'écrivant clairement.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="2"></textarea>
+                            <button class="step-save-btn" data-step="2">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step-card" data-step="3">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-3" data-step="3">
+                                <label for="step-3" class="step-title">
+                                    <span class="step-number">3</span>
+                                    <span class="step-name">Apprendre</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="3">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Recherche 3 informations essentielles : comment ça marche, pourquoi ça échoue, ce qu'il faut maîtriser.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="3"></textarea>
+                            <button class="step-save-btn" data-step="3">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step-card" data-step="4">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-4" data-step="4">
+                                <label for="step-4" class="step-title">
+                                    <span class="step-number">4</span>
+                                    <span class="step-name">Comprendre</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="4">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Identifie tes forces, tes faiblesses et ce que tu dois changer.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="4"></textarea>
+                            <button class="step-save-btn" data-step="4">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step-card" data-step="5">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-5" data-step="5">
+                                <label for="step-5" class="step-title">
+                                    <span class="step-number">5</span>
+                                    <span class="step-name">Écrire tes objectifs</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="5">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Définis combien, quand, comment et pourquoi.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="5"></textarea>
+                            <button class="step-save-btn" data-step="5">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step-card" data-step="6">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-6" data-step="6">
+                                <label for="step-6" class="step-title">
+                                    <span class="step-number">6</span>
+                                    <span class="step-name">Pourquoi j'échouerai ?</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="6">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Liste les raisons pour lesquelles tu pourrais échouer et anticipe-les.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="6"></textarea>
+                            <button class="step-save-btn" data-step="6">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step-card" data-step="7">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-7" data-step="7">
+                                <label for="step-7" class="step-title">
+                                    <span class="step-number">7</span>
+                                    <span class="step-name">Analyser</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="7">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Transforme chaque problème en solution concrète.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="7"></textarea>
+                            <button class="step-save-btn" data-step="7">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step-card" data-step="8">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-8" data-step="8">
+                                <label for="step-8" class="step-title">
+                                    <span class="step-number">8</span>
+                                    <span class="step-name">Créer</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="8">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Lance la première version de ton projet, même imparfaite.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="8"></textarea>
+                            <button class="step-save-btn" data-step="8">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+
+                    <div class="step-card" data-step="9">
+                        <div class="step-header">
+                            <div class="step-left">
+                                <input type="checkbox" class="step-checkbox" id="step-9" data-step="9">
+                                <label for="step-9" class="step-title">
+                                    <span class="step-number">9</span>
+                                    <span class="step-name">Développer</span>
+                                </label>
+                            </div>
+                            <button class="step-expand-btn" data-step="9">📝</button>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description">Améliore, optimise et fais grandir ton projet chaque jour.</p>
+                            <textarea class="step-notes" placeholder="Mes notes pour cette étape..." data-step="9"></textarea>
+                            <button class="step-save-btn" data-step="9">💾 Sauvegarder mes notes</button>
+                            <div class="step-message"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Message de félicitations -->
+                <div class="completion-message" id="completion-message">
+                    <h2>🏆 FÉLICITATIONS !</h2>
+                    <p>Tu as complété toutes les étapes du processus French Connexion™.</p>
+                    <p>Maintenant, recommence le cycle. Améliore. Optimise. Avance.</p>
+                    <p class="highlight-text">Le vrai entrepreneur ne s'arrête jamais.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Navigation Buttons (for ebook) -->
+    <div class="reader-nav" id="reader-nav">
+        <button id="prev-btn" class="nav-btn">← Précédent</button>
+        <button id="next-btn" class="nav-btn">Suivant →</button>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/reader.js"></script>
+</body>
+</html>

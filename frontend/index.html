@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .fleur-de-lys {
+            font-size: 56px;
+            color: #ffffff;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .slogan {
+            font-size: 16px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            margin-bottom: 60px;
+            color: #ffffff;
+            opacity: 0.85;
+        }
+
+        .connexion-btn {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 15px 50px;
+            font-size: 18px;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .connexion-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 13px 48px;
+        }
+
+        .footer-links {
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .fleur-de-lys {
+                font-size: 40px;
+            }
+
+            .logo {
+                font-size: 28px;
+                letter-spacing: 2px;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .slogan {
+                font-size: 14px;
+                letter-spacing: 1px;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .connexion-btn {
+                font-size: 16px;
+                padding: 12px 40px;
+            }
+
+            .connexion-btn:hover {
+                padding: 10px 38px;
+            }
+
+            .footer-links {
+                bottom: 20px;
+                gap: 20px;
+            }
+
+            .footer-links a {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <span class="fleur-de-lys">⚜</span>
+        <div class="logo">French Connexion</div>
+        <span class="fleur-de-lys">⚜</span>
+    </div>
+    <div class="slogan">1% Agissent. 99% Rêvent.</div>
+    <a href="login.html" class="connexion-btn">Connexion</a>
+
+    <div class="footer-links">
+        <a href="about.html">À Propos</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <script>
+        // Tracker les clics affiliés
+        const urlParams = new URLSearchParams(window.location.search);
+        const refCode = urlParams.get('ref');
+
+        if (refCode) {
+            // Stocker le code affilié dans localStorage
+            localStorage.setItem('affiliate_ref', refCode);
+
+            // API URL dynamique
+            const API_URL = window.location.hostname === 'localhost'
+                ? 'http://localhost:3000/api'
+                : 'https://ton-domaine.com/api';
+
+            // Envoyer une requête au backend pour tracker le clic
+            fetch(`${API_URL}/affiliate/track-click`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ ref: refCode })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('✅ Clic affilié tracké:', refCode);
+            })
+            .catch(error => {
+                console.error('❌ Erreur tracking:', error);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement - French Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .fleur-de-lys {
+            font-size: 32px;
+            color: #ffffff;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .payment-box {
+            width: 100%;
+            max-width: 500px;
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .price-highlight {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .payment-summary {
+            border: 1px solid #ffffff;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-header {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ffffff;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding-top: 15px;
+            border-top: 1px solid #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        #card-element {
+            padding: 12px;
+            border: 1px solid #ffffff;
+            background-color: #000000;
+        }
+
+        .StripeElement {
+            background-color: #000000;
+        }
+
+        .StripeElement--focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        #card-errors {
+            color: #ffffff;
+            background-color: #ff0000;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 11px;
+            display: none;
+        }
+
+        #card-errors.visible {
+            display: block;
+        }
+
+        .security-info {
+            background-color: #1a1a1a;
+            border: 1px solid #ffffff;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+        }
+
+        .security-info p {
+            margin-bottom: 5px;
+        }
+
+        .security-info p:first-child {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #000000;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            display: none;
+        }
+
+        .error-message {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .success-message {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .features-list {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ffffff;
+        }
+
+        .features-list h3 {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ffffff;
+        }
+
+        .features-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .features-list li:before {
+            content: "⚜";
+            position: absolute;
+            left: 0;
+            font-size: 10px;
+        }
+
+        .auth-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .auth-footer a {
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid #ffffff;
+            transition: opacity 0.3s;
+        }
+
+        .auth-footer a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .fleur-de-lys {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+
+            .payment-box {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <span class="fleur-de-lys">⚜</span>
+        <div class="logo">French Connexion</div>
+        <span class="fleur-de-lys">⚜</span>
+    </div>
+
+    <div class="payment-box">
+        <h1>Investis En Toi</h1>
+        <p class="subtitle">Accès à vie • <span class="price-highlight">19,99€</span></p>
+
+        <div class="payment-summary">
+            <div class="summary-header">Récapitulatif</div>
+            <div class="summary-item">
+                <span>French Connexion™ Ebook</span>
+                <span>19,99€</span>
+            </div>
+            <div class="summary-total">
+                <span>Total</span>
+                <span>19,99€</span>
+            </div>
+        </div>
+
+        <div class="features-list">
+            <h3>Tu vas recevoir</h3>
+            <ul>
+                <li>Accès immédiat à l'ebook complet</li>
+                <li>Les 9 étapes du processus</li>
+                <li>Lecture sur tous tes appareils</li>
+                <li>Accès à vie, sans abonnement</li>
+                <li>Contenu exclusif et protégé</li>
+            </ul>
+        </div>
+
+        <form id="payment-form">
+            <div class="form-group">
+                <label for="card-element">Informations Bancaires</label>
+                <div id="card-element"></div>
+                <div id="card-errors"></div>
+            </div>
+
+            <div class="security-info">
+                <p>🔒 Paiement 100% sécurisé via Stripe</p>
+                <p>Tes informations bancaires ne sont jamais stockées sur nos serveurs.</p>
+            </div>
+
+            <button type="submit" id="submit-button" class="btn-submit">
+                <span id="button-text">Payer 19,99€</span>
+                <span id="spinner" class="spinner" style="display: none;"></span>
+            </button>
+
+            <div id="error-message" class="message error-message"></div>
+            <div id="success-message" class="message success-message"></div>
+        </form>
+
+        <div class="auth-footer">
+            <p>En payant, tu acceptes nos <a href="cgv.html" target="_blank">CGV</a></p>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>

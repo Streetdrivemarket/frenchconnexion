@@ -1,0 +1,559 @@
+/* ========================================
+   FRENCH CONNEXION - Reader Styles
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1a1a2e;
+    --secondary-color: #16213e;
+    --accent-color: #0f3460;
+    --gold-color: #d4af37;
+    --text-light: #ffffff;
+    --text-gray: #cccccc;
+    --sidebar-width: 280px;
+}
+
+body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: #f5f5f5;
+    color: #333;
+    /* Désactiver la sélection de texte */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Désactiver le clic droit */
+body {
+    -webkit-touch-callout: none;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.reader-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.header-left .logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--gold-color);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.header-center h2 {
+    color: var(--text-light);
+    font-size: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-info {
+    color: var(--text-gray);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+}
+
+.btn-logout {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Segoe UI', sans-serif;
+    transition: background-color 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: var(--gold-color);
+    color: var(--primary-color);
+}
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
+
+.sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - 70px);
+    background-color: var(--secondary-color);
+    padding: 30px 20px;
+    overflow-y: auto;
+    transition: transform 0.3s;
+    z-index: 999;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-header h3 {
+    color: var(--gold-color);
+    font-size: 18px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.btn-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 30px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.chapters-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chapter-link {
+    color: var(--text-gray);
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 15px;
+}
+
+.chapter-link:hover {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+}
+
+.chapter-link.active {
+    background-color: var(--gold-color);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
+
+.reader-content {
+    margin-left: var(--sidebar-width);
+    margin-top: 70px;
+    padding: 60px 80px 120px;
+    max-width: 900px;
+    background-color: white;
+    min-height: calc(100vh - 70px);
+    position: relative;
+}
+
+/* Filigrane (watermark) */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.05);
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.chapter {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.chapter.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chapter h1 {
+    font-size: 42px;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    line-height: 1.3;
+}
+
+.chapter h2 {
+    font-size: 32px;
+    color: var(--secondary-color);
+    margin: 40px 0 20px;
+    line-height: 1.4;
+}
+
+.chapter h3 {
+    font-size: 24px;
+    color: var(--accent-color);
+    margin: 30px 0 15px;
+}
+
+.chapter p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.chapter ul, .chapter ol {
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.chapter li {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+/* Styles spéciaux */
+
+.quote-highlight {
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: var(--text-light);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.emphasis-box {
+    background-color: #f9f9f9;
+    border-left: 5px solid var(--gold-color);
+    padding: 25px;
+    margin: 30px 0;
+    border-radius: 8px;
+}
+
+.emphasis-box strong {
+    color: var(--gold-color);
+    font-size: 22px;
+}
+
+.big-text {
+    font-size: 28px !important;
+    font-weight: bold;
+    color: var(--gold-color);
+    text-align: center;
+    margin: 30px 0;
+}
+
+.truth-box {
+    background: var(--gradient-gold);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.truth-box p {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.truth-box strong {
+    font-size: 28px;
+}
+
+.final-truth {
+    font-size: 26px !important;
+    font-weight: bold;
+    color: var(--gold-color);
+    text-align: center;
+    margin: 40px 0;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+}
+
+.process-intro {
+    font-size: 20px !important;
+    font-style: italic;
+    text-align: center;
+    color: #666;
+    margin: 30px 0;
+}
+
+.highlight-text {
+    color: var(--gold-color);
+    font-weight: bold;
+    font-size: 20px !important;
+}
+
+.key-point {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+    padding: 25px;
+    border-radius: 12px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.key-point p {
+    font-size: 22px;
+    color: var(--text-light);
+}
+
+.transformation {
+    font-style: italic;
+    font-size: 22px !important;
+    color: var(--secondary-color);
+    text-align: center;
+    margin: 30px 0;
+}
+
+.purpose {
+    font-size: 22px !important;
+    font-weight: bold;
+    text-align: center;
+    color: var(--gold-color);
+    margin: 30px 0;
+}
+
+.reality-check {
+    font-size: 24px !important;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-align: center;
+    margin: 30px 0;
+}
+
+.critical-moment {
+    background-color: #fff3cd;
+    border: 3px solid var(--gold-color);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.critical-moment p {
+    font-size: 22px;
+    color: var(--primary-color);
+}
+
+.transformation-final {
+    font-size: 24px !important;
+    font-weight: bold;
+    color: var(--gold-color);
+    text-align: center;
+    margin: 30px 0;
+}
+
+.chess-metaphor {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.chess-metaphor p {
+    font-size: 20px;
+    color: white;
+}
+
+.final-revelation {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    padding: 40px;
+    border-radius: 15px;
+    margin: 40px 0;
+    text-align: center;
+}
+
+.final-revelation p {
+    font-size: 20px;
+    color: var(--text-light);
+    margin: 15px 0;
+}
+
+.the-key {
+    font-size: 28px !important;
+    margin-top: 30px !important;
+}
+
+.the-key strong {
+    color: var(--gold-color);
+    font-size: 36px;
+}
+
+.action-challenge {
+    background: linear-gradient(135deg, var(--gold-color), #f9d342);
+    padding: 40px;
+    border-radius: 15px;
+    margin: 40px 0;
+}
+
+.action-challenge h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.action-challenge p {
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+.signature {
+    text-align: center;
+    margin: 60px 0 40px;
+    font-size: 24px;
+    color: var(--gold-color);
+}
+
+/* ========================================
+   NAVIGATION BUTTONS
+   ======================================== */
+
+.reader-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 100;
+}
+
+.nav-btn {
+    background-color: var(--gold-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
+}
+
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .btn-toggle {
+        display: block;
+    }
+
+    .reader-content {
+        margin-left: 0;
+        padding: 40px 30px 120px;
+    }
+
+    .header-center h2 {
+        font-size: 16px;
+    }
+
+    .user-info {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .reader-content {
+        padding: 30px 20px 120px;
+    }
+
+    .chapter h1 {
+        font-size: 32px;
+    }
+
+    .chapter h2 {
+        font-size: 26px;
+    }
+
+    .chapter p, .chapter li {
+        font-size: 16px;
+    }
+
+    .watermark {
+        font-size: 18px;
+    }
+
+    .reader-nav {
+        flex-direction: column;
+        bottom: 20px;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+}
+
+/* ========================================
+   PRINT PROTECTION
+   ======================================== */
+
+@media print {
+    body {
+        display: none !important;
+    }
+}

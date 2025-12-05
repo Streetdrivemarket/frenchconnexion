@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST FINAL - Système de Progression</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .progress-global {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-percentage {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 30px;
+            background-color: #1a1a1a;
+            border: 2px solid #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #ffffff;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .step-card {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            margin-bottom: 15px;
+            padding: 20px;
+        }
+
+        .step-card.completed {
+            border-color: #4CAF50;
+            background-color: rgba(76, 175, 80, 0.05);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .validate-progress-btn {
+            width: 100%;
+            background-color: #ffffff;
+            color: #000000;
+            border: 3px solid #ffffff;
+            padding: 20px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            margin-top: 30px;
+        }
+
+        .validate-progress-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        #test-log {
+            background: #111;
+            border: 2px solid #fff;
+            padding: 20px;
+            margin-top: 30px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 12px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 TEST FINAL - Système de Progression</h1>
+
+        <div class="progress-global">
+            <div class="progress-header">
+                <h2>🎯 Avancement Global</h2>
+                <span class="progress-percentage" id="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p id="progress-status">Tu n'as pas encore commencé. C'est le moment de passer à l'action !</p>
+        </div>
+
+        <div id="steps-container"></div>
+
+        <button id="validate-progress-btn" class="validate-progress-btn">
+            🚀 VALIDER MA PROGRESSION
+        </button>
+
+        <div id="test-log"></div>
+    </div>
+
+    <script>
+        const testLog = document.getElementById('test-log');
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            testLog.innerHTML += `<div>[${time}] ${msg}</div>`;
+            testLog.scrollTop = testLog.scrollHeight;
+            console.log(msg);
+        }
+
+        log('✅ Page chargée - Génération des 9 étapes...');
+
+        // Créer les 9 étapes
+        const stepsContainer = document.getElementById('steps-container');
+        const stepNames = [
+            'Une idée',
+            'L\'écrire',
+            'Apprendre',
+            'Comprendre',
+            'Écrire tes objectifs',
+            'Pourquoi j\'échouerai ?',
+            'Analyser',
+            'Créer',
+            'Développer'
+        ];
+
+        stepNames.forEach((name, index) => {
+            const stepNum = index + 1;
+            const card = document.createElement('div');
+            card.className = 'step-card';
+            card.dataset.step = stepNum;
+            card.innerHTML = `
+                <div class="step-header">
+                    <input type="checkbox" class="step-checkbox" data-step="${stepNum}" id="step-${stepNum}">
+                    <label for="step-${stepNum}">${stepNum}. ${name}</label>
+                </div>
+            `;
+            stepsContainer.appendChild(card);
+        });
+
+        log(`✅ ${stepNames.length} étapes créées`);
+
+        // Récupérer les éléments
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercentage = document.getElementById('progress-percentage');
+        const progressStatus = document.getElementById('progress-status');
+        const stepCheckboxes = document.querySelectorAll('.step-checkbox');
+        const validateBtn = document.getElementById('validate-progress-btn');
+
+        log(`📊 Éléments trouvés:`);
+        log(`  - ProgressBar: ${progressBar ? 'OK' : 'NULL'}`);
+        log(`  - ProgressPercentage: ${progressPercentage ? 'OK' : 'NULL'}`);
+        log(`  - ProgressStatus: ${progressStatus ? 'OK' : 'NULL'}`);
+        log(`  - Checkboxes: ${stepCheckboxes.length}`);
+        log(`  - ValidateBtn: ${validateBtn ? 'OK' : 'NULL'}`);
+
+        // Fonction de mise à jour de la barre
+        function updateProgressBar() {
+            log('🔄 updateProgressBar() appelée');
+
+            const totalSteps = stepCheckboxes.length;
+            const completedSteps = Array.from(stepCheckboxes).filter(cb => cb.checked).length;
+            const percentage = Math.round((completedSteps / totalSteps) * 100);
+
+            log(`📊 Calcul: ${completedSteps}/${totalSteps} = ${percentage}%`);
+
+            progressBar.style.width = percentage + '%';
+            progressPercentage.textContent = percentage + '%';
+
+            if (percentage === 0) {
+                progressStatus.textContent = "Tu n'as pas encore commencé. C'est le moment de passer à l'action !";
+            } else if (percentage < 50) {
+                progressStatus.textContent = `Bon début ! Tu as complété ${completedSteps} étapes sur ${totalSteps}. Continue !`;
+            } else if (percentage < 100) {
+                progressStatus.textContent = `Excellent travail ! Tu es à ${percentage}%. Ne lâche rien !`;
+            } else {
+                progressStatus.textContent = "🎉 TU AS TOUT COMPLÉTÉ ! Tu es un vrai warrior !";
+            }
+
+            log(`✅ Barre mise à jour: ${percentage}%`);
+        }
+
+        // Fonction de mise à jour visuelle des cartes
+        function updateStepCard(stepNum, isCompleted) {
+            const card = document.querySelector(`.step-card[data-step="${stepNum}"]`);
+            if (card) {
+                if (isCompleted) {
+                    card.classList.add('completed');
+                } else {
+                    card.classList.remove('completed');
+                }
+            }
+        }
+
+        // Gérer les checkboxes
+        stepCheckboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', (e) => {
+                const stepNum = parseInt(e.target.dataset.step);
+                const isChecked = e.target.checked;
+
+                log(`☑️ Checkbox ${stepNum} changée: ${isChecked}`);
+                updateStepCard(stepNum, isChecked);
+            });
+        });
+
+        log(`✅ Event listeners attachés aux ${stepCheckboxes.length} checkboxes`);
+
+        // Gérer le bouton de validation
+        if (validateBtn) {
+            validateBtn.addEventListener('click', () => {
+                log('🚀🚀🚀 BOUTON CLIQUÉ !');
+
+                updateProgressBar();
+
+                validateBtn.textContent = '✅ PROGRESSION VALIDÉE !';
+                validateBtn.style.backgroundColor = '#4CAF50';
+                validateBtn.style.borderColor = '#4CAF50';
+
+                setTimeout(() => {
+                    validateBtn.textContent = '🚀 VALIDER MA PROGRESSION';
+                    validateBtn.style.backgroundColor = '#ffffff';
+                    validateBtn.style.borderColor = '#ffffff';
+                }, 2000);
+            });
+            log('✅ Event listener attaché au bouton de validation');
+        } else {
+            log('❌ ERREUR: Bouton de validation non trouvé!');
+        }
+
+        log('');
+        log('═══════════════════════════════════════');
+        log('✅ SYSTÈME ENTIÈREMENT INITIALISÉ');
+        log('═══════════════════════════════════════');
+        log('');
+        log('📝 INSTRUCTIONS:');
+        log('1. Coche quelques cases ci-dessus');
+        log('2. Clique sur le bouton VALIDER');
+        log('3. La barre doit se remplir !');
+        log('');
+    </script>
+</body>
+</html>

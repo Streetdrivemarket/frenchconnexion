@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - French Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+        }
+
+        .fleur-de-lys {
+            font-size: 32px;
+            color: #ffffff;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+            border: 3px solid #ffffff;
+            padding: 50px 40px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .contact-box h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .contact-box p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .warning-box {
+            background: #000000;
+            border: 3px solid #ff0000;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .warning-box h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #ff0000;
+            text-align: center;
+        }
+
+        .warning-box p {
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+            color: #ffffff;
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 3px solid #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 0 30px rgba(0, 136, 204, 0.5);
+        }
+
+        .telegram-btn:hover {
+            background: linear-gradient(135deg, #006699 0%, #0088cc 100%);
+            box-shadow: 0 0 50px rgba(0, 136, 204, 0.8);
+            transform: scale(1.05);
+        }
+
+        .telegram-icon {
+            font-size: 32px;
+        }
+
+        .info-text {
+            font-size: 14px;
+            margin-top: 30px;
+            opacity: 0.7;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 15px 40px;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 40px;
+        }
+
+        .back-btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 13px 38px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .contact-box {
+                padding: 30px 20px;
+            }
+
+            .contact-box h2 {
+                font-size: 20px;
+            }
+
+            .telegram-btn {
+                font-size: 16px;
+                padding: 15px 30px;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <span class="fleur-de-lys">⚜</span>
+            <div class="logo">French Connexion</div>
+            <span class="fleur-de-lys">⚜</span>
+        </div>
+
+        <h1>📡 CONTACT</h1>
+
+        <div class="contact-box">
+            <h2>💬 Rejoins le canal Telegram</h2>
+
+            <p>Un espace privé pour échanger avec nous et d'autres membres du 1%.</p>
+
+            <p><strong>Attention :</strong> Ce n'est PAS un groupe de support pour te tenir la main.</p>
+
+            <div class="warning-box">
+                <h3>⚠️ CE QUE CE CANAL N'EST PAS :</h3>
+                <p>❌ Un groupe de motivation quotidienne<br>
+                ❌ Un endroit pour pleurnicher<br>
+                ❌ Un système d'assistance 24/7<br>
+                ❌ Une béquille pour te pousser à agir</p>
+            </div>
+
+            <p style="font-weight: 700; margin-top: 30px;">Ce que c'est :</p>
+            <p>✅ Un espace pour échanger des idées<br>
+            ✅ Partager tes victoires<br>
+            ✅ Poser des questions stratégiques<br>
+            ✅ Connecter avec des gens qui BOUGENT</p>
+
+            <div class="center" style="margin-top: 40px;">
+                <a href="https://t.me/+f7WvDCHMszZkZmY0" target="_blank" class="telegram-btn">
+                    <span class="telegram-icon">✈️</span>
+                    <span>Rejoindre Telegram</span>
+                </a>
+            </div>
+
+            <p class="info-text">Le canal est privé. Le lien est réservé aux membres French Connexion™.</p>
+        </div>
+
+        <div class="center">
+            <a href="index.html" class="back-btn">Retour à l'accueil</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Barre de Progression</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .progress-global {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-percentage {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 30px;
+            background-color: #1a1a1a;
+            border: 2px solid #ffffff;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #ffffff;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .test-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .test-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border: 2px solid #ffffff;
+            cursor: pointer;
+        }
+
+        .test-checkbox input {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .test-checkbox.checked {
+            border-color: #4CAF50;
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+
+        .debug-info {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #ffffff;
+            font-size: 12px;
+        }
+
+        .debug-info pre {
+            background-color: #1a1a1a;
+            padding: 10px;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 TEST BARRE DE PROGRESSION</h1>
+
+        <div class="progress-global">
+            <div class="progress-header">
+                <h2>🎯 Avancement</h2>
+                <span class="progress-percentage" id="progress-percentage">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p id="progress-status">Aucune étape cochée</p>
+        </div>
+
+        <div class="test-controls">
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="1" id="cb1">
+                <label for="cb1">Étape 1 - Une idée</label>
+            </div>
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="2" id="cb2">
+                <label for="cb2">Étape 2 - L'écrire</label>
+            </div>
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="3" id="cb3">
+                <label for="cb3">Étape 3 - Apprendre</label>
+            </div>
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="4" id="cb4">
+                <label for="cb4">Étape 4 - Comprendre</label>
+            </div>
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="5" id="cb5">
+                <label for="cb5">Étape 5 - Écrire tes objectifs</label>
+            </div>
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="6" id="cb6">
+                <label for="cb6">Étape 6 - Pourquoi j'échouerai ?</label>
+            </div>
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="7" id="cb7">
+                <label for="cb7">Étape 7 - Analyser</label>
+            </div>
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="8" id="cb8">
+                <label for="cb8">Étape 8 - Créer</label>
+            </div>
+            <div class="test-checkbox">
+                <input type="checkbox" class="step-checkbox" data-step="9" id="cb9">
+                <label for="cb9">Étape 9 - Développer</label>
+            </div>
+        </div>
+
+        <div class="debug-info">
+            <h3>🔍 Debug Info</h3>
+            <pre id="debug-log"></pre>
+        </div>
+    </div>
+
+    <script>
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercentage = document.getElementById('progress-percentage');
+        const progressStatus = document.getElementById('progress-status');
+        const stepCheckboxes = document.querySelectorAll('.step-checkbox');
+        const debugLog = document.getElementById('debug-log');
+
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog.textContent += `[${timestamp}] ${message}\n`;
+            console.log(message);
+        }
+
+        log('Initialisation...');
+        log(`Éléments trouvés: ${stepCheckboxes.length} checkboxes`);
+        log(`ProgressBar: ${progressBar ? 'OK' : 'ERREUR'}`);
+        log(`ProgressPercentage: ${progressPercentage ? 'OK' : 'ERREUR'}`);
+
+        function updateProgressBar() {
+            const totalSteps = stepCheckboxes.length;
+            const completedSteps = Array.from(stepCheckboxes).filter(cb => cb.checked).length;
+            const percentage = Math.round((completedSteps / totalSteps) * 100);
+
+            log(`📊 Progression: ${completedSteps}/${totalSteps} = ${percentage}%`);
+
+            // Animer la barre
+            progressBar.style.width = `${percentage}%`;
+            progressPercentage.textContent = `${percentage}%`;
+
+            // Mettre à jour le message
+            if (percentage === 0) {
+                progressStatus.textContent = "Aucune étape cochée";
+            } else if (percentage < 100) {
+                progressStatus.textContent = `${completedSteps} étapes sur ${totalSteps} complétées`;
+            } else {
+                progressStatus.textContent = "🎉 Toutes les étapes complétées !";
+            }
+        }
+
+        // Initialiser les event listeners
+        stepCheckboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener('change', (e) => {
+                const stepNum = e.target.dataset.step;
+                const isChecked = e.target.checked;
+
+                log(`✅ Checkbox ${stepNum} changée: ${isChecked}`);
+
+                // Mettre à jour le style du container
+                const container = e.target.closest('.test-checkbox');
+                if (isChecked) {
+                    container.classList.add('checked');
+                } else {
+                    container.classList.remove('checked');
+                }
+
+                updateProgressBar();
+            });
+
+            log(`Event listener ajouté pour checkbox ${index + 1}`);
+        });
+
+        log('✅ Système de progression initialisé !');
+        log('Coche des cases pour voir la barre se remplir');
+    </script>
+</body>
+</html>

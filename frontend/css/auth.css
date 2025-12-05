@@ -1,0 +1,393 @@
+/* ========================================
+   FRENCH CONNEXION - Auth Pages Styles
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #1a1a2e;
+    --secondary-color: #16213e;
+    --accent-color: #0f3460;
+    --gold-color: #d4af37;
+    --text-light: #ffffff;
+    --text-gray: #cccccc;
+    --error-color: #ff6b6b;
+    --success-color: #51cf66;
+    --gradient-gold: linear-gradient(135deg, #d4af37 0%, #f9d342 100%);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1000px;
+    background-color: var(--secondary-color);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.auth-box {
+    padding: 60px 50px;
+    color: var(--text-light);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--gold-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.auth-box h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-gray);
+    margin-bottom: 40px;
+    font-size: 16px;
+}
+
+/* Form Styles */
+
+.auth-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--gold-color);
+}
+
+.form-group input::placeholder {
+    color: #666;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: var(--text-gray);
+    font-size: 12px;
+}
+
+.form-group.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group.checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.form-group.checkbox label {
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.form-group a {
+    color: var(--gold-color);
+    text-decoration: none;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+/* Submit Button */
+
+.btn-submit {
+    width: 100%;
+    padding: 18px;
+    background: var(--gradient-gold);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Messages */
+
+.error-message {
+    background-color: var(--error-color);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+    animation: slideDown 0.3s ease;
+}
+
+.success-message {
+    background-color: var(--success-color);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Auth Footer */
+
+.auth-footer {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--text-gray);
+}
+
+.auth-footer p {
+    margin: 10px 0;
+}
+
+.auth-footer a {
+    color: var(--gold-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Auth Info Panel */
+
+.auth-info {
+    background: var(--gradient-gold);
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.auth-info h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.auth-info ul {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.auth-info ul li {
+    font-size: 18px;
+    padding: 12px 0;
+    line-height: 1.6;
+}
+
+.quote {
+    background-color: rgba(26, 26, 46, 0.2);
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid var(--primary-color);
+    margin-top: auto;
+}
+
+.quote p {
+    font-size: 20px;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.quote strong {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-info {
+        display: none;
+    }
+
+    .auth-box {
+        padding: 40px 30px;
+    }
+
+    .auth-box h1 {
+        font-size: 28px;
+    }
+}
+
+/* Loading Spinner */
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(26, 26, 46, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Payment Specific Styles */
+
+.payment-summary {
+    background-color: var(--primary-color);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.payment-summary h3 {
+    color: var(--gold-color);
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--accent-color);
+    color: var(--text-light);
+}
+
+.price-value {
+    font-weight: bold;
+    color: var(--text-gray);
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.total-value {
+    color: var(--gold-color);
+}
+
+.stripe-element {
+    background-color: var(--primary-color);
+    padding: 15px;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    transition: border-color 0.3s;
+}
+
+.stripe-element:focus-within {
+    border-color: var(--gold-color);
+}
+
+.error-text {
+    color: var(--error-color);
+    font-size: 14px;
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+.security-info {
+    background-color: rgba(81, 207, 102, 0.1);
+    border-left: 3px solid var(--success-color);
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.security-info p {
+    color: var(--text-light);
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.payment-features {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.payment-features li {
+    font-size: 17px;
+    padding: 10px 0;
+    line-height: 1.6;
+}

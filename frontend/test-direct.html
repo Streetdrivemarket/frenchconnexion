@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Direct Barre</title>
+    <style>
+        body { background: #000; color: #fff; padding: 40px; font-family: monospace; }
+        .bar-container { width: 100%; height: 30px; background: #333; border: 2px solid #fff; margin: 20px 0; }
+        .bar { height: 100%; background: #fff; width: 0%; transition: width 0.5s; }
+        button { background: #fff; color: #000; padding: 15px 30px; font-size: 16px; cursor: pointer; margin: 10px; }
+        .checkbox { margin: 10px 0; padding: 10px; border: 1px solid #fff; }
+        input[type="checkbox"] { width: 20px; height: 20px; }
+        #log { background: #111; padding: 20px; margin-top: 20px; border: 1px solid #fff; max-height: 300px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>TEST DIRECT - Système de Progression</h1>
+    
+    <div id="progress-percentage" style="font-size: 32px; font-weight: bold;">0%</div>
+    <div class="bar-container">
+        <div class="bar" id="progress-bar"></div>
+    </div>
+    <p id="progress-status">Aucune étape cochée</p>
+    
+    <h2>Étapes :</h2>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="1"> Étape 1</div>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="2"> Étape 2</div>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="3"> Étape 3</div>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="4"> Étape 4</div>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="5"> Étape 5</div>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="6"> Étape 6</div>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="7"> Étape 7</div>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="8"> Étape 8</div>
+    <div class="checkbox"><input type="checkbox" class="step-checkbox" data-step="9"> Étape 9</div>
+    
+    <button id="validate-btn">🚀 VALIDER MA PROGRESSION</button>
+    <button onclick="location.reload()">🔄 Rafraîchir</button>
+    
+    <div id="log"></div>
+    
+    <script>
+        const log = document.getElementById('log');
+        function addLog(msg) {
+            const time = new Date().toLocaleTimeString();
+            log.innerHTML += `[${time}] ${msg}<br>`;
+            log.scrollTop = log.scrollHeight;
+            console.log(msg);
+        }
+        
+        addLog('✅ Page chargée');
+        
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercentage = document.getElementById('progress-percentage');
+        const progressStatus = document.getElementById('progress-status');
+        const stepCheckboxes = document.querySelectorAll('.step-checkbox');
+        const validateBtn = document.getElementById('validate-btn');
+        
+        addLog(`Éléments trouvés: ${stepCheckboxes.length} checkboxes`);
+        addLog(`ProgressBar: ${progressBar ? 'OK' : 'NULL'}`);
+        addLog(`ValidateBtn: ${validateBtn ? 'OK' : 'NULL'}`);
+        
+        function updateProgressBar() {
+            addLog('🔄 Fonction updateProgressBar() appelée');
+            
+            const totalSteps = stepCheckboxes.length;
+            const completedSteps = Array.from(stepCheckboxes).filter(cb => cb.checked).length;
+            const percentage = Math.round((completedSteps / totalSteps) * 100);
+            
+            addLog(`📊 Calcul: ${completedSteps}/${totalSteps} = ${percentage}%`);
+            
+            progressBar.style.width = percentage + '%';
+            progressPercentage.textContent = percentage + '%';
+            
+            if (percentage === 0) {
+                progressStatus.textContent = "Aucune étape cochée";
+            } else if (percentage < 100) {
+                progressStatus.textContent = `${completedSteps} étapes sur ${totalSteps} complétées`;
+            } else {
+                progressStatus.textContent = "🎉 Toutes les étapes complétées !";
+            }
+            
+            addLog(`✅ Barre mise à jour à ${percentage}%`);
+        }
+        
+        validateBtn.addEventListener('click', () => {
+            addLog('🚀 CLIC SUR LE BOUTON VALIDER');
+            updateProgressBar();
+            validateBtn.textContent = '✅ VALIDÉ !';
+            validateBtn.style.backgroundColor = '#4CAF50';
+            setTimeout(() => {
+                validateBtn.textContent = '🚀 VALIDER MA PROGRESSION';
+                validateBtn.style.backgroundColor = '#fff';
+            }, 2000);
+        });
+        
+        stepCheckboxes.forEach((cb, i) => {
+            cb.addEventListener('change', () => {
+                addLog(`Checkbox ${i+1} changée: ${cb.checked}`);
+            });
+        });
+        
+        addLog('✅ System initialisé - Coche des cases et clique sur VALIDER');
+    </script>
+</body>
+</html>
