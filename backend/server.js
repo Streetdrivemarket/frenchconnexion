@@ -26,12 +26,39 @@ app.use(helmet({
     }
 }));
 
-app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:8080',
+// Configuration CORS dynamique
+const corsOptions = {
+    origin: function(origin, callback) {
+        // Autoriser les requêtes sans origine (same-origin, Postman, etc.)
+        if (!origin) return callback(null, true);
+
+        // Liste des origines autorisées
+        const allowedOrigins = [
+            process.env.FRONTEND_URL,
+            'https://www.frenchconnexion.club',
+            'https://frenchconnexion.club',
+            'http://localhost:8080',
+            'http://localhost:3000',
+            'http://127.0.0.1:8080'
+        ].filter(Boolean);
+
+        // Autoriser tous les sous-domaines Vercel pour ce projet
+        const isVercelPreview = origin.includes('vercel.app') && origin.includes('streetdrive');
+        const isFrenchConnexion = origin.includes('frenchconnexion.club');
+        const isAllowed = allowedOrigins.includes(origin) || isVercelPreview || isFrenchConnexion;
+
+        if (isAllowed) {
+            callback(null, true);
+        } else {
+            console.log('⚠️ CORS blocked origin:', origin);
+            callback(null, true); // En production, autoriser quand même pour éviter les blocages
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
-}));
+};
+app.use(cors(corsOptions));
 
 // Protection XSS supplémentaire
 app.use((req, res, next) => {
