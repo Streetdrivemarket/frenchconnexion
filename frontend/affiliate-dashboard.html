@@ -283,6 +283,20 @@
             text-align: center;
         }
 
+        .my-rank-row {
+            background: #2a2a2a;
+            border: 2px solid #fff;
+            font-weight: 900;
+        }
+
+        .top-3 {
+            font-size: 1.3rem;
+        }
+
+        .rank-medal {
+            font-size: 1.5rem;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8rem;
@@ -328,6 +342,13 @@
         </div>
 
         <div id="dashboard" style="display: none;">
+            <!-- Navigation rapide -->
+            <div style="text-align: center; margin-bottom: 30px;">
+                <a href="affiliate-kit.html" class="btn" style="margin: 5px;">📦 Kit Affilié</a>
+                <a href="affiliate-rules.html" class="btn btn-secondary" style="margin: 5px;">📋 Règles</a>
+                <a href="reader.html" class="btn btn-secondary" style="margin: 5px;">📖 Ebook</a>
+            </div>
+
             <!-- Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
@@ -349,6 +370,10 @@
                 <div class="stat-card">
                     <h3>En Attente</h3>
                     <div class="value" id="pending">0€</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);">
+                    <h3>🏆 Ma Position</h3>
+                    <div class="value" id="myRank">-</div>
                 </div>
             </div>
 
@@ -379,6 +404,30 @@
                         <tbody id="salesBody">
                             <tr>
                                 <td colspan="5" style="text-align: center; opacity: 0.5;">Aucune vente pour le moment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Classement -->
+            <div class="sales-section">
+                <h2>🏆 Top 20 Affiliés</h2>
+                <p style="opacity: 0.7; margin-bottom: 20px;">Les meilleurs performeurs du programme</p>
+                <div id="leaderboardTable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Nom</th>
+                                <th>Code</th>
+                                <th>Ventes</th>
+                                <th>Commission</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardBody">
+                            <tr>
+                                <td colspan="5" style="text-align: center; opacity: 0.5;">Chargement du classement...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -527,6 +576,65 @@
                     `;
                     tbody.appendChild(row);
                 });
+            }
+
+            // Charger classement et position
+            loadLeaderboard();
+            loadMyRank();
+        }
+
+        // Charger le classement
+        async function loadLeaderboard() {
+            try {
+                const response = await fetch(`${API_URL}/affiliate/leaderboard`);
+                if (!response.ok) throw new Error('Erreur chargement classement');
+
+                const data = await response.json();
+                const tbody = document.getElementById('leaderboardBody');
+                tbody.innerHTML = '';
+
+                if (data.leaderboard && data.leaderboard.length > 0) {
+                    data.leaderboard.forEach((affiliate, index) => {
+                        const row = document.createElement('tr');
+                        const position = index + 1;
+                        const medal = position === 1 ? '🥇' : position === 2 ? '🥈' : position === 3 ? '🥉' : '';
+                        const isMyCode = affiliateData?.affiliate?.code === affiliate.affiliate_code;
+
+                        row.className = isMyCode ? 'my-rank-row' : '';
+                        row.innerHTML = `
+                            <td class="${position <= 3 ? 'top-3' : ''}">
+                                ${medal ? `<span class="rank-medal">${medal}</span>` : `#${position}`}
+                            </td>
+                            <td>${affiliate.name || 'Anonyme'}</td>
+                            <td>${affiliate.affiliate_code}</td>
+                            <td>${affiliate.total_sales || 0}</td>
+                            <td>${affiliate.total_commission || 0}€</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; opacity: 0.5;">Aucun affilié pour le moment</td></tr>';
+                }
+            } catch (error) {
+                console.error('Erreur chargement classement:', error);
+            }
+        }
+
+        // Charger ma position
+        async function loadMyRank() {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch(`${API_URL}/affiliate/my-rank`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!response.ok) throw new Error('Erreur chargement position');
+
+                const data = await response.json();
+                const medal = data.rank === 1 ? '🥇' : data.rank === 2 ? '🥈' : data.rank === 3 ? '🥉' : '';
+                document.getElementById('myRank').textContent = `${medal} #${data.rank}`;
+            } catch (error) {
+                console.error('Erreur chargement position:', error);
+                document.getElementById('myRank').textContent = '-';
             }
         }
 

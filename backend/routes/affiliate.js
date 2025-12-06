@@ -336,4 +336,66 @@ router.post('/admin/mark-paid/:saleId', authMiddleware, isAdmin, async (req, res
     }
 });
 
+// ==========================================
+// CLASSEMENT DES AFFILIÉS (public)
+// ==========================================
+router.get('/leaderboard', async (req, res) => {
+    try {
+        const { data: leaderboard, error } = await supabase
+            .from('affiliates')
+            .select('name, affiliate_code, total_sales, total_commission')
+            .eq('status', 'active')
+            .order('total_sales', { ascending: false })
+            .limit(20);
+
+        if (error) {
+            console.error('❌ Erreur leaderboard:', error);
+            return res.status(500).json({ error: 'Erreur lors de la récupération.' });
+        }
+
+        res.json({ leaderboard });
+
+    } catch (error) {
+        console.error('❌ Erreur leaderboard:', error);
+        res.status(500).json({ error: 'Erreur serveur.' });
+    }
+});
+
+// ==========================================
+// MA POSITION DANS LE CLASSEMENT
+// ==========================================
+router.get('/my-rank', authMiddleware, async (req, res) => {
+    try {
+        // Récupérer mon profil affilié
+        const { data: myAffiliate } = await supabase
+            .from('affiliates')
+            .select('*')
+            .eq('user_id', req.user.id)
+            .single();
+
+        if (!myAffiliate) {
+            return res.status(404).json({ error: 'Profil affilié non trouvé.' });
+        }
+
+        // Compter combien d'affiliés ont plus de ventes que moi
+        const { count } = await supabase
+            .from('affiliates')
+            .select('*', { count: 'exact', head: true })
+            .eq('status', 'active')
+            .gt('total_sales', myAffiliate.total_sales);
+
+        const rank = (count || 0) + 1;
+
+        res.json({
+            rank,
+            total_sales: myAffiliate.total_sales,
+            total_commission: myAffiliate.total_commission
+        });
+
+    } catch (error) {
+        console.error('❌ Erreur my-rank:', error);
+        res.status(500).json({ error: 'Erreur serveur.' });
+    }
+});
+
 module.exports = router;
