@@ -644,6 +644,12 @@
         async function becomeAffiliate() {
             const token = localStorage.getItem('token');
 
+            if (!token) {
+                alert('❌ Tu dois être connecté pour devenir affilié.\n\nRedirection vers la page de connexion...');
+                window.location.href = 'login.html';
+                return;
+            }
+
             try {
                 const response = await fetch(`${API_URL}/affiliate/register`, {
                     method: 'POST',
@@ -655,6 +661,16 @@
 
                 if (!response.ok) {
                     const error = await response.json();
+
+                    // Si session invalide, proposer de se reconnecter
+                    if (error.error && error.error.includes('invalide')) {
+                        if (confirm('❌ Ta session a expiré.\n\nVeux-tu te reconnecter ?')) {
+                            localStorage.removeItem('token');
+                            window.location.href = 'login.html';
+                        }
+                        return;
+                    }
+
                     throw new Error(error.error || 'Erreur lors de l\'inscription');
                 }
 
