@@ -1,8 +1,21 @@
 // Configuration globale
 // ⚠️ IMPORTANT: Remplace ces valeurs avec tes propres clés avant de déployer en production
-const API_URL = window.location.hostname === 'localhost'
-    ? 'http://localhost:3000/api'
-    : 'https://french-connexion-ebook-2e0xd2y05-streetdrives-projects.vercel.app/api'; // Production URL
+
+// Déterminer l'URL de l'API automatiquement
+function getApiUrl() {
+    const hostname = window.location.hostname;
+
+    // Développement local
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return 'http://localhost:3000/api';
+    }
+
+    // Production - utiliser le même domaine que le frontend avec /api
+    // Cela fonctionne si le backend est sur le même domaine (Vercel rewrites/redirects)
+    return `${window.location.origin}/api`;
+}
+
+const API_URL = getApiUrl();
 
 // Stripe publishable key - MODE LIVE PRODUCTION ⚠️
 const STRIPE_PUBLISHABLE_KEY = 'pk_live_51Safd5FKeI89dgT28Zwt8FznPowY2Z7N0Mdls0AeSn3WEjIgULBlwcYfvFDousgjPEk7Zxl9ssqNlCcImPOmx5LC00yH2Djj9g';
