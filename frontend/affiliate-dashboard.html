@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Affilié - French Connexion™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +13,7 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Orbitron', sans-serif;
             background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
             color: #fff;
             min-height: 100vh;
@@ -413,7 +414,7 @@
         // API URL dynamique
         const API_URL = window.location.hostname === 'localhost'
             ? 'http://localhost:3000/api'
-            : 'https://ton-domaine.com/api';
+            : 'https://french-connexion-ebook-2e0xd2y05-streetdrives-projects.vercel.app/api';
         let affiliateData = null;
 
         // Vérifier l'authentification

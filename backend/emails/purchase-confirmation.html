@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation d'achat - French Connexion™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 3px solid #ffffff;
+        }
+        .fleur {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .content {
+            padding: 40px 0;
+            line-height: 1.8;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+        .details {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border: 2px solid #ffffff;
+            margin: 30px 0;
+        }
+        .details p {
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #ffffff;
+            font-size: 11px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="fleur">⚜</div>
+            <div class="logo">French Connexion</div>
+        </div>
+
+        <div class="content">
+            <h1>✅ PAIEMENT CONFIRMÉ</h1>
+
+            <p>Félicitations {{PRENOM}},</p>
+
+            <p>Ton paiement a été confirmé avec succès. Tu fais désormais partie des 1% qui AGISSENT.</p>
+
+            <div class="details">
+                <p><strong>📦 Commande :</strong> French Connexion™ Ebook</p>
+                <p><strong>💰 Montant :</strong> {{MONTANT}}€</p>
+                <p><strong>📧 Email :</strong> {{EMAIL}}</p>
+                <p><strong>🆔 Transaction :</strong> {{TRANSACTION_ID}}</p>
+            </div>
+
+            <p>Tu vas recevoir un email de bienvenue dans quelques minutes avec tes premiers accès.</p>
+
+            <div class="cta">
+                <a href="{{FRONTEND_URL}}/reader.html" class="btn">ACCÉDER À L'EBOOK</a>
+            </div>
+
+            <p style="text-align: center; font-size: 12px; margin-top: 30px;">
+                "1% Agissent. 99% Rêvent."<br>
+                Tu viens de franchir la ligne.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>⚜ French Connexion™ - 2025</p>
+            <p>Si tu as des questions, réponds directement à cet email.</p>
+        </div>
+    </div>
+</body>
+</html>

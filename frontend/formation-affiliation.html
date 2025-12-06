@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Affiliation - French Connexion™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid #ffffff;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-button {
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 15px 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .tab-button:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .module h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #ffffff;
+            padding-bottom: 15px;
+        }
+
+        .module h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .module h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .module p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .module ul {
+            list-style: none;
+            margin-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .module ul li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .module ul li:before {
+            content: "■";
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        .script-box {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 25px;
+            margin: 20px 0;
+            border: 2px solid #000000;
+            font-weight: 500;
+        }
+
+        .script-box h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .script-box p {
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .example-box {
+            border: 2px solid #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #0a0a0a;
+        }
+
+        .example-box h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .warning-box {
+            border: 3px solid #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #1a1a1a;
+        }
+
+        .warning-box h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .format-card {
+            border: 2px solid #ffffff;
+            padding: 20px;
+            background-color: #0a0a0a;
+        }
+
+        .format-card h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .format-card ul {
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 2px solid #ffffff;
+            margin-top: 60px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .tab-button {
+                padding: 12px 20px;
+                font-size: 0.8rem;
+            }
+
+            .module {
+                padding: 25px;
+            }
+
+            .module h2 {
+                font-size: 1.5rem;
+            }
+
+            .module h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>FORMATION AFFILIATION</h1>
+            <p class="subtitle">French Connexion™ - Guide Complet pour Affiliés</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'module1')">MODULE 1</button>
+            <button class="tab-button" onclick="openTab(event, 'module2')">MODULE 2</button>
+            <button class="tab-button" onclick="openTab(event, 'module3')">MODULE 3</button>
+            <button class="tab-button" onclick="openTab(event, 'module4')">MODULE 4</button>
+        </div>
+
+        <div id="module1" class="tab-content active">
+            <div class="module">
+                <h2>MODULE 1 - COMMENT VENDRE UN PRODUIT DIGITAL</h2>
+
+                <h3>1. Comprendre le public cible</h3>
+                <p>Pour vendre efficacement French Connexion™, vous devez comprendre qui sont vos clients potentiels :</p>
+                <ul>
+                    <li>Personnes cherchant à apprendre le français de manière moderne et pratique</li>
+                    <li>Jeunes professionnels, étudiants, expatriés, passionnés de culture française</li>
+                    <li>Personnes frustrées par les méthodes traditionnelles trop théoriques</li>
+                    <li>Public actif sur les réseaux sociaux (TikTok, Instagram, Snapchat)</li>
+                    <li>Âge cible : 18-45 ans, connectés, cherchant des solutions rapides et efficaces</li>
+                </ul>
+
+                <h3>2. Savoir parler du problème (douleur)</h3>
+                <p>Avant de vendre la solution, il faut identifier et exprimer la douleur du client :</p>
+
+                <div class="example-box">
+                    <h4>Exemples de douleurs à mettre en avant :</h4>
+                    <ul>
+                        <li>"Tu passes des heures sur des apps de langue mais tu ne progresses pas vraiment"</li>
+                        <li>"Tu connais la grammaire mais tu bloques quand il faut parler en vrai"</li>
+                        <li>"Les cours de français classiques sont ennuyeux et trop chers"</li>
+                        <li>"Tu veux impressionner lors de ton voyage en France mais tu manques de confiance"</li>
+                        <li>"Tu comprends l'écrit mais le français parlé va trop vite pour toi"</li>
+                    </ul>
+                </div>
+
+                <h3>3. Savoir vendre la solution</h3>
+                <p>Une fois la douleur exprimée, présentez French Connexion™ comme LA solution :</p>
+
+                <div class="script-box">
+                    <h4>Script de vente type :</h4>
+                    <p>"Et si tu pouvais apprendre le français RÉEL, celui qu'on parle vraiment dans la rue, pas celui des livres scolaires ?"</p>
+                    <p>"French Connexion™ te donne accès à des conversations authentiques, du vocabulaire moderne, et des techniques pour parler avec confiance en seulement quelques semaines."</p>
+                    <p>"Pas de grammaire ennuyeuse. Juste du français vivant, pratique, et directement applicable."</p>
+                </div>
+
+                <h3>4. Comment créer une accroche puissante</h3>
+                <p>L'accroche est la première phrase qui capte l'attention. Elle doit être courte, percutante, et créer de la curiosité.</p>
+
+                <div class="example-box">
+                    <h4>10 accroches prêtes à l'emploi :</h4>
+                    <ul>
+                        <li>"Arrête de perdre ton temps avec Duolingo"</li>
+                        <li>"Le secret pour parler français en 30 jours"</li>
+                        <li>"Voilà pourquoi tu ne progresses pas en français"</li>
+                        <li>"Ce que les profs de français ne te disent jamais"</li>
+                        <li>"Comment j'ai appris le français sans aller en cours"</li>
+                        <li>"La méthode que les Français utilisent vraiment"</li>
+                        <li>"Tu veux parler français comme un natif ?"</li>
+                        <li>"Pourquoi les apps de langue ne fonctionnent pas"</li>
+                        <li>"Le français de la rue vs le français des livres"</li>
+                        <li>"Comment comprendre les Français quand ils parlent vite"</li>
+                    </ul>
+                </div>
+
+                <h3>5. Comment attirer les gens sur le lien</h3>
+                <p>Une fois l'attention captée, il faut diriger vers la page de vente avec une raison claire d'agir maintenant.</p>
+
+                <div class="script-box">
+                    <h4>Techniques pour rediriger :</h4>
+                    <p><strong>Curiosité :</strong> "Si tu veux découvrir la vraie méthode, j'ai mis le lien dans ma bio"</p>
+                    <p><strong>Urgence :</strong> "Le prix augmente bientôt, profite maintenant - lien en bio"</p>
+                    <p><strong>Preuve sociale :</strong> "Déjà +500 personnes ont transformé leur français avec cette méthode - lien en bio"</p>
+                    <p><strong>Exclusivité :</strong> "Cette formation n'est pas disponible partout, je te donne accès ici"</p>
+                    <p><strong>Valeur ajoutée :</strong> "Clique sur le lien pour recevoir ton guide gratuit + la formation complète"</p>
+                </div>
+
+                <div class="warning-box">
+                    <h4>À RETENIR :</h4>
+                    <p>Vendre = Comprendre + Empathie + Solution + Action</p>
+                    <p>Ne vendez pas un produit. Vendez une transformation.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="module2" class="tab-content">
+            <div class="module">
+                <h2>MODULE 2 - COMMENT CRÉER DU CONTENU</h2>
+
+                <h3>1. Les 4 formats gagnants</h3>
+                <p>Tous vos contenus doivent entrer dans l'une de ces 4 catégories pour être performants :</p>
+
+                <div class="format-grid">
+                    <div class="format-card">
+                        <h4>1. PREUVE</h4>
+                        <p>Montrez des résultats concrets, des témoignages, des transformations.</p>
+                        <ul>
+                            <li>Avant/Après</li>
+                            <li>Témoignages clients</li>
+                            <li>Screenshots de messages</li>
+                            <li>Statistiques de ventes</li>
+                        </ul>
+                    </div>
+
+                    <div class="format-card">
+                        <h4>2. STORY</h4>
+                        <p>Racontez une histoire personnelle qui connecte émotionnellement.</p>
+                        <ul>
+                            <li>Votre parcours</li>
+                            <li>Un échec puis succès</li>
+                            <li>Une anecdote marquante</li>
+                            <li>Un moment de transformation</li>
+                        </ul>
+                    </div>
+
+                    <div class="format-card">
+                        <h4>3. ÉDUCATION</h4>
+                        <p>Apportez de la valeur en enseignant quelque chose d'utile.</p>
+                        <ul>
+                            <li>Tips et astuces</li>
+                            <li>Erreurs à éviter</li>
+                            <li>Méthodes efficaces</li>
+                            <li>Mini-leçons gratuites</li>
+                        </ul>
+                    </div>
+
+                    <div class="format-card">
+                        <h4>4. MOTIVATION</h4>
+                        <p>Inspirez et motivez votre audience à passer à l'action.</p>
+                        <ul>
+                            <li>Citations inspirantes</li>
+                            <li>Discours motivants</li>
+                            <li>Success stories</li>
+                            <li>Encouragements personnels</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>2. Comment filmer (angles, lumière, cadrage)</h3>
+
+                <h4>LUMIÈRE</h4>
+                <ul>
+                    <li>Filmez toujours face à une fenêtre ou une source de lumière naturelle</li>
+                    <li>Évitez le contre-jour (lumière derrière vous)</li>
+                    <li>Si vous filmez le soir, utilisez une lampe annulaire (ring light)</li>
+                    <li>La lumière doit éclairer votre visage uniformément</li>
+                </ul>
+
+                <h4>CADRAGE</h4>
+                <ul>
+                    <li>Gardez votre visage au centre de l'écran</li>
+                    <li>Laissez un peu d'espace au-dessus de votre tête</li>
+                    <li>Format vertical pour TikTok/Instagram/Snapchat</li>
+                    <li>Regardez directement la caméra pour créer une connexion</li>
+                </ul>
+
+                <h4>ANGLES</h4>
+                <ul>
+                    <li>Placez la caméra à hauteur des yeux ou légèrement au-dessus</li>
+                    <li>Ne filmez jamais d'en bas (angle peu flatteur)</li>
+                    <li>Gardez le téléphone stable (utilisez un trépied si possible)</li>
+                    <li>Testez plusieurs angles et gardez le meilleur</li>
+                </ul>
+
+                <h3>3. Comment parler (ton, débit, conviction)</h3>
+
+                <h4>TON</h4>
+                <ul>
+                    <li>Parlez avec énergie et enthousiasme (pas monotone)</li>
+                    <li>Soyez naturel et authentique</li>
+                    <li>Variez les intonations pour garder l'attention</li>
+                    <li>Souriez quand c'est approprié</li>
+                </ul>
+
+                <h4>DÉBIT</h4>
+                <ul>
+                    <li>Ne parlez ni trop vite ni trop lentement</li>
+                    <li>Faites des pauses stratégiques pour laisser respirer</li>
+                    <li>Articulez clairement chaque mot</li>
+                    <li>Ralentissez sur les points importants</li>
+                </ul>
+
+                <h4>CONVICTION</h4>
+                <ul>
+                    <li>Parlez comme si vous croyiez vraiment en ce produit</li>
+                    <li>Utilisez des affirmations fortes ("c'est incroyable", "ça change tout")</li>
+                    <li>Regardez la caméra dans les yeux</li>
+                    <li>Soyez passionné et convaincant</li>
+                </ul>
+
+                <h3>4. Comment écrire une description</h3>
+
+                <div class="script-box">
+                    <h4>Structure d'une description efficace :</h4>
+                    <p><strong>1. Accroche (1 ligne)</strong> - Captez l'attention immédiatement</p>
+                    <p><strong>2. Problème (1-2 lignes)</strong> - Identifiez la douleur</p>
+                    <p><strong>3. Solution (1-2 lignes)</strong> - Présentez French Connexion™</p>
+                    <p><strong>4. Call to action (1 ligne)</strong> - Dites quoi faire</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Exemple de description complète :</h4>
+                    <p>"Arrête de perdre ton temps avec les apps de langue.</p>
+                    <p>Tu passes des heures sur Duolingo mais tu ne sais toujours pas tenir une vraie conversation en français.</p>
+                    <p>French Connexion™ t'apprend le français RÉEL avec des méthodes qui fonctionnent vraiment.</p>
+                    <p>Lien en bio pour transformer ton français en 30 jours."</p>
+                </div>
+
+                <h3>5. Hashtags simples et efficaces</h3>
+                <p>Utilisez entre 5 et 10 hashtags pertinents. Ne surchargez pas.</p>
+
+                <div class="example-box">
+                    <h4>Hashtags recommandés :</h4>
+                    <p>#apprendrefrancais #frenchlanguage #frenchlearning #speakfrench #french #francais #learnfrench #frenchlessons #frenchteacher #languagelearning #polyglot #studyfrench</p>
+                </div>
+
+                <h3>6. 5 modèles de vidéos prêtes</h3>
+
+                <div class="script-box">
+                    <h4>MODÈLE 1 - PREUVE</h4>
+                    <p><strong>Hook :</strong> "Voilà comment j'ai gagné [montant] en vendant French Connexion"</p>
+                    <p><strong>Corps :</strong> Montrez des captures d'écran de vos revenus d'affiliation</p>
+                    <p><strong>CTA :</strong> "Si tu veux faire pareil, lien en bio"</p>
+                </div>
+
+                <div class="script-box">
+                    <h4>MODÈLE 2 - STORY</h4>
+                    <p><strong>Hook :</strong> "Il y a 6 mois, je galérais en français..."</p>
+                    <p><strong>Corps :</strong> Racontez votre transformation grâce à French Connexion</p>
+                    <p><strong>CTA :</strong> "Aujourd'hui je parle couramment. Lien pour découvrir comment"</p>
+                </div>
+
+                <div class="script-box">
+                    <h4>MODÈLE 3 - ÉDUCATION</h4>
+                    <p><strong>Hook :</strong> "3 erreurs que tu fais en apprenant le français"</p>
+                    <p><strong>Corps :</strong> Listez 3 erreurs courantes et comment les éviter</p>
+                    <p><strong>CTA :</strong> "Pour la méthode complète, lien en bio"</p>
+                </div>
+
+                <div class="script-box">
+                    <h4>MODÈLE 4 - MOTIVATION</h4>
+                    <p><strong>Hook :</strong> "Tu es capable de parler français couramment"</p>
+                    <p><strong>Corps :</strong> Discours motivant sur pourquoi c'est possible</p>
+                    <p><strong>CTA :</strong> "Commence aujourd'hui avec French Connexion - lien en bio"</p>
+                </div>
+
+                <div class="script-box">
+                    <h4>MODÈLE 5 - COMPARAISON</h4>
+                    <p><strong>Hook :</strong> "Duolingo vs French Connexion - la différence est énorme"</p>
+                    <p><strong>Corps :</strong> Comparez les méthodes traditionnelles vs French Connexion</p>
+                    <p><strong>CTA :</strong> "Découvre la méthode qui marche vraiment - lien en bio"</p>
+                </div>
+
+                <div class="warning-box">
+                    <h4>À RETENIR :</h4>
+                    <p>La qualité du contenu détermine vos résultats. Prenez le temps de bien filmer, bien écrire, et bien réfléchir à votre message.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="module3" class="tab-content">
+            <div class="module">
+                <h2>MODULE 3 - COMMENT REDIRIGER VERS LA PAGE</h2>
+
+                <h3>1. Call to action efficaces</h3>
+                <p>Un call to action (CTA) est une instruction claire qui dit à votre audience quoi faire ensuite.</p>
+
+                <div class="example-box">
+                    <h4>15 CTA prêts à l'emploi :</h4>
+                    <ul>
+                        <li>"Lien en bio pour commencer maintenant"</li>
+                        <li>"Clique sur le lien dans ma bio"</li>
+                        <li>"Va voir le lien en bio si tu veux transformer ton français"</li>
+                        <li>"Tape LIEN en commentaire et je t'envoie l'accès"</li>
+                        <li>"Le lien est dans ma bio, ne passe pas à côté"</li>
+                        <li>"Swipe up pour découvrir la formation"</li>
+                        <li>"Envoie-moi un message pour le lien direct"</li>
+                        <li>"Clique sur ma bio et découvre French Connexion"</li>
+                        <li>"Le lien d'accès est juste ici (en bio)"</li>
+                        <li>"Va en bio, clique sur le lien, et merci plus tard"</li>
+                        <li>"Rejoins les +500 personnes qui progressent déjà - lien en bio"</li>
+                        <li>"Tape GO en commentaire pour recevoir l'accès"</li>
+                        <li>"Ne perds plus de temps, le lien est en bio"</li>
+                        <li>"Transforme ton français aujourd'hui - lien en bio"</li>
+                        <li>"Clique maintenant avant que le prix augmente - lien en bio"</li>
+                    </ul>
+                </div>
+
+                <h3>2. Script à lire en fin de vidéo</h3>
+
+                <div class="script-box">
+                    <h4>SCRIPT COURT (10-15 secondes) :</h4>
+                    <p>"Si tu veux apprendre le français RÉEL, pas celui des livres scolaires, j'ai mis le lien de French Connexion dans ma bio. C'est la méthode que j'utilise et ça marche vraiment. Va voir."</p>
+                </div>
+
+                <div class="script-box">
+                    <h4>SCRIPT MOYEN (20-30 secondes) :</h4>
+                    <p>"Écoute, si tu en as marre de perdre ton temps avec des apps qui ne te font pas progresser, French Connexion c'est exactement ce qu'il te faut. C'est du français authentique, celui qu'on parle vraiment dans la rue. Des conversations réelles, du vocabulaire moderne, des techniques qui fonctionnent. Le lien est dans ma bio, clique dessus et commence ta transformation aujourd'hui."</p>
+                </div>
+
+                <div class="script-box">
+                    <h4>SCRIPT LONG (40-60 secondes) :</h4>
+                    <p>"Alors voilà la vérité : les méthodes classiques pour apprendre le français ne fonctionnent pas. Tu peux passer des années sur Duolingo, tu ne sauras toujours pas tenir une vraie conversation. Pourquoi ? Parce qu'ils t'enseignent le français des livres, pas le français de la vraie vie. French Connexion, c'est différent. Tu apprends le français qu'on parle vraiment, avec des expressions authentiques, des situations réelles, et des techniques qui te donnent confiance en quelques semaines seulement. J'ai mis le lien dans ma bio. Si tu es sérieux sur le fait d'apprendre le français, clique dessus maintenant. Tu ne le regretteras pas."</p>
+                </div>
+
+                <h3>3. Exemple de vidéo TikTok</h3>
+
+                <div class="example-box">
+                    <h4>CONCEPT : "3 mots français que tu utilises mal"</h4>
+                    <p><strong>Durée :</strong> 30-45 secondes</p>
+                    <p><strong>Hook (3 premières secondes) :</strong> "Tu fais ces 3 erreurs en français et tu ne le sais même pas"</p>
+                    <p><strong>Contenu :</strong></p>
+                    <ul>
+                        <li>Mot 1 : "Actuellement" ne veut PAS dire "currently" mais "en ce moment"</li>
+                        <li>Mot 2 : "Éventuellement" ne veut PAS dire "eventually" mais "peut-être"</li>
+                        <li>Mot 3 : "Assister" ne veut PAS dire "to assist" mais "être présent à"</li>
+                    </ul>
+                    <p><strong>CTA final :</strong> "Pour apprendre le vrai français et éviter ces erreurs, lien en bio"</p>
+                    <p><strong>Description :</strong> "Ces faux-amis français peuvent te faire dire n'importe quoi. French Connexion t'apprend le vrai français. #apprendrefrancais #french #frenchlearning #learnfrench"</p>
+                </div>
+
+                <h3>4. Exemple de message Snap</h3>
+
+                <div class="example-box">
+                    <h4>FORMAT : Story Snap avec texte</h4>
+                    <p><strong>Visuel :</strong> Votre visage souriant ou un screenshot de la formation</p>
+                    <p><strong>Texte sur l'image :</strong></p>
+                    <p>"NOUVELLE FORMATION"</p>
+                    <p>"Apprends le français comme un natif"</p>
+                    <p>"Swipe up pour découvrir"</p>
+                    <p><strong>Lien swipe-up :</strong> Votre lien d'affiliation French Connexion</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>FORMAT : Série de Snaps (3-4 snaps)</h4>
+                    <p><strong>Snap 1 :</strong> "Je dois vous montrer un truc de fou"</p>
+                    <p><strong>Snap 2 :</strong> "Cette formation m'a fait progresser en français en 2 semaines"</p>
+                    <p><strong>Snap 3 :</strong> "Avant je comprenais rien, maintenant je parle couramment"</p>
+                    <p><strong>Snap 4 :</strong> "Lien en bio si tu veux la même chose - French Connexion"</p>
+                </div>
+
+                <h3>5. Exemple de story Instagram</h3>
+
+                <div class="example-box">
+                    <h4>STORY 1 : Question interactive</h4>
+                    <p><strong>Visuel :</strong> Fond noir avec texte blanc</p>
+                    <p><strong>Texte :</strong> "Tu galères à comprendre les Français quand ils parlent vite ?"</p>
+                    <p><strong>Sticker :</strong> Sondage "OUI / NON"</p>
+                    <p><strong>Story suivante :</strong> "J'ai la solution - French Connexion. Lien en bio"</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>STORY 2 : Témoignage personnel</h4>
+                    <p><strong>Slide 1 :</strong> "Il y a 3 mois je ne parlais pas français"</p>
+                    <p><strong>Slide 2 :</strong> "Aujourd'hui je tiens des conversations entières"</p>
+                    <p><strong>Slide 3 :</strong> "Tout ça grâce à French Connexion"</p>
+                    <p><strong>Slide 4 :</strong> "Lien en bio si tu veux la même transformation"</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>STORY 3 : Preuve de résultats</h4>
+                    <p><strong>Visuel :</strong> Screenshot de vos commissions d'affiliation</p>
+                    <p><strong>Texte :</strong> "Voilà ce que j'ai gagné en vendant French Connexion ce mois"</p>
+                    <p><strong>Slide suivante :</strong> "Toi aussi tu peux devenir affilié. DM-moi pour les infos"</p>
+                </div>
+
+                <h3>6. Exemple de message privé (sans spam)</h3>
+
+                <div class="script-box">
+                    <h4>MESSAGE DE PREMIER CONTACT (si la personne a interagi avec votre contenu) :</h4>
+                    <p>"Hey ! J'ai vu que tu t'intéresses au français. Tu cherches à améliorer ton niveau ou tu débutes ?"</p>
+                    <p><em>Attendez la réponse</em></p>
+                    <p>"Cool ! Alors je te conseille vraiment French Connexion, c'est une formation qui m'a fait progresser super vite. C'est pas comme les apps classiques, c'est du vrai français de la vie réelle. Je peux t'envoyer le lien si tu veux ?"</p>
+                </div>
+
+                <div class="script-box">
+                    <h4>MESSAGE DE SUIVI (si la personne a demandé des infos) :</h4>
+                    <p>"Voilà le lien : [VOTRE LIEN]"</p>
+                    <p>"Tu as accès à des modules complets sur le français authentique, des conversations réelles, et des techniques pour parler avec confiance. C'est vraiment ce qu'il y a de mieux actuellement."</p>
+                    <p>"Si tu as des questions, hésite pas !"</p>
+                </div>
+
+                <div class="script-box">
+                    <h4>MESSAGE DE RELANCE (3-5 jours après) :</h4>
+                    <p>"Hello ! Tu as eu le temps de regarder French Connexion ?"</p>
+                    <p><em>Si oui :</em> "Super ! Qu'est-ce que tu en penses ?"</p>
+                    <p><em>Si non :</em> "Pas de souci, mais vraiment, ça vaut le coup d'y jeter un oeil. Ça a changé mon niveau de français complètement."</p>
+                </div>
+
+                <div class="warning-box">
+                    <h4>RÈGLES D'OR DES MESSAGES PRIVÉS :</h4>
+                    <ul>
+                        <li>NE contactez que les personnes qui ont interagi avec votre contenu</li>
+                        <li>NE copiez-collez JAMAIS le même message à tout le monde</li>
+                        <li>Personnalisez chaque conversation</li>
+                        <li>Posez des questions, créez une vraie conversation</li>
+                        <li>N'insistez pas si la personne n'est pas intéressée</li>
+                        <li>Apportez de la valeur avant de vendre</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4>À RETENIR :</h4>
+                    <p>La redirection ne doit jamais être agressive. Vous guidez, vous conseillez, vous aidez. Vous ne forcez jamais.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="module4" class="tab-content">
+            <div class="module">
+                <h2>MODULE 4 - COMMENT ÉVITER LES ERREURS</h2>
+
+                <p>Ce module est crucial. Éviter ces erreurs déterminera votre succès ou votre échec en affiliation.</p>
+
+                <h3>1. NE PAS mendier des ventes</h3>
+
+                <div class="warning-box">
+                    <h4>CE QU'IL NE FAUT JAMAIS FAIRE :</h4>
+                    <ul>
+                        <li>"S'il vous plaît achetez via mon lien j'ai besoin d'argent"</li>
+                        <li>"Aidez-moi à atteindre mes objectifs, cliquez sur mon lien"</li>
+                        <li>"Je galère financièrement, soutenez-moi en achetant"</li>
+                        <li>"Juste un petit clic pour m'aider svp"</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>CE QU'IL FAUT FAIRE À LA PLACE :</h4>
+                    <p>Vendez la VALEUR du produit, pas votre besoin personnel.</p>
+                    <ul>
+                        <li>"Cette formation va transformer ton français en quelques semaines"</li>
+                        <li>"Si tu veux vraiment progresser, c'est par ici"</li>
+                        <li>"J'ai testé et approuvé, je te recommande vraiment"</li>
+                        <li>"Fais-toi ce cadeau, tu ne le regretteras pas"</li>
+                    </ul>
+                </div>
+
+                <h3>2. NE PAS promettre du rêve</h3>
+
+                <div class="warning-box">
+                    <h4>PROMESSES INTERDITES :</h4>
+                    <ul>
+                        <li>"Deviens BILINGUE en 7 jours garanti"</li>
+                        <li>"Parle français PARFAITEMENT sans effort"</li>
+                        <li>"Gagne 10 000 euros par mois en vendant ce produit"</li>
+                        <li>"Résultats instantanés sans rien faire"</li>
+                        <li>"Tu vas devenir riche grâce à l'affiliation"</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>PROMESSES RÉALISTES ET HONNÊTES :</h4>
+                    <ul>
+                        <li>"Améliore ton français rapidement avec des méthodes efficaces"</li>
+                        <li>"Gagne en confiance pour parler français dans la vraie vie"</li>
+                        <li>"Progresse à ton rythme avec du contenu authentique"</li>
+                        <li>"Apprends le français qu'on parle vraiment"</li>
+                        <li>"Génère des revenus en recommandant un produit de qualité"</li>
+                    </ul>
+                </div>
+
+                <h3>3. NE PAS spammer les DM</h3>
+
+                <div class="warning-box">
+                    <h4>COMPORTEMENTS À ÉVITER ABSOLUMENT :</h4>
+                    <ul>
+                        <li>Envoyer le même message copié-collé à 100 personnes</li>
+                        <li>Contacter des gens qui n'ont jamais interagi avec vous</li>
+                        <li>Insister après un premier "non merci"</li>
+                        <li>Envoyer des messages non sollicités à tout va</li>
+                        <li>Harceler les gens pour qu'ils achètent</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>APPROCHE RESPECTUEUSE :</h4>
+                    <ul>
+                        <li>Contactez uniquement les personnes qui ont liké/commenté votre contenu</li>
+                        <li>Personnalisez chaque message avec leur prénom et contexte</li>
+                        <li>Commencez par créer une conversation naturelle</li>
+                        <li>Apportez de la valeur avant de mentionner votre lien</li>
+                        <li>Respectez un "non" et ne recontactez pas</li>
+                    </ul>
+                </div>
+
+                <h3>4. NE PAS copier/coller des messages automatiques</h3>
+
+                <div class="warning-box">
+                    <h4>MESSAGES ROBOTIQUES À ÉVITER :</h4>
+                    <p>"Hey ! Tu veux gagner de l'argent en ligne ? Clique ici : [lien]"</p>
+                    <p>"Salut ! J'ai une opportunité incroyable pour toi ! Intéressé(e) ?"</p>
+                    <p>"Bonjour, je te contacte pour te parler d'une formation révolutionnaire..."</p>
+                    <p><em>Ces messages sont impersonnels, spammy, et inefficaces.</em></p>
+                </div>
+
+                <div class="example-box">
+                    <h4>MESSAGES AUTHENTIQUES ET PERSONNALISÉS :</h4>
+                    <p><strong>Exemple 1 :</strong> "Salut Marie ! J'ai vu que tu commentais souvent mes vidéos sur le français. Tu apprends depuis longtemps ?"</p>
+                    <p><strong>Exemple 2 :</strong> "Hey Thomas ! Merci d'avoir liké ma dernière vidéo. Tu cherches à améliorer ton français pour le travail ou pour le plaisir ?"</p>
+                    <p><strong>Exemple 3 :</strong> "Coucou ! J'ai remarqué que tu galérais avec la prononciation française. J'ai trouvé une formation qui m'a vraiment aidé, tu veux que je te montre ?"</p>
+                </div>
+
+                <h3>5. Rester cohérent dans son contenu</h3>
+
+                <p>La cohérence est la clé de la crédibilité. Si vous changez constamment de niche ou de message, votre audience ne vous prendra pas au sérieux.</p>
+
+                <div class="warning-box">
+                    <h4>ERREURS DE COHÉRENCE :</h4>
+                    <ul>
+                        <li>Lundi : Vous vendez French Connexion</li>
+                        <li>Mardi : Vous vendez une formation fitness</li>
+                        <li>Mercredi : Vous vendez du dropshipping</li>
+                        <li>Jeudi : Vous vendez du coaching amoureux</li>
+                        <li>Vendredi : Vous revenez au français</li>
+                    </ul>
+                    <p><em>Résultat : Personne ne sait qui vous êtes ni pourquoi vous suivre.</em></p>
+                </div>
+
+                <div class="example-box">
+                    <h4>STRATÉGIE COHÉRENTE :</h4>
+                    <ul>
+                        <li>Choisissez votre niche : Apprentissage du français</li>
+                        <li>Créez du contenu exclusivement autour de cette niche</li>
+                        <li>Partagez des tips, des stories, des preuves liées au français</li>
+                        <li>Devenez LA référence pour cette thématique</li>
+                        <li>Votre audience vous associera naturellement au français</li>
+                    </ul>
+                </div>
+
+                <h3>RÉCAPITULATIF DES ERREURS FATALES</h3>
+
+                <div class="warning-box">
+                    <h4>LES 5 ERREURS QUI TUENT VOS VENTES :</h4>
+                    <ul>
+                        <li><strong>ERREUR 1 :</strong> Mendier des ventes au lieu de vendre de la valeur</li>
+                        <li><strong>ERREUR 2 :</strong> Promettre des résultats irréalistes et perdre toute crédibilité</li>
+                        <li><strong>ERREUR 3 :</strong> Spammer les DM et se faire bloquer/signaler</li>
+                        <li><strong>ERREUR 4 :</strong> Envoyer des messages automatiques impersonnels</li>
+                        <li><strong>ERREUR 5 :</strong> Manquer de cohérence et perdre la confiance de l'audience</li>
+                    </ul>
+                </div>
+
+                <h3>LES 5 PRINCIPES DU BON AFFILIÉ</h3>
+
+                <div class="example-box">
+                    <h4>SUIVEZ CES RÈGLES POUR RÉUSSIR :</h4>
+                    <ul>
+                        <li><strong>PRINCIPE 1 :</strong> Vendez la transformation, pas le produit</li>
+                        <li><strong>PRINCIPE 2 :</strong> Soyez authentique et honnête sur ce que le produit apporte</li>
+                        <li><strong>PRINCIPE 3 :</strong> Créez de vraies relations avant de vendre quoi que ce soit</li>
+                        <li><strong>PRINCIPE 4 :</strong> Personnalisez chaque interaction et montrez que vous vous souciez</li>
+                        <li><strong>PRINCIPE 5 :</strong> Restez focus sur votre niche et devenez une autorité</li>
+                    </ul>
+                </div>
+
+                <h3>CHECKLIST AVANT DE PUBLIER</h3>
+
+                <div class="script-box">
+                    <h4>POSEZ-VOUS CES QUESTIONS :</h4>
+                    <ul>
+                        <li>Mon contenu apporte-t-il de la valeur réelle ?</li>
+                        <li>Est-ce que je vends une transformation ou juste un produit ?</li>
+                        <li>Mes promesses sont-elles réalistes et honnêtes ?</li>
+                        <li>Mon message est-il personnel ou copié-collé ?</li>
+                        <li>Est-ce que je respecte mon audience ou je spam ?</li>
+                        <li>Mon contenu est-il cohérent avec ce que je poste habituellement ?</li>
+                    </ul>
+                    <p><strong>Si vous répondez "OUI" à toutes ces questions, vous êtes prêt à publier.</strong></p>
+                </div>
+
+                <div class="warning-box">
+                    <h4>CONCLUSION DU MODULE 4 :</h4>
+                    <p>Éviter ces erreurs ne garantit pas le succès, mais les commettre garantit l'échec.</p>
+                    <p>Soyez professionnel, respectueux, authentique, et cohérent.</p>
+                    <p>Vendez avec intégrité, et les résultats suivront.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>FRENCH CONNEXION™ - FORMATION AFFILIATION</p>
+            <p>Tous droits réservés - 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        function openTab(evt, moduleName) {
+            // Cacher tous les contenus
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+
+            // Retirer la classe active de tous les boutons
+            var tabButtons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            // Afficher le contenu actuel et activer le bouton
+            document.getElementById(moduleName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+            // Scroll vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
