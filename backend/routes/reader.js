@@ -54,6 +54,20 @@ const verifyPayment = async (req, res, next) => {
 };
 
 // ==========================================
+// VÉRIFIER L'ACCÈS AU CONTENU PAYANT
+// ==========================================
+router.get('/access', authMiddleware, verifyPayment, async (req, res) => {
+    res.json({
+        access: true,
+        message: 'Accès autorisé.',
+        user: {
+            id: req.user.id,
+            email: req.user.email
+        }
+    });
+});
+
+// ==========================================
 // RÉCUPÉRER LA PROGRESSION
 // ==========================================
 router.get('/progress', authMiddleware, verifyPayment, async (req, res) => {
