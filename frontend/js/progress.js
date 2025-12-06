@@ -144,21 +144,40 @@ class ProgressManager {
     // ✅ BOUTONS DE VALIDATION
     // ========================================
     addValidationButtons() {
+        // Supprimer tous les anciens boutons d'abord
+        document.querySelectorAll('.validation-button').forEach(btn => btn.remove());
+
         const chapters = document.querySelectorAll('.chapter');
 
-        chapters.forEach((chapterEl, index) => {
+        chapters.forEach((chapterEl) => {
             const chapterId = chapterEl.id;
 
-            // Ne pas ajouter de bouton si déjà déverrouillé le chapitre suivant
-            const nextChapter = this.chapters[index + 1];
-            if (!nextChapter || this.isChapterUnlocked(nextChapter.id)) {
+            // Trouver l'index de ce chapitre dans notre tableau
+            const currentIndex = this.chapters.findIndex(c => c.id === chapterId);
+            if (currentIndex === -1) {
+                console.warn(`⚠️ Chapitre ${chapterId} non trouvé dans la liste`);
                 return;
             }
 
-            // Seulement si ce chapitre est déverrouillé
+            // Vérifier si ce chapitre est déverrouillé
             if (!this.isChapterUnlocked(chapterId)) {
                 return;
             }
+
+            // Trouver le chapitre suivant
+            const nextChapter = this.chapters[currentIndex + 1];
+            if (!nextChapter) {
+                console.log(`✅ ${chapterId} est le dernier chapitre, pas de bouton`);
+                return;
+            }
+
+            // Ne pas ajouter de bouton si le chapitre suivant est déjà déverrouillé
+            if (this.isChapterUnlocked(nextChapter.id)) {
+                console.log(`✅ ${nextChapter.id} déjà déverrouillé, pas besoin de bouton`);
+                return;
+            }
+
+            console.log(`🎯 Ajout bouton pour ${chapterId} → ${nextChapter.id}`);
 
             // Créer le bouton de validation
             const validationBtn = document.createElement('div');
