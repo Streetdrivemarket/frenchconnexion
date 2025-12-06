@@ -90,6 +90,11 @@
         </div>
 
         <div class="info-block">
+            <div class="label">🔌 URL de l'API backend:</div>
+            <div class="value" id="apiUrl"></div>
+        </div>
+
+        <div class="info-block">
             <div class="label">🔑 auth_token (localStorage):</div>
             <div class="value" id="token"></div>
         </div>
@@ -117,6 +122,13 @@
     <script>
         // Afficher le domaine
         document.getElementById('domain').textContent = window.location.hostname;
+
+        // Afficher l'URL de l'API
+        const hostname = window.location.hostname;
+        const apiUrl = (hostname === 'localhost' || hostname === '127.0.0.1')
+            ? 'http://localhost:3000/api'
+            : `${window.location.origin}/api`;
+        document.getElementById('apiUrl').textContent = apiUrl;
 
         // Récupérer le token (vérifier les deux clés possibles)
         const authToken = localStorage.getItem('auth_token');
@@ -174,9 +186,10 @@
                 </div>
             `;
 
-            const API_URL = window.location.hostname === 'localhost'
+            const hostname = window.location.hostname;
+            const API_URL = (hostname === 'localhost' || hostname === '127.0.0.1')
                 ? 'http://localhost:3000/api'
-                : 'https://french-connexion-ebook-2e0xd2y05-streetdrives-projects.vercel.app/api';
+                : `${window.location.origin}/api`;
 
             try {
                 const response = await fetch(`${API_URL}/auth/me`, {

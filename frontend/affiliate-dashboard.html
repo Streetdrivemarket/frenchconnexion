@@ -412,9 +412,19 @@
 
     <script>
         // API URL dynamique
-        const API_URL = window.location.hostname === 'localhost'
-            ? 'http://localhost:3000/api'
-            : 'https://french-connexion-ebook-2e0xd2y05-streetdrives-projects.vercel.app/api';
+        function getApiUrl() {
+            const hostname = window.location.hostname;
+
+            // Développement local
+            if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                return 'http://localhost:3000/api';
+            }
+
+            // Production - utiliser le même domaine que le frontend avec /api
+            return `${window.location.origin}/api`;
+        }
+
+        const API_URL = getApiUrl();
         let affiliateData = null;
 
         // Vérifier l'authentification
