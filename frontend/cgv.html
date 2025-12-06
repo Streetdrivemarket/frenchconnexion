@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CGV - French Connexion</title>
+    <title>Conditions Générales de Vente - French Connexion</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -16,13 +16,14 @@
             font-family: 'Orbitron', sans-serif;
             background-color: #000000;
             color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
             line-height: 1.8;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
         }
 
         .logo-container {
@@ -34,61 +35,89 @@
         }
 
         .fleur-de-lys {
-            font-size: 24px;
+            font-size: 32px;
+            color: #ffffff;
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 28px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            text-align: center;
-            letter-spacing: 2px;
+        .logo a {
+            color: #ffffff;
+            text-decoration: none;
         }
 
-        .date {
-            text-align: center;
-            font-size: 12px;
-            opacity: 0.7;
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
             margin-bottom: 40px;
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ffffff;
+            padding-bottom: 20px;
         }
 
         h2 {
-            font-size: 20px;
-            margin: 40px 0 20px;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #ffffff;
-            padding-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #ffffff;
         }
 
         h3 {
-            font-size: 16px;
-            margin: 25px 0 15px;
+            font-size: 14px;
+            font-weight: 500;
             letter-spacing: 1px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
         p {
+            font-size: 12px;
             margin-bottom: 15px;
-            font-size: 13px;
-            text-align: justify;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
         }
 
-        ul, ol {
-            margin: 15px 0 15px 30px;
-            font-size: 13px;
+        ul {
+            font-size: 12px;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            opacity: 0.9;
         }
 
         li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        strong {
-            color: #ffffff;
+        .content-box {
+            background-color: #000000;
+            border: 2px solid #ffffff;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .warning {
+            border: 1px solid #ffffff;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .important {
+            border: 2px solid #ffffff;
+            padding: 25px;
+            margin: 25px 0;
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .back-link {
@@ -96,27 +125,54 @@
             margin-top: 40px;
             color: #ffffff;
             text-decoration: none;
-            border-bottom: 1px solid #ffffff;
             font-size: 12px;
             letter-spacing: 1px;
-            transition: opacity 0.3s;
+            border: 1px solid #ffffff;
+            padding: 12px 25px;
+            transition: all 0.3s;
         }
 
         .back-link:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .footer-links {
+            margin-top: 50px;
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 1px;
+            margin: 0 15px;
             opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
+            .content-box {
+                padding: 25px 20px;
+            }
+
             h1 {
-                font-size: 24px;
+                font-size: 20px;
             }
 
             h2 {
-                font-size: 18px;
+                font-size: 16px;
             }
 
-            p, ul, ol {
-                font-size: 12px;
+            .logo {
+                font-size: 20px;
             }
         }
     </style>
@@ -125,151 +181,141 @@
     <div class="container">
         <div class="logo-container">
             <span class="fleur-de-lys">⚜</span>
-            <div class="logo">French Connexion</div>
+            <div class="logo"><a href="index.html">French Connexion</a></div>
             <span class="fleur-de-lys">⚜</span>
         </div>
 
         <h1>Conditions Générales de Vente</h1>
-        <p class="date">Dernière mise à jour : 4 décembre 2024</p>
 
-        <h2>Article 1 - Objet</h2>
-        <p>Les présentes Conditions Générales de Vente (CGV) régissent la vente en ligne de l'ebook numérique "French Connexion™" (ci-après "le Produit") proposé par French Connexion (ci-après "le Vendeur") sur le site accessible à l'adresse [votre-site.com].</p>
-        <p>Toute commande implique l'acceptation sans réserve des présentes CGV.</p>
+        <div class="content-box">
+            <h2>Article 1 - Objet</h2>
+            <p>Les présentes Conditions Générales de Vente (CGV) régissent les ventes de produits numériques (eBooks, guides, formations) effectuées sur le site <strong>www.frenchconnexion.club</strong> (ci-après "le Site"), édité par French Connexion (ci-après "le Vendeur").</p>
+            <p>Toute commande implique l'acceptation sans réserve des présentes CGV.</p>
 
-        <h2>Article 2 - Vendeur</h2>
-        <p><strong>Dénomination :</strong> French Connexion</p>
-        <p><strong>Forme juridique :</strong> [À compléter - Auto-entrepreneur / SARL / SAS]</p>
-        <p><strong>Siège social :</strong> [Votre adresse complète]</p>
-        <p><strong>SIRET :</strong> [À compléter]</p>
-        <p><strong>Email :</strong> contact@french-connexion.com</p>
-        <p><strong>Directeur de publication :</strong> [Votre nom]</p>
-        <p><strong>Hébergeur :</strong> [Nom de l'hébergeur, adresse]</p>
+            <h2>Article 2 - Produits</h2>
+            <p>Les produits proposés à la vente sont des contenus numériques téléchargeables, notamment :</p>
+            <ul>
+                <li>eBooks au format PDF</li>
+                <li>Guides pratiques</li>
+                <li>Formations en ligne</li>
+            </ul>
+            <p>Les caractéristiques essentielles des produits sont présentées sur le Site. Le Vendeur s'engage à présenter une description fidèle de ses produits.</p>
 
-        <h2>Article 3 - Produit</h2>
-        <p>Le Produit proposé est un ebook numérique intitulé "French Connexion™ - Le Processus" accessible en ligne via une plateforme dédiée après paiement.</p>
+            <h2>Article 3 - Prix</h2>
+            <p>Les prix sont indiqués en euros (EUR) et toutes taxes comprises (TTC).</p>
+            <p>Le Vendeur se réserve le droit de modifier ses prix à tout moment. Toutefois, les produits seront facturés sur la base des tarifs en vigueur au moment de la validation de la commande.</p>
 
-        <h3>3.1 Caractéristiques</h3>
-        <ul>
-            <li>Format : Lecture en ligne uniquement (non téléchargeable)</li>
-            <li>Contenu : 9 chapitres méthodologiques</li>
-            <li>Langue : Français</li>
-            <li>Accès : Illimité à vie après achat</li>
-            <li>Compatibilité : Tous navigateurs web modernes</li>
-        </ul>
+            <h2>Article 4 - Commande</h2>
+            <p>Pour passer commande, l'acheteur doit :</p>
+            <ul>
+                <li>Créer un compte client ou se connecter à son compte existant</li>
+                <li>Sélectionner le(s) produit(s) souhaité(s)</li>
+                <li>Valider son panier</li>
+                <li>Accepter les présentes CGV</li>
+                <li>Procéder au paiement</li>
+            </ul>
+            <p>La commande n'est définitive qu'après confirmation du paiement.</p>
 
-        <h3>3.2 Restrictions</h3>
-        <ul>
-            <li>Le Produit ne peut être téléchargé, copié ou redistribué</li>
-            <li>Limite de 3 appareils connectés simultanément par compte</li>
-            <li>Usage strictement personnel et non commercial</li>
-        </ul>
+            <h2>Article 5 - Paiement</h2>
+            <p>Le paiement s'effectue en ligne par carte bancaire via notre prestataire de paiement sécurisé <strong>Stripe</strong>.</p>
+            <p>Les moyens de paiement acceptés sont :</p>
+            <ul>
+                <li>Carte Visa</li>
+                <li>Carte Mastercard</li>
+                <li>American Express</li>
+                <li>Apple Pay / Google Pay</li>
+            </ul>
+            <p>Le paiement est exigible immédiatement à la commande. Vos données bancaires sont transmises de manière sécurisée et ne sont jamais stockées sur nos serveurs.</p>
 
-        <h2>Article 4 - Prix</h2>
-        <p><strong>Prix TTC :</strong> 19,99 € (dix-neuf euros et quatre-vingt-dix-neuf centimes)</p>
-        <p>Le prix est indiqué en euros, toutes taxes comprises (TTC), incluant la TVA applicable au jour de la commande.</p>
-        <p>Le prix est ferme et non révisable pendant sa période de validité.</p>
-        <p>Les frais de transaction bancaire sont inclus dans le prix.</p>
+            <h2>Article 6 - Livraison</h2>
+            <p>S'agissant de produits numériques, la livraison s'effectue :</p>
+            <ul>
+                <li><strong>Immédiatement</strong> après validation du paiement</li>
+                <li>Par accès direct au contenu depuis votre espace client</li>
+                <li>Les produits sont accessibles depuis la page "Lecteur" après connexion</li>
+            </ul>
+            <p>Un email de confirmation est envoyé à l'adresse fournie lors de l'inscription.</p>
 
-        <h2>Article 5 - Commande</h2>
+            <div class="important">
+                <h3>Article 7 - Droit de rétractation</h3>
+                <p><strong>IMPORTANT :</strong> Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne peut être exercé pour les contrats de fourniture de contenu numérique non fourni sur un support matériel dont l'exécution a commencé après accord préalable exprès du consommateur et renoncement exprès à son droit de rétractation.</p>
+                <p>En validant votre commande et en accédant immédiatement au contenu numérique, vous reconnaissez expressément :</p>
+                <ul>
+                    <li>Avoir été informé de la perte de votre droit de rétractation</li>
+                    <li>Renoncer expressément à votre droit de rétractation</li>
+                    <li>Souhaiter accéder immédiatement au contenu</li>
+                </ul>
+                <p><strong>Aucun remboursement ne sera effectué après l'accès au contenu numérique.</strong></p>
+            </div>
 
-        <h3>5.1 Processus de commande</h3>
-        <ol>
-            <li>Création d'un compte utilisateur</li>
-            <li>Vérification du panier et du prix</li>
-            <li>Acceptation des présentes CGV</li>
-            <li>Paiement sécurisé via Stripe</li>
-            <li>Confirmation de commande par email</li>
-        </ol>
+            <h2>Article 8 - Licence d'utilisation</h2>
+            <p>L'achat d'un produit numérique confère à l'acheteur une <strong>licence d'utilisation personnelle, non exclusive et non transférable</strong>.</p>
+            <p>L'acheteur est autorisé à :</p>
+            <ul>
+                <li>Consulter le contenu pour son usage personnel</li>
+                <li>Télécharger le contenu sur ses appareils personnels</li>
+                <li>Imprimer le contenu pour son usage personnel</li>
+            </ul>
 
-        <h3>5.2 Validation de la commande</h3>
-        <p>La commande est considérée comme définitive après validation du paiement par Stripe et réception du mail de confirmation.</p>
+            <div class="warning">
+                <h3>Interdictions formelles</h3>
+                <p>Il est <strong>strictement interdit</strong> de :</p>
+                <ul>
+                    <li>Revendre, louer ou distribuer le contenu à des tiers</li>
+                    <li>Partager le contenu sur des plateformes de téléchargement</li>
+                    <li>Copier le contenu à des fins commerciales</li>
+                    <li>Modifier le contenu ou supprimer les mentions de copyright</li>
+                    <li>Utiliser le contenu à des fins de formation commerciale</li>
+                    <li>Partager ses identifiants de connexion avec des tiers</li>
+                </ul>
+                <p><strong>Toute violation de ces conditions entraînera la suspension immédiate du compte et pourra faire l'objet de poursuites judiciaires.</strong></p>
+            </div>
 
-        <h2>Article 6 - Paiement</h2>
+            <h2>Article 9 - Propriété intellectuelle</h2>
+            <p>Tous les contenus proposés sur le Site (textes, images, graphismes, logo, icônes, eBooks, etc.) sont la propriété exclusive de French Connexion et sont protégés par le droit d'auteur et les lois relatives à la propriété intellectuelle.</p>
+            <p>L'achat d'un produit ne confère aucun droit de propriété intellectuelle sur ce produit. L'acheteur acquiert uniquement un droit d'usage personnel.</p>
 
-        <h3>6.1 Moyens de paiement</h3>
-        <p>Le paiement s'effectue exclusivement par carte bancaire via la plateforme sécurisée Stripe.</p>
-        <p>Cartes acceptées : Visa, Mastercard, American Express.</p>
+            <h2>Article 10 - Responsabilité</h2>
+            <p>Le Vendeur s'engage à fournir des produits conformes à leur description. Toutefois :</p>
+            <ul>
+                <li>Les informations contenues dans les produits sont fournies à titre informatif</li>
+                <li>Le Vendeur ne garantit pas de résultats spécifiques suite à l'utilisation des produits</li>
+                <li>Le Vendeur n'est pas responsable de l'usage que fait l'acheteur des informations</li>
+            </ul>
 
-        <h3>6.2 Sécurité</h3>
-        <p>Le paiement est sécurisé par Stripe. Le Vendeur ne collecte ni ne conserve les données bancaires.</p>
-        <p>En cas de paiement refusé, la commande est automatiquement annulée.</p>
+            <h2>Article 11 - Protection des données</h2>
+            <p>Le Vendeur collecte et traite les données personnelles de l'acheteur conformément au Règlement Général sur la Protection des Données (RGPD).</p>
+            <p>Pour plus d'informations, consultez notre <a href="mentions-legales.html" style="color: #ffffff;">Politique de confidentialité</a>.</p>
 
-        <h2>Article 7 - Livraison et accès</h2>
-        <p>L'accès au Produit est <strong>immédiat</strong> après validation du paiement.</p>
-        <p>Le Client reçoit un email de confirmation contenant ses identifiants d'accès.</p>
-        <p>En cas de problème technique, le Client peut contacter le support : contact@french-connexion.com</p>
+            <h2>Article 12 - Service client</h2>
+            <p>Pour toute question ou réclamation, vous pouvez contacter notre service client :</p>
+            <p><strong>Email :</strong> contact@frenchconnexion.club</p>
+            <p>Nous nous engageons à répondre dans un délai de 48 heures ouvrées.</p>
 
-        <h2>Article 8 - Droit de rétractation</h2>
-        <p><strong>Important :</strong> Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne peut être exercé pour les contrats de fourniture d'un contenu numérique non fourni sur un support matériel dont l'exécution a commencé après accord préalable exprès du consommateur et renoncement exprès à son droit de rétractation.</p>
+            <h2>Article 13 - Médiation</h2>
+            <p>Conformément aux articles L.611-1 et suivants du Code de la consommation, en cas de litige, le consommateur peut recourir gratuitement au service de médiation de la consommation.</p>
+            <p>Le médiateur peut être saisi après avoir préalablement tenté de résoudre le litige directement avec le Vendeur.</p>
 
-        <p>En cochant la case lors de la commande, le Client reconnaît et accepte expressément :</p>
-        <ul>
-            <li>Que l'exécution du contrat commence immédiatement après le paiement</li>
-            <li>Qu'il renonce expressément à son droit de rétractation de 14 jours</li>
-            <li>Que l'accès immédiat au contenu entraîne la perte du droit de rétractation</li>
-        </ul>
+            <h2>Article 14 - Droit applicable</h2>
+            <p>Les présentes CGV sont soumises au droit français.</p>
+            <p>En cas de litige, les tribunaux français seront seuls compétents.</p>
 
-        <h2>Article 9 - Garanties</h2>
+            <h2>Article 15 - Modification des CGV</h2>
+            <p>Le Vendeur se réserve le droit de modifier les présentes CGV à tout moment. Les CGV applicables sont celles en vigueur à la date de la commande.</p>
 
-        <h3>9.1 Conformité</h3>
-        <p>Le Produit est conforme à la description fournie sur le site.</p>
-        <p>En cas de non-conformité, le Client peut demander un remboursement sous 7 jours.</p>
+            <p style="margin-top: 40px; opacity: 0.6; font-size: 11px;">
+                Dernière mise à jour : Décembre 2024
+            </p>
+        </div>
 
-        <h3>9.2 Disponibilité</h3>
-        <p>Le Vendeur s'engage à maintenir l'accès au Produit de manière continue, sauf cas de force majeure ou maintenance technique.</p>
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">Retour</a>
+        </div>
 
-        <h3>9.3 Exclusion</h3>
-        <p>Le Vendeur ne garantit pas de résultats spécifiques liés à l'application de la méthode décrite dans le Produit.</p>
-
-        <h2>Article 10 - Responsabilité</h2>
-        <p>Le Vendeur ne saurait être tenu responsable de :</p>
-        <ul>
-            <li>L'impossibilité d'accéder au site pour des raisons techniques</li>
-            <li>La non-compatibilité du navigateur du Client</li>
-            <li>L'utilisation frauduleuse du compte du Client</li>
-            <li>Les résultats obtenus par l'application de la méthode</li>
-        </ul>
-
-        <h2>Article 11 - Propriété intellectuelle</h2>
-        <p>L'intégralité du contenu du Produit (textes, images, graphismes, logo) est la propriété exclusive du Vendeur ou de ses partenaires.</p>
-        <p>Toute reproduction, représentation, modification, publication, transmission ou dénaturation, totale ou partielle, est strictement interdite sans autorisation écrite préalable.</p>
-        <p>Toute violation expose le contrevenant à des poursuites judiciaires civiles et pénales.</p>
-
-        <h2>Article 12 - Protection des données personnelles</h2>
-        <p>Les données personnelles collectées sont traitées conformément au RGPD et à la loi Informatique et Libertés.</p>
-        <p>Pour plus d'informations, consulter notre <a href="privacy.html" style="color: #ffffff;">Politique de confidentialité</a>.</p>
-
-        <h2>Article 13 - Réclamations et litiges</h2>
-
-        <h3>13.1 Service client</h3>
-        <p>Pour toute réclamation : contact@french-connexion.com</p>
-        <p>Délai de réponse : 48 heures ouvrées maximum.</p>
-
-        <h3>13.2 Médiation</h3>
-        <p>En cas de litige, le Client peut recourir gratuitement à un médiateur de la consommation :</p>
-        <p><strong>Médiateur de la consommation :</strong> [Nom du médiateur agréé]</p>
-        <p><strong>Site :</strong> [URL du médiateur]</p>
-        <p><strong>Adresse :</strong> [Adresse du médiateur]</p>
-
-        <h3>13.3 Juridiction compétente</h3>
-        <p>En cas d'échec de la médiation, les tribunaux français seront seuls compétents.</p>
-        <p>Droit applicable : Droit français.</p>
-
-        <h2>Article 14 - Modifications des CGV</h2>
-        <p>Le Vendeur se réserve le droit de modifier les présentes CGV à tout moment.</p>
-        <p>Les CGV applicables sont celles en vigueur au jour de la commande.</p>
-
-        <h2>Article 15 - Contact</h2>
-        <p><strong>Email :</strong> contact@french-connexion.com</p>
-        <p><strong>Adresse :</strong> [Votre adresse postale complète]</p>
-
-        <hr style="border: 1px solid #ffffff; margin: 40px 0;">
-
-        <p style="text-align: center; font-size: 11px; opacity: 0.7;">
-            En validant votre commande, vous reconnaissez avoir lu et accepté sans réserve les présentes Conditions Générales de Vente.
-        </p>
-
-        <a href="register.html" class="back-link">← Retour à l'inscription</a>
+        <div class="footer-links">
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="cgv.html">CGV</a>
+        </div>
     </div>
 </body>
 </html>
