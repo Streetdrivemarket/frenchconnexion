@@ -226,7 +226,7 @@ router.post('/reset-password',
 // ==========================================
 // VÉRIFIER LA SESSION (nouveau)
 // ==========================================
-router.get('/session', async (req, res) => {
+const sessionHandler = async (req, res) => {
     try {
         const token = req.headers.authorization?.split(' ')[1];
 
@@ -261,6 +261,9 @@ router.get('/session', async (req, res) => {
         console.error('❌ Erreur vérification session:', error);
         res.status(500).json({ error: 'Erreur serveur.' });
     }
-});
+};
+
+router.get('/session', sessionHandler);
+router.get('/me', sessionHandler); // Alias pour compatibilité
 
 module.exports = router;
