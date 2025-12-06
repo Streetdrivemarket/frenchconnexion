@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Debug Gamification - French Connexion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff88;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FFD700;
+            margin-bottom: 30px;
+            font-size: 32px;
+            text-shadow: 0 0 10px #FFD700;
+        }
+
+        .section {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            color: #888;
+            font-weight: bold;
+        }
+
+        .info-value {
+            color: #00ff88;
+            word-break: break-all;
+        }
+
+        .info-value.error {
+            color: #ff6b6b;
+        }
+
+        .info-value.warning {
+            color: #ffa500;
+        }
+
+        .info-value.success {
+            color: #00ff88;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn.danger {
+            background: linear-gradient(135deg, #ff6b6b, #ff4444);
+            color: #fff;
+        }
+
+        .log-container {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 8px;
+            border-left: 3px solid #333;
+            padding-left: 12px;
+        }
+
+        .log-entry.info {
+            border-left-color: #00ff88;
+            color: #00ff88;
+        }
+
+        .log-entry.error {
+            border-left-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+
+        .log-entry.warning {
+            border-left-color: #ffa500;
+            color: #ffa500;
+        }
+
+        .log-entry.success {
+            border-left-color: #FFD700;
+            color: #FFD700;
+        }
+
+        .timestamp {
+            color: #666;
+            font-size: 10px;
+            margin-right: 10px;
+        }
+
+        pre {
+            background: #0a0a0a;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-indicator.online {
+            background: #00ff88;
+            box-shadow: 0 0 10px #00ff88;
+        }
+
+        .status-indicator.offline {
+            background: #ff6b6b;
+            box-shadow: 0 0 10px #ff6b6b;
+        }
+
+        .status-indicator.loading {
+            background: #ffa500;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .clear-btn {
+            float: right;
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .clear-btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 DEBUG GAMIFICATION - FRENCH CONNEXION</h1>
+
+        <!-- SECTION 1: ÉTAT DU SYSTÈME -->
+        <div class="section">
+            <h2>📊 État du Système</h2>
+            <div class="info-grid">
+                <div class="info-label">API Backend:</div>
+                <div class="info-value" id="api-status">
+                    <span class="status-indicator loading"></span>
+                    Vérification en cours...
+                </div>
+
+                <div class="info-label">Token:</div>
+                <div class="info-value" id="token-status">Chargement...</div>
+
+                <div class="info-label">User ID:</div>
+                <div class="info-value" id="user-id">Inconnu</div>
+
+                <div class="info-label">Email:</div>
+                <div class="info-value" id="user-email">Inconnu</div>
+
+                <div class="info-label">Has Paid:</div>
+                <div class="info-value" id="has-paid">Inconnu</div>
+
+                <div class="info-label">API URL:</div>
+                <div class="info-value" id="api-url">Chargement...</div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: PROGRESSION ACTUELLE -->
+        <div class="section">
+            <h2>🎮 Progression Actuelle</h2>
+            <div class="info-grid">
+                <div class="info-label">Chapitres déverrouillés:</div>
+                <div class="info-value" id="unlocked-chapters">Chargement...</div>
+
+                <div class="info-label">Pourcentage:</div>
+                <div class="info-value" id="completion">Chargement...</div>
+
+                <div class="info-label">Badges:</div>
+                <div class="info-value" id="badges">Chargement...</div>
+
+                <div class="info-label">Dernier chapitre:</div>
+                <div class="info-value" id="last-chapter">Chargement...</div>
+            </div>
+            <div class="action-buttons">
+                <button class="btn" onclick="loadProgress()">🔄 Recharger Progression</button>
+                <button class="btn danger" onclick="resetProgress()">🗑️ Reset Progression</button>
+            </div>
+        </div>
+
+        <!-- SECTION 3: TESTS API -->
+        <div class="section">
+            <h2>🧪 Tests API</h2>
+            <div class="action-buttons">
+                <button class="btn" onclick="testHealthAPI()">1️⃣ Test /api/health</button>
+                <button class="btn" onclick="testSessionAPI()">2️⃣ Test /api/auth/session</button>
+                <button class="btn" onclick="testProgressAPI()">3️⃣ Test /api/progress/me</button>
+                <button class="btn" onclick="testUnlockAPI()">4️⃣ Test /api/progress/unlock (intro → chapitre-1)</button>
+                <button class="btn" onclick="testAllAPIs()">🚀 Tester TOUT</button>
+            </div>
+        </div>
+
+        <!-- SECTION 4: LOGS -->
+        <div class="section">
+            <h2>📝 Logs <button class="clear-btn" onclick="clearLogs()">Clear</button></h2>
+            <div class="log-container" id="logs"></div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script>
+        const token = localStorage.getItem('token');
+        let userData = null;
+        let progressData = null;
+
+        // ========================================
+        // FONCTIONS DE LOG
+        // ========================================
+        function log(message, type = 'info', data = null) {
+            const logs = document.getElementById('logs');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+
+            const timestamp = new Date().toLocaleTimeString();
+            let html = `<span class="timestamp">[${timestamp}]</span>${message}`;
+
+            if (data) {
+                html += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            }
+
+            entry.innerHTML = html;
+            logs.appendChild(entry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        function clearLogs() {
+            document.getElementById('logs').innerHTML = '';
+            log('Logs cleared', 'info');
+        }
+
+        // ========================================
+        // INITIALISATION
+        // ========================================
+        async function init() {
+            log('🚀 Initialisation du debug...', 'info');
+
+            // Afficher API URL
+            document.getElementById('api-url').textContent = window.API_URL;
+
+            // Vérifier token
+            if (!token) {
+                document.getElementById('token-status').innerHTML = '<span class="error">❌ Aucun token trouvé</span>';
+                log('❌ Pas de token dans localStorage', 'error');
+                log('⚠️ Tu dois te connecter d\'abord !', 'warning');
+                return;
+            }
+
+            document.getElementById('token-status').innerHTML = `<span class="success">✅ ${token.substring(0, 30)}...</span>`;
+            log('✅ Token trouvé', 'success');
+
+            // Tests automatiques au chargement
+            await testHealthAPI();
+            await testSessionAPI();
+            await loadProgress();
+        }
+
+        // ========================================
+        // TEST 1: HEALTH API
+        // ========================================
+        async function testHealthAPI() {
+            log('🔍 Test /api/health...', 'info');
+
+            try {
+                const response = await fetch(`${window.API_URL}/api/health`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('api-status').innerHTML = '<span class="status-indicator online"></span><span class="success">✅ API en ligne</span>';
+                    log('✅ API Health OK', 'success', data);
+                } else {
+                    document.getElementById('api-status').innerHTML = '<span class="status-indicator offline"></span><span class="error">❌ API erreur</span>';
+                    log(`❌ API Health erreur ${response.status}`, 'error', data);
+                }
+            } catch (error) {
+                document.getElementById('api-status').innerHTML = '<span class="status-indicator offline"></span><span class="error">❌ API inaccessible</span>';
+                log('❌ Exception API Health', 'error', { error: error.message });
+            }
+        }
+
+        // ========================================
+        // TEST 2: SESSION API
+        // ========================================
+        async function testSessionAPI() {
+            log('🔍 Test /api/auth/session...', 'info');
+
+            if (!token) {
+                log('❌ Pas de token pour tester session', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${window.API_URL}/api/auth/session`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.user) {
+                    userData = data.user;
+                    document.getElementById('user-id').textContent = data.user.id || 'Inconnu';
+                    document.getElementById('user-email').textContent = data.user.email || 'Inconnu';
+                    document.getElementById('has-paid').innerHTML = data.user.has_paid
+                        ? '<span class="success">✅ OUI</span>'
+                        : '<span class="error">❌ NON</span>';
+
+                    log('✅ Session valide', 'success', data);
+                } else {
+                    log(`❌ Session invalide ${response.status}`, 'error', data);
+                }
+            } catch (error) {
+                log('❌ Exception session', 'error', { error: error.message });
+            }
+        }
+
+        // ========================================
+        // TEST 3: PROGRESSION API
+        // ========================================
+        async function testProgressAPI() {
+            await loadProgress();
+        }
+
+        async function loadProgress() {
+            log('🔍 Test /api/progress/me...', 'info');
+
+            if (!token) {
+                log('❌ Pas de token pour charger progression', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${window.API_URL}/api/progress/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.progress) {
+                    progressData = data.progress;
+
+                    const unlocked = Array.isArray(data.progress.unlocked_chapters)
+                        ? data.progress.unlocked_chapters
+                        : [];
+
+                    document.getElementById('unlocked-chapters').innerHTML =
+                        `<span class="success">${unlocked.length} chapitres: ${unlocked.join(', ')}</span>`;
+
+                    document.getElementById('completion').innerHTML =
+                        `<span class="success">${data.progress.completion_percentage}%</span>`;
+
+                    const badges = Array.isArray(data.progress.badges_earned)
+                        ? data.progress.badges_earned
+                        : [];
+
+                    document.getElementById('badges').innerHTML =
+                        badges.length > 0
+                        ? `<span class="success">${badges.length} badges</span>`
+                        : '<span class="warning">Aucun badge</span>';
+
+                    document.getElementById('last-chapter').textContent =
+                        data.progress.last_chapter_unlocked || 'Aucun';
+
+                    log('✅ Progression chargée', 'success', data.progress);
+                } else {
+                    log(`❌ Erreur progression ${response.status}`, 'error', data);
+                }
+            } catch (error) {
+                log('❌ Exception progression', 'error', { error: error.message });
+            }
+        }
+
+        // ========================================
+        // TEST 4: UNLOCK API
+        // ========================================
+        async function testUnlockAPI() {
+            log('🔍 Test /api/progress/unlock (intro → chapitre-1)...', 'info');
+
+            if (!token) {
+                log('❌ Pas de token pour tester unlock', 'error');
+                return;
+            }
+
+            try {
+                log('📤 Envoi requête unlock...', 'info', { chapter_id: 'chapitre-1' });
+
+                const response = await fetch(`${window.API_URL}/api/progress/unlock`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ chapter_id: 'chapitre-1' })
+                });
+
+                log(`📡 Status HTTP: ${response.status}`, response.ok ? 'success' : 'error');
+
+                const data = await response.json();
+                log('📊 Réponse complète:', 'info', data);
+
+                if (response.ok && data.success) {
+                    log('✅ UNLOCK RÉUSSI !', 'success', {
+                        unlocked: data.unlocked_chapters,
+                        percentage: data.completion_percentage,
+                        message: data.shock_message
+                    });
+
+                    // Recharger la progression
+                    await loadProgress();
+                } else {
+                    log(`❌ UNLOCK ÉCHOUÉ - HTTP ${response.status}`, 'error', data);
+                }
+            } catch (error) {
+                log('❌ Exception unlock', 'error', { error: error.message, stack: error.stack });
+            }
+        }
+
+        // ========================================
+        // TEST ALL
+        // ========================================
+        async function testAllAPIs() {
+            clearLogs();
+            log('🚀 Lancement de TOUS les tests...', 'info');
+
+            await testHealthAPI();
+            await new Promise(r => setTimeout(r, 500));
+
+            await testSessionAPI();
+            await new Promise(r => setTimeout(r, 500));
+
+            await testProgressAPI();
+            await new Promise(r => setTimeout(r, 500));
+
+            await testUnlockAPI();
+
+            log('✅ Tous les tests terminés !', 'success');
+        }
+
+        // ========================================
+        // RESET PROGRESSION
+        // ========================================
+        async function resetProgress() {
+            if (!confirm('⚠️ ATTENTION: Réinitialiser toute ta progression ?')) {
+                return;
+            }
+
+            log('🗑️ Reset progression...', 'warning');
+
+            if (!token) {
+                log('❌ Pas de token pour reset', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${window.API_URL}/api/progress/reset`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    log('✅ Progression réinitialisée !', 'success', data);
+                    await loadProgress();
+                } else {
+                    log(`❌ Erreur reset ${response.status}`, 'error', data);
+                }
+            } catch (error) {
+                log('❌ Exception reset', 'error', { error: error.message });
+            }
+        }
+
+        // ========================================
+        // LANCEMENT
+        // ========================================
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
