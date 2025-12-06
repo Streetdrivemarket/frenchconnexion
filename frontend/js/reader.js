@@ -65,14 +65,12 @@ function showScreenshotWarning() {
     }
 }
 
-// Protection contre la copie du texte - DÉSACTIVÉ TEMPORAIREMENT
-/*
+// Protection contre la copie du texte
 document.addEventListener('copy', (e) => {
     e.preventDefault();
     showScreenshotWarning();
     return false;
 });
-*/
 
 // Détecter l'ouverture de DevTools par la taille de la fenêtre - DÉSACTIVÉ TEMPORAIREMENT
 /*
@@ -162,13 +160,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Afficher l'email de l'utilisateur dans le header
     document.getElementById('user-email').textContent = user.email;
 
-    // Ajouter le filigrane avec l'email (multiple pour couvrir tout l'écran)
+    // Ajouter le filigrane avec le domaine (multiple pour couvrir tout l'écran)
     const watermark = document.getElementById('watermark');
     if (watermark) {
         // Créer 20 copies du watermark pour couvrir tout l'écran
         let watermarkContent = '';
         for (let i = 0; i < 20; i++) {
-            watermarkContent += `<span class="watermark-text">${user.email}</span>`;
+            watermarkContent += `<span class="watermark-text">frenchconnexion.club</span>`;
         }
         watermark.innerHTML = watermarkContent;
     }
