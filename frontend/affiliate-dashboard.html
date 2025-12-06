@@ -419,7 +419,7 @@
 
         // Vérifier l'authentification
         async function checkAuth() {
-            const token = localStorage.getItem('auth_token');
+            const token = localStorage.getItem('token');
             if (!token) {
                 window.location.href = 'login.html';
                 return;
@@ -446,7 +446,7 @@
 
         // Charger les données affilié
         async function loadAffiliateData() {
-            const token = localStorage.getItem('auth_token');
+            const token = localStorage.getItem('token');
 
             try {
                 const response = await fetch(`${API_URL}/affiliate/stats`, {
@@ -522,7 +522,7 @@
 
         // Devenir affilié
         async function becomeAffiliate() {
-            const token = localStorage.getItem('auth_token');
+            const token = localStorage.getItem('token');
 
             try {
                 const response = await fetch(`${API_URL}/affiliate/register`, {

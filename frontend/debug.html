@@ -118,13 +118,20 @@
         // Afficher le domaine
         document.getElementById('domain').textContent = window.location.hostname;
 
-        // Récupérer le token
-        const token = localStorage.getItem('auth_token');
-        if (token) {
-            document.getElementById('token').textContent = token.substring(0, 50) + '...' + token.substring(token.length - 20);
-            document.getElementById('status').innerHTML = '<span class="success">✅ Token trouvé !</span>';
+        // Récupérer le token (vérifier les deux clés possibles)
+        const authToken = localStorage.getItem('auth_token');
+        const token = localStorage.getItem('token');
+
+        let displayToken = authToken || token;
+
+        if (displayToken) {
+            document.getElementById('token').innerHTML = `
+                <strong>auth_token:</strong> ${authToken ? authToken.substring(0, 50) + '...' + authToken.substring(authToken.length - 20) : 'NULL'}<br><br>
+                <strong>token:</strong> ${token ? token.substring(0, 50) + '...' + token.substring(token.length - 20) : 'NULL'}
+            `;
+            document.getElementById('status').innerHTML = '<span class="success">✅ Token trouvé sous la clé: ' + (authToken ? 'auth_token' : 'token') + '</span>';
         } else {
-            document.getElementById('token').textContent = 'NULL (aucun token trouvé)';
+            document.getElementById('token').textContent = 'NULL (aucun token trouvé sous auth_token ou token)';
             document.getElementById('status').innerHTML = '<span class="warning">❌ Pas de token ! Tu dois te reconnecter.</span>';
         }
 
@@ -147,9 +154,11 @@
         // Fonction pour tester l'API
         async function testAPI() {
             const resultDiv = document.getElementById('apiResult');
-            const token = localStorage.getItem('auth_token');
+            const authToken = localStorage.getItem('auth_token');
+            const token = localStorage.getItem('token');
+            const finalToken = authToken || token;
 
-            if (!token) {
+            if (!finalToken) {
                 resultDiv.innerHTML = `
                     <div class="info-block">
                         <div class="label">❌ Erreur:</div>
@@ -172,7 +181,7 @@
             try {
                 const response = await fetch(`${API_URL}/auth/me`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${finalToken}`
                     }
                 });
 
