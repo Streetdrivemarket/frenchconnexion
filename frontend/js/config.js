@@ -7,12 +7,11 @@ function getApiUrl() {
 
     // Développement local
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        return 'http://localhost:3000/api';
+        return 'http://localhost:3000';
     }
 
-    // Production - utiliser le même domaine que le frontend avec /api
-    // Cela fonctionne si le backend est sur le même domaine (Vercel rewrites/redirects)
-    return `${window.location.origin}/api`;
+    // Production - Backend API Vercel
+    return 'https://french-connexion-api.vercel.app';
 }
 
 const API_URL = getApiUrl();
@@ -41,13 +40,13 @@ async function apiRequest(endpoint, options = {}) {
     }
 
     console.log('🌐 API Request:', {
-        url: `${API_URL}${endpoint}`,
+        url: `${API_URL}/api${endpoint}`,
         method: config.method || 'GET',
         hasToken: !!token
     });
 
     try {
-        const response = await fetch(`${API_URL}${endpoint}`, config);
+        const response = await fetch(`${API_URL}/api${endpoint}`, config);
 
         console.log('📡 API Response:', {
             status: response.status,
