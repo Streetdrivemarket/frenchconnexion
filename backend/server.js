@@ -35,6 +35,8 @@ const corsOptions = {
         // Liste des origines autorisées
         const allowedOrigins = [
             process.env.FRONTEND_URL,
+            'https://www.frenchconnexion.club',
+            'https://frenchconnexion.club',
             'http://localhost:8080',
             'http://localhost:3000',
             'http://127.0.0.1:8080'
@@ -42,7 +44,8 @@ const corsOptions = {
 
         // Autoriser tous les sous-domaines Vercel pour ce projet
         const isVercelPreview = origin.includes('vercel.app') && origin.includes('streetdrive');
-        const isAllowed = allowedOrigins.includes(origin) || isVercelPreview;
+        const isFrenchConnexion = origin.includes('frenchconnexion.club');
+        const isAllowed = allowedOrigins.includes(origin) || isVercelPreview || isFrenchConnexion;
 
         if (isAllowed) {
             callback(null, true);
