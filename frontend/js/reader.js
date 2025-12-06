@@ -121,6 +121,49 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ==========================================
+    // MENU HAMBURGER MOBILE
+    // ==========================================
+
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mainSidebar = document.getElementById('main-sidebar');
+    const menuOverlay = document.getElementById('menu-overlay');
+
+    if (hamburgerBtn && mainSidebar) {
+        // Toggle menu on hamburger click
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            mainSidebar.classList.toggle('open');
+            if (menuOverlay) {
+                menuOverlay.classList.toggle('show');
+            }
+        });
+
+        // Close menu when clicking overlay
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                mainSidebar.classList.remove('open');
+                menuOverlay.classList.remove('show');
+            });
+        }
+
+        // Close menu when clicking a menu item (for mobile UX)
+        const mobileMenuItems = mainSidebar.querySelectorAll('.menu-item');
+        mobileMenuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Check if we're on mobile (hamburger is visible)
+                if (window.innerWidth <= 1024) {
+                    hamburgerBtn.classList.remove('active');
+                    mainSidebar.classList.remove('open');
+                    if (menuOverlay) {
+                        menuOverlay.classList.remove('show');
+                    }
+                }
+            });
+        });
+    }
+
+    // ==========================================
     // MENU RABATTABLE (Collapsible Sections)
     // ==========================================
 
