@@ -205,9 +205,14 @@ class ProgressManager {
         try {
             const token = localStorage.getItem('token');
             if (!token) {
+                alert('❌ Pas de token. Reconnecte-toi.');
                 window.location.href = 'login.html';
                 return;
             }
+
+            console.log(`🔓 Tentative déverrouillage: ${currentChapterId} → ${nextChapterId}`);
+            console.log(`🔑 Token: ${token.substring(0, 20)}...`);
+            console.log(`🌐 URL: ${window.API_URL}/api/progress/unlock`);
 
             const response = await fetch(`${window.API_URL}/api/progress/unlock`, {
                 method: 'POST',
@@ -218,11 +223,24 @@ class ProgressManager {
                 body: JSON.stringify({ chapter_id: nextChapterId })
             });
 
-            if (!response.ok) {
-                throw new Error('Erreur déverrouillage');
-            }
+            console.log(`📡 Status HTTP: ${response.status}`);
 
             const data = await response.json();
+            console.log(`📊 Réponse API:`, data);
+
+            if (!response.ok) {
+                console.error(`❌ HTTP ${response.status}:`, data);
+                alert(`❌ Erreur ${response.status}: ${data.error || 'Erreur inconnue'}\n\nDétails: ${JSON.stringify(data)}`);
+                return;
+            }
+
+            if (!data.success) {
+                console.error('❌ Success = false:', data);
+                alert(`❌ Échec déverrouillage: ${data.error || 'Erreur inconnue'}`);
+                return;
+            }
+
+            console.log(`✅ Déverrouillage réussi !`);
 
             // Mise à jour de la progression locale
             this.userProgress.unlocked_chapters = data.unlocked_chapters;
@@ -237,8 +255,8 @@ class ProgressManager {
             this.updateProgressUI();
 
         } catch (error) {
-            console.error('❌ Erreur unlock:', error);
-            alert('❌ Impossible de déverrouiller le chapitre. Réessaye.');
+            console.error('❌ Exception unlock:', error);
+            alert(`❌ Exception: ${error.message}\n\nVoir console F12 pour détails.`);
         }
     }
 
