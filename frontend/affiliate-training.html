@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Affilié - French Connexion™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #fff;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .fleur {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+            border: 3px solid #fff;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .warning-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .warning-box p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .module {
+            background: #1a1a1a;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .module-header {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .module-header:hover {
+            background: #2a2a2a;
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .module-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .module.active .module-icon {
+            transform: rotate(180deg);
+        }
+
+        .module-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #000;
+        }
+
+        .module.active .module-content {
+            max-height: 5000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .module-body {
+            padding: 30px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin: 25px 0 15px;
+            border-left: 4px solid #fff;
+            padding-left: 15px;
+        }
+
+        h4 {
+            font-size: 1rem;
+            margin: 20px 0 10px;
+            opacity: 0.9;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        ul {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .example-box {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-left: 3px solid #fff;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 2px solid #fff;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .highlight {
+            background: #2a2a2a;
+            border-left: 4px solid #fff;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .error-list {
+            background: #2a0000;
+            border: 2px solid #ff0000;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .error-list h4 {
+            color: #ff0000;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 900;
+            border-radius: 5px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #fff;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .module-title {
+                font-size: 1rem;
+            }
+
+            .module-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="fleur">⚜</span>
+            <h1>Formation Affilié</h1>
+            <p class="subtitle">Devenir un affilié qui fait des ventes</p>
+        </header>
+
+        <div class="warning-box">
+            <h2>⚠️ AVANT DE COMMENCER</h2>
+            <p><strong>Cette formation n'est PAS un copier-coller.</strong></p>
+            <p>On va te donner les bases, les principes, les exemples.</p>
+            <p><strong>Mais ton job, c'est de CRÉER TON PROPRE STYLE.</strong></p>
+            <p style="margin-top: 20px; font-size: 1.1rem; font-weight: 700;">
+                Les affiliés qui réussissent ne copient pas.<br>
+                Ils comprennent, adaptent, créent.
+            </p>
+        </div>
+
+        <!-- MODULE 1 -->
+        <div class="module">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">📚 MODULE 1 — Comment Vendre un Produit Digital</div>
+                <div class="module-icon">▼</div>
+            </div>
+            <div class="module-content">
+                <div class="module-body">
+                    <h3>1. Comprendre le public</h3>
+                    <p>Avant de vendre, tu dois savoir <strong>à qui</strong> tu vends.</p>
+
+                    <p><strong>Le public de French Connexion™ :</strong></p>
+                    <ul>
+                        <li>18-35 ans</li>
+                        <li>Veulent lancer un business mais ne savent pas par où commencer</li>
+                        <li>En ont marre des formations bullshit à 2000€</li>
+                        <li>Cherchent du concret, pas de la motivation vide</li>
+                        <li>Sont sur TikTok, Snap, Insta, YouTube</li>
+                    </ul>
+
+                    <div class="highlight">
+                        <p><strong>Question clé :</strong> Pourquoi TON public achèterait cet ebook ?</p>
+                        <p>Pense à tes potes, ta famille, tes abonnés. Qu'est-ce qu'ils galèrent à faire ? Lancer un projet ? Passer à l'action ?</p>
+                        <p><strong>Si tu ne comprends pas leur problème, tu ne vendras rien.</strong></p>
+                    </div>
+
+                    <h3>2. Savoir parler du problème</h3>
+                    <p>Les gens n'achètent pas un produit. Ils achètent une <strong>solution à leur problème</strong>.</p>
+
+                    <p><strong>Les problèmes que French Connexion™ résout :</strong></p>
+                    <ul>
+                        <li>"J'ai plein d'idées mais je ne passe jamais à l'action"</li>
+                        <li>"Je ne sais pas par où commencer pour lancer mon business"</li>
+                        <li>"J'ai peur d'échouer"</li>
+                        <li>"Les formations coûtent trop cher et sont remplies de bullshit"</li>
+                    </ul>
+
+                    <div class="formula">
+                        FORMULE : Problème → Agitation → Solution
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>Exemple :</strong></p>
+                        <p><strong>Problème :</strong> "Tu as des idées de business mais tu passes jamais à l'action."</p>
+                        <p><strong>Agitation :</strong> "Ça fait combien de temps que tu dis 'un jour je vais lancer mon truc' ? 6 mois ? 1 an ?"</p>
+                        <p><strong>Solution :</strong> "French Connexion™ te donne un processus étape par étape. Plus d'excuses."</p>
+                    </div>
+
+                    <h3>3. Savoir vendre la solution</h3>
+                    <p>L'ebook n'est pas juste un PDF. C'est une <strong>transformation</strong>.</p>
+
+                    <p><strong>Ne dis PAS :</strong> "Cet ebook de 50 pages sur l'entrepreneuriat"</p>
+                    <p><strong>Dis PLUTÔT :</strong> "Le processus qui m'a aidé à passer de l'idée à l'action"</p>
+
+                    <div class="highlight">
+                        <h4>Valeurs à mettre en avant :</h4>
+                        <ul>
+                            <li>✅ <strong>Concret</strong> : Pas de théorie vide, du processus actionnable</li>
+                            <li>✅ <strong>Honnête</strong> : Pas de promesses bidon ("deviens riche en 24h")</li>
+                            <li>✅ <strong>Accessible</strong> : 25€, pas 2000€ comme les formations</li>
+                            <li>✅ <strong>Prouvé</strong> : Si ça t'a aidé, c'est ta meilleure preuve</li>
+                        </ul>
+                    </div>
+
+                    <h3>4. Comment créer une accroche</h3>
+                    <p>Tu as <strong>3 secondes</strong> pour capter l'attention. Pas plus.</p>
+
+                    <p><strong>Formules qui marchent :</strong></p>
+                    <ul>
+                        <li><strong>Choc :</strong> "J'ai gagné 500€ en partageant un ebook."</li>
+                        <li><strong>Question :</strong> "Pourquoi tu lances jamais tes projets ?"</li>
+                        <li><strong>Affirmation :</strong> "Cet ebook a changé ma façon de voir l'entrepreneuriat."</li>
+                        <li><strong>Problème :</strong> "Tu regardes des vidéos YouTube mais tu passes jamais à l'action ?"</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <p><strong>Mauvaise accroche :</strong> "Salut, je vais te parler d'un truc cool..."</p>
+                        <p><strong>Bonne accroche :</strong> "Cet ebook m'a fait passer à l'action. Pour la première fois."</p>
+                    </div>
+
+                    <h3>5. Comment attirer les gens sur le lien</h3>
+                    <p>Ton contenu doit donner de la <strong>valeur AVANT</strong> de vendre.</p>
+
+                    <div class="formula">
+                        80% Valeur → 20% Vente
+                    </div>
+
+                    <p><strong>La stratégie :</strong></p>
+                    <ol>
+                        <li>Partage des conseils gratuits (contenu éducatif)</li>
+                        <li>Raconte ton expérience (story authentique)</li>
+                        <li>Montre tes résultats (preuve sociale)</li>
+                        <li><strong>Ensuite</strong>, mentionne l'ebook comme "la méthode complète"</li>
+                    </ol>
+
+                    <div class="highlight">
+                        <p><strong>Exemple de progression :</strong></p>
+                        <p>Vidéo 1 : Conseil gratuit ("Voilà comment j'ai trouvé mon idée de business")</p>
+                        <p>Vidéo 2 : Story ("Comment j'ai arrêté de procrastiner")</p>
+                        <p>Vidéo 3 : Résultat ("J'ai lancé mon premier projet grâce à cette méthode")</p>
+                        <p>Vidéo 4 : Mention ebook ("Tout ça vient de French Connexion. Lien en bio.")</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="module">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">🎥 MODULE 2 — Comment Créer du Contenu</div>
+                <div class="module-icon">▼</div>
+            </div>
+            <div class="module-content">
+                <div class="module-body">
+                    <h3>Méthode des 4 Formats</h3>
+                    <p>Tu dois alterner entre 4 types de contenu. Pas toujours le même.</p>
+
+                    <h4>1️⃣ PREUVE</h4>
+                    <p>Montre des résultats concrets.</p>
+                    <div class="example-box">
+                        <p>"Depuis que j'ai lu French Connexion, j'ai lancé mon premier side project."</p>
+                        <p>"10 ventes en affiliation ce mois-ci. Merci le processus."</p>
+                    </div>
+
+                    <h4>2️⃣ STORY</h4>
+                    <p>Raconte ton parcours, tes galères, tes déclics.</p>
+                    <div class="example-box">
+                        <p>"Il y a 6 mois, je scrollais TikTok en me disant 'un jour je ferai un truc'."</p>
+                        <p>"Puis j'ai lu French Connexion. Ça a tout changé."</p>
+                    </div>
+
+                    <h4>3️⃣ ÉDUCATION</h4>
+                    <p>Partage des conseils, des leçons, des insights.</p>
+                    <div class="example-box">
+                        <p>"Voilà les 3 erreurs qui t'empêchent de lancer ton business."</p>
+                        <p>"Comment trouver ton idée en 10 minutes (méthode simple)."</p>
+                    </div>
+
+                    <h4>4️⃣ MOTIVATION</h4>
+                    <p>Donne un coup de boost. Mais attention : pas de bullshit motivationnel vide.</p>
+                    <div class="example-box">
+                        <p>"Personne ne viendra te sauver. Tu le sais. Alors agis."</p>
+                        <p>"Dans 1 an, tu seras au même endroit. Ou pas. À toi de choisir."</p>
+                    </div>
+
+                    <div class="highlight">
+                        <p><strong>Rotation recommandée :</strong></p>
+                        <p>Lundi : Éducation → Mercredi : Story → Vendredi : Preuve → Dimanche : Motivation</p>
+                    </div>
+
+                    <h3>Comment filmer</h3>
+                    <ul>
+                        <li><strong>Lumière :</strong> Naturelle (près d'une fenêtre) ou ring light</li>
+                        <li><strong>Son :</strong> Pas de vent, pas de bruit de fond</li>
+                        <li><strong>Cadrage :</strong> Vertical (9:16), visage centré</li>
+                        <li><strong>Durée :</strong> 15-60 sec pour TikTok/Reels, 10-15 sec par snap</li>
+                        <li><strong>Arrière-plan :</strong> Simple, pas de bordel</li>
+                    </ul>
+
+                    <h3>Comment parler</h3>
+                    <ul>
+                        <li><strong>Regarde la caméra</strong> (= contact visuel)</li>
+                        <li><strong>Parle comme à un pote</strong> (pas de ton corporate)</li>
+                        <li><strong>Sois direct</strong> (pas de blabla inutile)</li>
+                        <li><strong>Énergie</strong> (pas monotone, mais pas hystérique non plus)</li>
+                        <li><strong>Authenticité</strong> (si tu te forces, ça se voit)</li>
+                    </ul>
+
+                    <h3>Comment écrire une description</h3>
+                    <div class="formula">
+                        Accroche + Développement + CTA
+                    </div>
+
+                    <div class="example-box">
+                        <p><strong>Accroche :</strong> Cet ebook m'a fait passer à l'action.</p>
+                        <p><strong>Développement :</strong> Pas de théorie vide. Juste un processus étape par étape. Concret. Brutal. Efficace.</p>
+                        <p><strong>CTA :</strong> Lien en bio si tu veux checker. ⚜️</p>
+                    </div>
+
+                    <h3>Hashtags simples</h3>
+                    <p>3-5 hashtags max. Pas 30.</p>
+                    <ul>
+                        <li>#entrepreneuriat</li>
+                        <li>#business</li>
+                        <li>#mindset</li>
+                        <li>#frenchconnexion</li>
+                        <li>#tiktokfrance (pour TikTok)</li>
+                    </ul>
+
+                    <h3>Modèles de vidéos déjà prêtes</h3>
+                    <p>Va dans <strong>Kit Affilié</strong> → Section Scripts pour 20+ modèles TikTok et Snap.</p>
+                    <p>Ces scripts sont des BASES. Adapte-les à ton style, ton expérience, ta personnalité.</p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="module">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">🎯 MODULE 3 — Comment Rediriger vers la Page</div>
+                <div class="module-icon">▼</div>
+            </div>
+            <div class="module-content">
+                <div class="module-body">
+                    <h3>Call to Action (CTA)</h3>
+                    <p>Un CTA = dire clairement quoi faire.</p>
+
+                    <p><strong>Mauvais CTA :</strong> "Voilà, bye"</p>
+                    <p><strong>Bon CTA :</strong> "Lien en bio"</p>
+                    <p><strong>Meilleur CTA :</strong> "Lien en bio si ça t'intéresse"</p>
+
+                    <div class="highlight">
+                        <h4>Règles d'or :</h4>
+                        <ul>
+                            <li>✅ Clair et simple</li>
+                            <li>✅ Pas agressif</li>
+                            <li>✅ Laisse le choix ("si ça t'intéresse")</li>
+                            <li>❌ Pas de "CLIQUE MAINTENANT !!!"</li>
+                        </ul>
+                    </div>
+
+                    <h3>Script à lire (vidéo TikTok/Reel)</h3>
+                    <div class="example-box">
+                        <p><strong>[0-3 sec - Accroche]</strong></p>
+                        <p>"Cet ebook a changé ma façon de voir l'entrepreneuriat."</p>
+
+                        <p><strong>[3-15 sec - Problème]</strong></p>
+                        <p>"Avant, je regardais des vidéos YouTube, je lisais des trucs... mais je passais jamais à l'action. Toujours des excuses."</p>
+
+                        <p><strong>[15-30 sec - Solution]</strong></p>
+                        <p>"French Connexion, c'est pas de la théorie. C'est un processus. Étape par étape. J'ai appliqué. Ça marche."</p>
+
+                        <p><strong>[30-35 sec - Preuve]</strong></p>
+                        <p>"Aujourd'hui j'ai lancé mon premier side project. Et je partage l'ebook en affiliation."</p>
+
+                        <p><strong>[35-40 sec - CTA]</strong></p>
+                        <p>"Lien en bio si tu veux checker. ⚜️"</p>
+                    </div>
+
+                    <h3>Exemple de message Snap</h3>
+                    <div class="example-box">
+                        <p><strong>Story 1 :</strong> "J'ai lu un truc qui m'a vraiment aidé récemment"</p>
+                        <p><strong>Story 2 :</strong> "C'est un ebook sur l'entrepreneuriat mais sans bullshit"</p>
+                        <p><strong>Story 3 :</strong> "Si tu veux lancer ton truc, ça peut t'aider"</p>
+                        <p><strong>Story 4 :</strong> "Swipe up si ça t'intéresse ⚜️" [+ lien]</p>
+                    </div>
+
+                    <h3>Exemple de story Insta</h3>
+                    <div class="example-box">
+                        <p><strong>Image :</strong> Cover de l'ebook ou toi en train de le lire</p>
+                        <p><strong>Texte sur l'image :</strong> "Le seul ebook business sans bullshit"</p>
+                        <p><strong>Sticker lien :</strong> "Swipe up" ou "Lien"</p>
+                        <p><strong>Musique :</strong> Un son trending ou silence (pour que les gens lisent)</p>
+                    </div>
+
+                    <h3>Exemple de message privé</h3>
+                    <div class="example-box">
+                        <p>Salut [Prénom],</p>
+                        <p>Je voulais te partager un truc qui m'a vraiment aidé récemment.</p>
+                        <p>C'est un ebook sur l'entrepreneuriat. Pas comme les autres. Pas de promesses bidon. Juste un processus concret.</p>
+                        <p>Ça s'appelle French Connexion.</p>
+                        <p>Je me suis dit que ça pourrait t'intéresser vu que [raison personnalisée : tu veux lancer ton business / tu galères à passer à l'action / etc].</p>
+                        <p>Voici le lien : [TON LIEN]</p>
+                        <p>Dis-moi ce que tu en penses !</p>
+                    </div>
+
+                    <div class="highlight">
+                        <p><strong>⚠️ IMPORTANT :</strong> Ne copie pas mot pour mot. Adapte à ta voix, ton style.</p>
+                        <p>Les gens sentent quand c'est un copier-coller.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="module">
+            <div class="module-header" onclick="toggleModule(this)">
+                <div class="module-title">⚠️ MODULE 4 — Comment Éviter les Erreurs</div>
+                <div class="module-icon">▼</div>
+            </div>
+            <div class="module-content">
+                <div class="module-body">
+                    <div class="error-list">
+                        <h4>❌ 1. Ne pas mendier des ventes</h4>
+                        <p><strong>Mauvais :</strong> "S'il te plaît achète mon lien j'ai besoin d'argent"</p>
+                        <p><strong>Bon :</strong> "J'ai trouvé cette ressource. Ça m'a aidé. Lien dispo si ça t'intéresse."</p>
+                        <p><strong>Pourquoi :</strong> Mendier = désespéré = pas crédible. Partage de la valeur = confiance.</p>
+                    </div>
+
+                    <div class="error-list">
+                        <h4>❌ 2. Ne pas promettre du rêve</h4>
+                        <p><strong>Mauvais :</strong> "Avec cet ebook tu vas devenir millionnaire"</p>
+                        <p><strong>Bon :</strong> "Cet ebook donne un processus concret pour passer à l'action."</p>
+                        <p><strong>Pourquoi :</strong> Les promesses bidon détruisent ta crédibilité. Sois honnête.</p>
+                    </div>
+
+                    <div class="error-list">
+                        <h4>❌ 3. Ne pas spammer les DM</h4>
+                        <p><strong>Mauvais :</strong> Envoyer ton lien à 200 personnes en copier-coller</p>
+                        <p><strong>Bon :</strong> Envoyer à 10 personnes que tu CONNAIS, avec un message PERSONNALISÉ</p>
+                        <p><strong>Pourquoi :</strong> Le spam = blocage + mauvaise réputation. La qualité > quantité.</p>
+                    </div>
+
+                    <div class="error-list">
+                        <h4>❌ 4. Ne pas copier/coller des messages automatiques</h4>
+                        <p><strong>Mauvais :</strong> "Salut ! J'ai un truc génial pour toi ! Clique ici : [lien]"</p>
+                        <p><strong>Bon :</strong> "Hey Sarah, je me souviens que tu voulais lancer un projet. J'ai lu un truc qui pourrait t'aider. Dis-moi si tu veux le lien."</p>
+                        <p><strong>Pourquoi :</strong> Les gens reconnaissent les messages génériques. Personnalise.</p>
+                    </div>
+
+                    <div class="error-list">
+                        <h4>❌ 5. Rester cohérent</h4>
+                        <p><strong>Mauvais :</strong> Poster 10 vidéos en 2 jours puis disparaître 3 semaines</p>
+                        <p><strong>Bon :</strong> 3-5 vidéos par semaine, régulièrement</p>
+                        <p><strong>Pourquoi :</strong> La constance > l'intensité ponctuelle. L'algorithme récompense la régularité.</p>
+                    </div>
+
+                    <h3>Récap des erreurs fatales</h3>
+                    <div class="highlight">
+                        <ul>
+                            <li>🚫 Mendier des ventes</li>
+                            <li>🚫 Promettre "deviens riche en 24h"</li>
+                            <li>🚫 Spammer 200 DM identiques</li>
+                            <li>🚫 Copier-coller des scripts sans adapter</li>
+                            <li>🚫 Poster 50 vidéos puis disparaître</li>
+                            <li>🚫 Acheter des followers/likes</li>
+                            <li>🚫 Mentir sur tes résultats</li>
+                        </ul>
+                    </div>
+
+                    <h3>La bonne approche</h3>
+                    <div class="highlight">
+                        <ul>
+                            <li>✅ Apporte de la valeur AVANT de vendre</li>
+                            <li>✅ Sois authentique (raconte TON expérience)</li>
+                            <li>✅ Personnalise tes messages</li>
+                            <li>✅ Reste régulier (3-5 posts/semaine)</li>
+                            <li>✅ Crée ton propre style (pas copier-coller)</li>
+                            <li>✅ Teste, analyse, adapte</li>
+                        </ul>
+                    </div>
+
+                    <div class="formula" style="margin-top: 40px;">
+                        FORMULE FINALE :<br>
+                        Valeur + Authenticité + Régularité = Ventes
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA FINAL -->
+        <div class="warning-box" style="margin-top: 40px;">
+            <h2>🚀 MAINTENANT, À TOI DE JOUER</h2>
+            <p>Tu as les bases. Tu as les principes. Tu as des exemples.</p>
+            <p><strong>Ce qui manque ? TON IMAGINATION.</strong></p>
+            <p style="margin-top: 20px;">
+                Les affiliés qui font des ventes ne copient pas.<br>
+                Ils comprennent le système.<br>
+                Puis ils créent leur propre approche.
+            </p>
+            <p style="margin-top: 20px; font-size: 1.1rem; font-weight: 700;">
+                C'est exactement ce que French Connexion™ enseigne :<br>
+                Pas de formule magique. Juste un processus.
+            </p>
+        </div>
+
+        <div class="btn-container">
+            <a href="affiliate-kit.html" class="btn">📦 Voir les Scripts & Exemples</a>
+            <a href="affiliate-dashboard.html" class="btn btn-secondary">📊 Retour au Dashboard</a>
+        </div>
+
+        <a href="affiliate-dashboard.html" class="back-link">← Retour au dashboard</a>
+    </div>
+
+    <script>
+        function toggleModule(header) {
+            const module = header.parentElement;
+            const allModules = document.querySelectorAll('.module');
+
+            // Fermer les autres modules
+            allModules.forEach(m => {
+                if (m !== module) {
+                    m.classList.remove('active');
+                }
+            });
+
+            // Toggle le module actuel
+            module.classList.toggle('active');
+        }
+
+        // Ouvrir le premier module par défaut
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstModule = document.querySelector('.module');
+            if (firstModule) {
+                firstModule.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit Affilié - French Connexion™</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #fff;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .fleur {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 40px 0 20px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 25px 0 15px;
+        }
+
+        .section {
+            background: #1a1a1a;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .resource-card {
+            background: #000;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .resource-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .resource-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 900;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-copy {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            font-size: 0.8rem;
+            padding: 8px 20px;
+        }
+
+        .btn-copy:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .text-box {
+            background: #000;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .copy-btn-container {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .social-platform {
+            background: #0a0a0a;
+            border-left: 4px solid #fff;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .platform-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tips-list {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .tips-list li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .emoji {
+            font-size: 1.2rem;
+            margin-right: 5px;
+        }
+
+        .highlight {
+            background: #2a2a2a;
+            padding: 15px;
+            border-left: 3px solid #fff;
+            margin: 15px 0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #fff;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="fleur">⚜</span>
+            <h1>Kit Affilié</h1>
+            <p class="subtitle">Tout ce dont tu as besoin pour promouvoir French Connexion™</p>
+        </header>
+
+        <!-- RESSOURCES TÉLÉCHARGEABLES -->
+        <div class="section">
+            <h2>📦 Ressources Téléchargeables</h2>
+
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📄</div>
+                    <div class="resource-title">Guide PDF Complet</div>
+                    <div class="resource-desc">Guide étape par étape pour promouvoir efficacement l'ebook sur tous les réseaux sociaux</div>
+                    <button class="btn" onclick="alert('PDF en cours de création - Disponible prochainement')">Télécharger PDF</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎨</div>
+                    <div class="resource-title">Visuels & Bannières</div>
+                    <div class="resource-desc">Pack de bannières et visuels optimisés pour Instagram, TikTok, YouTube, etc.</div>
+                    <button class="btn" onclick="alert('Visuels en cours de création - Disponibles prochainement')">Télécharger Pack</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎥</div>
+                    <div class="resource-title">Vidéos Modèles</div>
+                    <div class="resource-desc">Templates vidéo pour TikTok, Reels et Shorts avec scripts inclus</div>
+                    <button class="btn" onclick="alert('Vidéos en cours de création - Disponibles prochainement')">Télécharger Vidéos</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEXTES PRÊTS À L'EMPLOI -->
+        <div class="section">
+            <h2>✍️ Textes Prêts à l'Emploi</h2>
+
+            <h3>Post Instagram / Facebook</h3>
+            <div class="text-box">
+🚀 J'ai découvert un ebook qui change vraiment la donne pour l'entrepreneuriat...
+
+"French Connexion - Le Processus" m'a donné une vraie méthode, pas de blabla théorique.
+
+Si tu veux passer à l'action concrètement, je te le recommande.
+
+Lien dans ma bio ⚜️
+
+#entrepreneuriat #mindset #business #frenchconnexion
+            </div>
+            <div class="copy-btn-container">
+                <button class="btn btn-copy" onclick="copyText(this.previousElementSibling.textContent)">Copier le texte</button>
+            </div>
+
+            <h3>Story Instagram / Snapchat</h3>
+            <div class="text-box">
+Franchement cet ebook 🔥
+
+Simple, concret, actionnable.
+
+Si tu veux te lancer sérieusement, regarde ça 👆
+
+Swipe up ! ⚜️
+            </div>
+            <div class="copy-btn-container">
+                <button class="btn btn-copy" onclick="copyText(this.previousElementSibling.textContent)">Copier le texte</button>
+            </div>
+
+            <h3>Caption TikTok</h3>
+            <div class="text-box">
+L'ebook qui m'a vraiment aidé à structurer mes projets 💡
+
+Pas de promesses bidon, juste du concret.
+
+Lien dans ma bio si ça t'intéresse ⚜️
+
+#entrepreneuriat #business #tiktokfrance #frenchconnexion
+            </div>
+            <div class="copy-btn-container">
+                <button class="btn btn-copy" onclick="copyText(this.previousElementSibling.textContent)">Copier le texte</button>
+            </div>
+
+            <h3>Email / DM</h3>
+            <div class="text-box">
+Salut !
+
+Je voulais te partager un truc qui m'a vraiment aidé récemment.
+
+C'est un ebook sur l'entrepreneuriat qui s'appelle "French Connexion - Le Processus".
+
+Contrairement à d'autres, celui-là est vraiment actionnable et sans bullshit.
+
+Si tu veux te lancer ou améliorer tes projets, je pense que ça peut t'intéresser.
+
+Voici le lien : [TON LIEN]
+
+Dis-moi ce que tu en penses !
+            </div>
+            <div class="copy-btn-container">
+                <button class="btn btn-copy" onclick="copyText(this.previousElementSibling.textContent)">Copier le texte</button>
+            </div>
+        </div>
+
+        <!-- SCRIPTS MESSAGES -->
+        <div class="section">
+            <h2>💬 Scripts Messages</h2>
+
+            <h3>Script Vidéo TikTok (30 secondes)</h3>
+            <div class="text-box">
+<strong>[Accroche - 3 sec]</strong>
+"Cet ebook a changé ma façon de voir l'entrepreneuriat."
+
+<strong>[Problème - 8 sec]</strong>
+"Avant, je regardais des vidéos YouTube, je lisais des trucs... mais je passais jamais à l'action."
+
+<strong>[Solution - 10 sec]</strong>
+"French Connexion, c'est pas de la théorie. C'est un processus étape par étape pour lancer ton truc."
+
+<strong>[Preuve - 5 sec]</strong>
+"J'ai appliqué la méthode, et franchement ça m'a aidé à structurer mes idées."
+
+<strong>[CTA - 4 sec]</strong>
+"Lien dans ma bio si tu veux checker. ⚜️"
+            </div>
+            <div class="copy-btn-container">
+                <button class="btn btn-copy" onclick="copyText(this.previousElementSibling.textContent)">Copier le script</button>
+            </div>
+
+            <h3>Script Vidéo YouTube (1 minute)</h3>
+            <div class="text-box">
+<strong>[Intro - 5 sec]</strong>
+"Salut ! Aujourd'hui je vais te parler d'un ebook que j'ai lu récemment et qui m'a vraiment marqué."
+
+<strong>[Présentation - 15 sec]</strong>
+"Il s'appelle 'French Connexion - Le Processus'. C'est un guide sur l'entrepreneuriat, mais pas comme les autres. Pas de promesses bidon genre 'deviens riche en 24h'."
+
+<strong>[Contenu - 20 sec]</strong>
+"Ce que j'ai aimé, c'est que c'est hyper concret. Il y a une vraie méthode étape par étape. Tu sais exactement quoi faire, dans quel ordre. Pas de blabla."
+
+<strong>[Résultats - 10 sec]</strong>
+"Depuis que j'applique ce que j'ai appris, j'ai beaucoup plus de clarté sur mes projets."
+
+<strong>[CTA - 10 sec]</strong>
+"Si ça t'intéresse, le lien est en description. Franchement je te le recommande. Sur ce, à plus ! ⚜️"
+            </div>
+            <div class="copy-btn-container">
+                <button class="btn btn-copy" onclick="copyText(this.previousElementSibling.textContent)">Copier le script</button>
+            </div>
+        </div>
+
+        <!-- GUIDES RÉSEAUX SOCIAUX -->
+        <div class="section">
+            <h2>📱 Comment Poster sur Chaque Plateforme</h2>
+
+            <div class="social-platform">
+                <div class="platform-name"><span class="emoji">📷</span> Instagram</div>
+                <div class="highlight">
+                    <strong>Format optimal :</strong> Carrousel (10 slides) ou Reel (15-30 sec)
+                </div>
+                <ul class="tips-list">
+                    <li><strong>Post Carrousel :</strong> Slide 1 = Accroche forte, Slides 2-9 = Valeur/conseils, Slide 10 = CTA avec lien bio</li>
+                    <li><strong>Reel :</strong> Hook dans les 3 premières secondes, sous-titres obligatoires, musique tendance</li>
+                    <li><strong>Story :</strong> Swipe up avec ton lien (ou lien sticker si -10k abonnés)</li>
+                    <li><strong>Hashtags :</strong> 10-15 hashtags pertinents (#entrepreneuriat #business #mindset)</li>
+                    <li><strong>Heure de post :</strong> 12h-14h ou 18h-21h (meilleur engagement)</li>
+                </ul>
+            </div>
+
+            <div class="social-platform">
+                <div class="platform-name"><span class="emoji">🎵</span> TikTok</div>
+                <div class="highlight">
+                    <strong>Format optimal :</strong> Vidéo verticale 9:16, 15-60 secondes
+                </div>
+                <ul class="tips-list">
+                    <li><strong>Hook :</strong> 3 premières secondes = CRUCIALES (pose une question, fais une affirmation choc)</li>
+                    <li><strong>Sous-titres :</strong> OBLIGATOIRES (80% regardent sans son)</li>
+                    <li><strong>Tendances :</strong> Utilise les sons trending pour booster la portée</li>
+                    <li><strong>CTA :</strong> "Lien dans ma bio" + pointer vers le haut</li>
+                    <li><strong>Hashtags :</strong> 3-5 max (#pourtoi #entrepreneuriat #frenchconnexion)</li>
+                    <li><strong>Fréquence :</strong> 1-3 vidéos par jour pour percer</li>
+                </ul>
+            </div>
+
+            <div class="social-platform">
+                <div class="platform-name"><span class="emoji">👻</span> Snapchat</div>
+                <div class="highlight">
+                    <strong>Format optimal :</strong> Story verticale, 10-15 secondes par snap
+                </div>
+                <ul class="tips-list">
+                    <li><strong>Authenticité :</strong> Snap demande du contenu brut et authentique</li>
+                    <li><strong>Stories :</strong> Séquence de 5-7 snaps pour raconter ton histoire</li>
+                    <li><strong>Swipe up :</strong> Intègre ton lien directement dans la story</li>
+                    <li><strong>Stickers :</strong> Utilise les GIF et stickers pour rendre ça dynamique</li>
+                    <li><strong>Heure :</strong> Poste en soirée (18h-22h) pour max de vues</li>
+                </ul>
+            </div>
+
+            <div class="social-platform">
+                <div class="platform-name"><span class="emoji">▶️</span> YouTube</div>
+                <div class="highlight">
+                    <strong>Format optimal :</strong> Vidéo 16:9, 5-15 minutes (YouTube Shorts = 60 sec max)
+                </div>
+                <ul class="tips-list">
+                    <li><strong>Miniature :</strong> Texte gros et contrasté + visage expressif</li>
+                    <li><strong>Titre :</strong> Accrocheur avec mots-clés SEO</li>
+                    <li><strong>Description :</strong> Ton lien affilié en PREMIER (avant le "voir plus")</li>
+                    <li><strong>Timestamps :</strong> Chapitres pour faciliter la navigation</li>
+                    <li><strong>CTA :</strong> Rappelle ton lien à mi-vidéo et en fin de vidéo</li>
+                    <li><strong>YouTube Shorts :</strong> Même principe que TikTok (vertical, hook, sous-titres)</li>
+                </ul>
+            </div>
+
+            <div class="social-platform">
+                <div class="platform-name"><span class="emoji">💼</span> LinkedIn</div>
+                <div class="highlight">
+                    <strong>Format optimal :</strong> Post texte (1300-2000 caractères) ou carrousel PDF
+                </div>
+                <ul class="tips-list">
+                    <li><strong>Ton :</strong> Plus professionnel que les autres réseaux</li>
+                    <li><strong>Structure :</strong> Accroche → Problème → Solution → Résultat → CTA</li>
+                    <li><strong>Lien :</strong> Ne pas mettre de lien direct (baisse la portée), dis "Lien en commentaire"</li>
+                    <li><strong>Engagement :</strong> Commente d'autres posts avant de poster le tien</li>
+                    <li><strong>Hashtags :</strong> 3-5 hashtags (#Entrepreneuriat #StartUp #Business)</li>
+                </ul>
+            </div>
+
+            <div class="social-platform">
+                <div class="platform-name"><span class="emoji">❌</span> Twitter/X</div>
+                <div class="highlight">
+                    <strong>Format optimal :</strong> Thread de 5-10 tweets
+                </div>
+                <ul class="tips-list">
+                    <li><strong>Tweet 1 :</strong> Accroche puissante + annonce du thread</li>
+                    <li><strong>Tweets 2-9 :</strong> Conseils / insights / valeur</li>
+                    <li><strong>Tweet 10 :</strong> CTA avec ton lien</li>
+                    <li><strong>Format :</strong> Phrases courtes, retours à la ligne, émojis stratégiques</li>
+                    <li><strong>Heure :</strong> 8h-10h ou 17h-19h</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BONNES PRATIQUES -->
+        <div class="section">
+            <h2>✅ Bonnes Pratiques Générales</h2>
+
+            <div class="highlight">
+                <h3>📈 Maximiser tes conversions</h3>
+                <ul class="tips-list">
+                    <li><strong>Sois authentique :</strong> Partage ton expérience réelle, pas un script robotique</li>
+                    <li><strong>Apporte de la valeur :</strong> Donne des conseils gratuits avant de promouvoir</li>
+                    <li><strong>Test A/B :</strong> Essaie plusieurs accroches/formats et vois ce qui marche</li>
+                    <li><strong>Suivi :</strong> Vérifie tes stats dans le dashboard pour voir ce qui convertit</li>
+                    <li><strong>Patience :</strong> Les résultats viennent avec la régularité (30-60 jours)</li>
+                </ul>
+            </div>
+
+            <div class="highlight">
+                <h3>🚫 À Éviter Absolument</h3>
+                <ul class="tips-list">
+                    <li>❌ Spammer les DM avec ton lien</li>
+                    <li>❌ Promettre "deviens riche rapidement"</li>
+                    <li>❌ Inventer des résultats que tu n'as pas eus</li>
+                    <li>❌ Copier-coller le même message partout</li>
+                    <li>❌ Acheter des followers/likes (ça ne convertit pas)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="affiliate-dashboard.html" class="btn">Retour au Dashboard</a>
+            <a href="affiliate-rules.html" class="btn" style="margin-left: 15px; background: transparent; border: 2px solid #fff; color: #fff;">Voir les Règles</a>
+        </div>
+
+        <a href="affiliate-dashboard.html" class="back-link">← Retour au dashboard</a>
+    </div>
+
+    <script>
+        function copyText(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text.trim();
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            alert('✅ Texte copié dans le presse-papiers !');
+        }
+    </script>
+</body>
+</html>
