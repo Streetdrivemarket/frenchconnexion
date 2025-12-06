@@ -44,27 +44,31 @@ router.get('/me', authMiddleware, async (req, res) => {
 
         // Si pas de progression trouvée, initialiser
         if (error && error.code === 'PGRST116') {
-            // Initialiser via fonction SQL
-            const { error: initError } = await supabaseAdmin.rpc('initialize_user_progress', {
-                p_user_id: userId
-            });
+            console.log(`📝 Initialisation progression pour user ${userId}`);
 
-            if (initError) {
-                console.error('❌ Erreur init progression:', initError);
-                return res.status(500).json({ error: 'Impossible d\'initialiser la progression' });
-            }
-
-            // Récupérer après init
-            const { data: newProgress, error: fetchError } = await supabaseAdmin
+            // Initialiser directement avec supabaseAdmin (bypass RLS)
+            const { data: newProgress, error: insertError } = await supabaseAdmin
                 .from('user_progress')
-                .select('*')
-                .eq('user_id', userId)
+                .insert({
+                    user_id: userId,
+                    unlocked_chapters: ['intro'],
+                    badges_earned: [],
+                    completion_percentage: 7, // 1/15 chapitres
+                    last_chapter_unlocked: 'intro',
+                    chapters_completed: 1
+                })
+                .select()
                 .single();
 
-            if (fetchError) {
-                console.error('❌ Erreur récupération après init:', fetchError);
-                return res.status(500).json({ error: 'Impossible de récupérer la progression' });
+            if (insertError) {
+                console.error('❌ Erreur init progression:', insertError);
+                return res.status(500).json({
+                    error: 'Impossible d\'initialiser la progression',
+                    details: insertError.message
+                });
             }
+
+            console.log(`✅ Progression initialisée:`, newProgress);
 
             return res.json({
                 success: true,
@@ -113,27 +117,83 @@ router.post('/unlock', authMiddleware, async (req, res) => {
             return res.status(403).json({ error: 'Accès refusé. Paiement requis.' });
         }
 
-        // Déverrouiller via fonction SQL
-        const { data, error } = await supabaseAdmin.rpc('unlock_chapter', {
-            p_user_id: userId,
-            p_chapter_id: chapter_id
-        });
+        // Récupérer la progression actuelle
+        let { data: progress, error: progressError } = await supabaseAdmin
+            .from('user_progress')
+            .select('*')
+            .eq('user_id', userId)
+            .single();
 
-        if (error) {
-            console.error('❌ Erreur unlock_chapter:', error);
-            return res.status(500).json({ error: 'Impossible de déverrouiller le chapitre' });
+        // Si pas de progression, initialiser
+        if (progressError && progressError.code === 'PGRST116') {
+            console.log(`📝 Init progression pour unlock - user ${userId}`);
+
+            const { data: newProgress, error: insertError } = await supabaseAdmin
+                .from('user_progress')
+                .insert({
+                    user_id: userId,
+                    unlocked_chapters: ['intro'],
+                    badges_earned: [],
+                    completion_percentage: 7,
+                    last_chapter_unlocked: 'intro',
+                    chapters_completed: 1
+                })
+                .select()
+                .single();
+
+            if (insertError) {
+                console.error('❌ Erreur init:', insertError);
+                return res.status(500).json({ error: 'Impossible d\'initialiser la progression' });
+            }
+
+            progress = newProgress;
+        } else if (progressError) {
+            console.error('❌ Erreur récup progression:', progressError);
+            return res.status(500).json({ error: 'Erreur récupération progression' });
         }
 
-        // data est un array avec un seul élément
-        const result = data && data.length > 0 ? data[0] : null;
-
-        if (!result || !result.success) {
-            return res.status(500).json({ error: 'Échec du déverrouillage' });
+        // Vérifier si le chapitre est déjà déverrouillé
+        let unlockedChapters = progress.unlocked_chapters || ['intro'];
+        if (unlockedChapters.includes(chapter_id)) {
+            console.log(`ℹ️ Chapitre ${chapter_id} déjà déverrouillé`);
+            return res.json({
+                success: true,
+                unlocked_chapters: unlockedChapters,
+                completion_percentage: progress.completion_percentage,
+                chapter_unlocked: chapter_id,
+                shock_message: 'Chapitre déjà déverrouillé',
+                badge_awarded: null
+            });
         }
+
+        // Ajouter le nouveau chapitre
+        unlockedChapters.push(chapter_id);
+
+        // Calculer le pourcentage
+        const totalChapters = 15;
+        const newPercentage = Math.floor((unlockedChapters.length * 100) / totalChapters);
+
+        // Mettre à jour la progression
+        const { error: updateError } = await supabaseAdmin
+            .from('user_progress')
+            .update({
+                unlocked_chapters: unlockedChapters,
+                last_chapter_unlocked: chapter_id,
+                chapters_completed: unlockedChapters.length,
+                completion_percentage: newPercentage
+            })
+            .eq('user_id', userId);
+
+        if (updateError) {
+            console.error('❌ Erreur update:', updateError);
+            return res.status(500).json({ error: 'Impossible de mettre à jour la progression' });
+        }
+
+        console.log(`✅ Chapitre ${chapter_id} déverrouillé pour user ${userId}`);
 
         // Vérifier si un badge doit être attribué
         let badgeAwarded = null;
-        const unlockedCount = result.unlocked_chapters ? JSON.parse(JSON.stringify(result.unlocked_chapters)).length : 0;
+        const unlockedCount = unlockedChapters.length;
 
         // Badges selon progression
         if (unlockedCount === 3 && !await hasBadge(userId, 'first-steps')) {
@@ -151,8 +211,8 @@ router.post('/unlock', authMiddleware, async (req, res) => {
 
         res.json({
             success: true,
-            unlocked_chapters: result.unlocked_chapters,
-            completion_percentage: result.new_percentage,
+            unlocked_chapters: unlockedChapters,
+            completion_percentage: newPercentage,
             chapter_unlocked: chapter_id,
             shock_message: shockMessage,
             badge_awarded: badgeAwarded
