@@ -100,11 +100,13 @@ const authRoutes = require('./routes/auth');
 const paymentRoutes = require('./routes/payment');
 const readerRoutes = require('./routes/reader');
 const affiliateRoutes = require('./routes/affiliate');
+const progressRoutes = require('./routes/progress');
 
 app.use('/api/auth', authLimiter, authRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/reader', readerRoutes);
 app.use('/api/affiliate', affiliateRoutes);
+app.use('/api/progress', progressRoutes);
 
 // Route de test
 app.get('/api/health', (req, res) => {
