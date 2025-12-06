@@ -280,8 +280,15 @@
         </div>
     </div>
 
-    <script src="js/config.js"></script>
+    <script src="js/config.js?v=2"></script>
     <script>
+        // Forcer l'URL de l'API (override config.js si nécessaire)
+        window.API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:3000'
+            : 'https://french-connexion-api.vercel.app';
+
+        console.log('🔧 API_URL forcé:', window.API_URL);
+
         const token = localStorage.getItem('token');
         let userData = null;
         let progressData = null;

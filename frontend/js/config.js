@@ -14,7 +14,9 @@ function getApiUrl() {
     return 'https://french-connexion-api.vercel.app';
 }
 
-const API_URL = getApiUrl();
+// Exposer l'API URL globalement
+window.API_URL = getApiUrl();
+const API_URL = window.API_URL;
 
 // Stripe publishable key - MODE LIVE PRODUCTION ⚠️
 const STRIPE_PUBLISHABLE_KEY = 'pk_live_51Safd5FKeI89dgT28Zwt8FznPowY2Z7N0Mdls0AeSn3WEjIgULBlwcYfvFDousgjPEk7Zxl9ssqNlCcImPOmx5LC00yH2Djj9g';

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Progression API</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #fff; }
+        button { padding: 10px 20px; margin: 10px 0; cursor: pointer; background: #FFD700; border: none; font-weight: bold; }
+        pre { background: #000; padding: 15px; border-radius: 8px; overflow-x: auto; }
+        .error { color: #ff6b6b; }
+        .success { color: #00ff88; }
+    </style>
+</head>
+<body>
+    <h1>🎮 Test API Progression</h1>
+
+    <button onclick="testGetProgress()">1. GET /api/progress/me</button>
+    <button onclick="testUnlock()">2. POST /api/progress/unlock (intro → chapitre-1)</button>
+    <button onclick="testReset()">3. POST /api/progress/reset</button>
+
+    <div id="output"></div>
+
+    <script>
+        const API_URL = 'https://french-connexion-api.vercel.app';
+        const token = localStorage.getItem('token');
+
+        function log(message, type = 'info') {
+            const output = document.getElementById('output');
+            const pre = document.createElement('pre');
+            pre.className = type;
+            pre.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            output.appendChild(pre);
+        }
+
+        if (!token) {
+            log('❌ Pas de token trouvé ! Connecte-toi d\'abord.', 'error');
+        } else {
+            log(`✅ Token trouvé: ${token.substring(0, 20)}...`, 'success');
+        }
+
+        async function testGetProgress() {
+            log('🔍 Test GET /api/progress/me...');
+            try {
+                const response = await fetch(`${API_URL}/api/progress/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    log(`✅ Réponse: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    log(`❌ Erreur ${response.status}: ${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Exception: ${error.message}`, 'error');
+            }
+        }
+
+        async function testUnlock() {
+            log('🔓 Test POST /api/progress/unlock...');
+            try {
+                const response = await fetch(`${API_URL}/api/progress/unlock`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ chapter_id: 'chapitre-1' })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    log(`✅ Réponse: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    log(`❌ Erreur ${response.status}: ${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Exception: ${error.message}`, 'error');
+            }
+        }
+
+        async function testReset() {
+            if (!confirm('Réinitialiser la progression ?')) return;
+
+            log('🔄 Test POST /api/progress/reset...');
+            try {
+                const response = await fetch(`${API_URL}/api/progress/reset`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    log(`✅ Réponse: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    log(`❌ Erreur ${response.status}: ${JSON.stringify(data, null, 2)}`, 'error');
+                }
+            } catch (error) {
+                log(`❌ Exception: ${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
