@@ -316,6 +316,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     let currentChapterIndex = 0;
 
     const showChapter = (index) => {
+        // Vérifier si le chapitre est déverrouillé (gamification)
+        const chapterId = chapters[index]?.id;
+        if (chapterId && window.progressManager) {
+            const isUnlocked = window.progressManager.isChapterUnlocked(chapterId);
+            if (!isUnlocked) {
+                console.warn(`🔒 Tentative d'accès au chapitre verrouillé: ${chapterId}`);
+                window.progressManager.showLockedMessage(chapterId);
+                return; // Bloquer la navigation
+            }
+        }
+
         // Masquer tous les chapitres
         chapters.forEach(chapter => chapter.classList.remove('active'));
 
