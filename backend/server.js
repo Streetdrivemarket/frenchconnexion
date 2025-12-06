@@ -26,39 +26,30 @@ app.use(helmet({
     }
 }));
 
-// Configuration CORS dynamique
+// Configuration CORS - SIMPLIFIÉE pour Vercel
 const corsOptions = {
-    origin: function(origin, callback) {
-        // Autoriser les requêtes sans origine (same-origin, Postman, etc.)
-        if (!origin) return callback(null, true);
-
-        // Liste des origines autorisées
-        const allowedOrigins = [
-            process.env.FRONTEND_URL,
-            'https://www.frenchconnexion.club',
-            'https://frenchconnexion.club',
-            'http://localhost:8080',
-            'http://localhost:3000',
-            'http://127.0.0.1:8080'
-        ].filter(Boolean);
-
-        // Autoriser tous les sous-domaines Vercel pour ce projet
-        const isVercelPreview = origin.includes('vercel.app') && origin.includes('streetdrive');
-        const isFrenchConnexion = origin.includes('frenchconnexion.club');
-        const isAllowed = allowedOrigins.includes(origin) || isVercelPreview || isFrenchConnexion;
-
-        if (isAllowed) {
-            callback(null, true);
-        } else {
-            console.log('⚠️ CORS blocked origin:', origin);
-            callback(null, true); // En production, autoriser quand même pour éviter les blocages
-        }
-    },
+    origin: true, // Autoriser toutes les origines (API publique)
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    exposedHeaders: ['Content-Length', 'Content-Type'],
+    maxAge: 86400 // 24h cache pour preflight
 };
 app.use(cors(corsOptions));
+
+// Headers CORS supplémentaires pour Vercel
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
+
+    // Répondre immédiatement aux requêtes OPTIONS (preflight)
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    next();
+});
 
 // Protection XSS supplémentaire
 app.use((req, res, next) => {
