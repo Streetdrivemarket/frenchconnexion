@@ -109,10 +109,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Afficher l'email de l'utilisateur dans le header
     document.getElementById('user-email').textContent = user.email;
 
-    // Ajouter le filigrane avec l'email
+    // Ajouter le filigrane avec l'email (multiple pour couvrir tout l'écran)
     const watermark = document.getElementById('watermark');
     if (watermark) {
-        watermark.textContent = `${user.email} - ${user.email} - ${user.email}`;
+        // Créer 20 copies du watermark pour couvrir tout l'écran
+        let watermarkContent = '';
+        for (let i = 0; i < 20; i++) {
+            watermarkContent += `<span class="watermark-text">${user.email}</span>`;
+        }
+        watermark.innerHTML = watermarkContent;
     }
 
     // ==========================================
