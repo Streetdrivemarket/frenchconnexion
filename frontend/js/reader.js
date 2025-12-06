@@ -29,7 +29,8 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// Détecter les outils de développement (F12, Ctrl+Shift+I, etc.)
+// Détecter les outils de développement (F12, Ctrl+Shift+I, etc.) - DÉSACTIVÉ TEMPORAIREMENT
+/*
 document.addEventListener('keydown', (e) => {
     if (e.key === 'F12' ||
         (e.ctrlKey && e.shiftKey && e.key === 'I') ||
@@ -40,13 +41,16 @@ document.addEventListener('keydown', (e) => {
         return false;
     }
 });
+*/
 
-// Bloquer le clic droit
+// Bloquer le clic droit - DÉSACTIVÉ TEMPORAIREMENT
+/*
 document.addEventListener('contextmenu', (e) => {
     e.preventDefault();
     showScreenshotWarning();
     return false;
 });
+*/
 
 // Fonction pour afficher l'avertissement
 function showScreenshotWarning() {
@@ -61,14 +65,17 @@ function showScreenshotWarning() {
     }
 }
 
-// Protection contre la copie du texte
+// Protection contre la copie du texte - DÉSACTIVÉ TEMPORAIREMENT
+/*
 document.addEventListener('copy', (e) => {
     e.preventDefault();
     showScreenshotWarning();
     return false;
 });
+*/
 
-// Détecter l'ouverture de DevTools par la taille de la fenêtre
+// Détecter l'ouverture de DevTools par la taille de la fenêtre - DÉSACTIVÉ TEMPORAIREMENT
+/*
 let devtoolsOpen = false;
 const threshold = 160;
 
@@ -83,6 +90,7 @@ setInterval(() => {
         devtoolsOpen = false;
     }
 }, 1000);
+*/
 
 // ==========================================
 // MENU HAMBURGER MOBILE (indépendant de l'auth)

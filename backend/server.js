@@ -75,7 +75,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Rate limiting global
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // 100 requêtes max par IP
+    max: 1000, // 1000 requêtes max par IP (augmenté pour dev/production)
     handler: (req, res) => {
         res.status(429).json({
             error: 'Trop de requêtes depuis cette IP, réessaye plus tard.'

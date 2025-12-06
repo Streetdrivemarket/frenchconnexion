@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { supabase } = require('../config/supabase');
+const { supabase, supabaseAdmin } = require('../config/supabase');
 
 // Middleware pour vérifier l'authentification
 const authMiddleware = async (req, res, next) => {
@@ -30,14 +30,37 @@ const authMiddleware = async (req, res, next) => {
 // Middleware pour vérifier que l'utilisateur a payé
 const verifyPayment = async (req, res, next) => {
     try {
-        const { data: profile } = await supabase
+        console.log(`🔍 Vérification paiement pour user_id: ${req.user.id} (${req.user.email})`);
+
+        // Utiliser supabaseAdmin pour bypass RLS et lire has_paid
+        const { data: profile, error } = await supabaseAdmin
             .from('profiles')
             .select('has_paid')
             .eq('id', req.user.id)
             .single();
 
-        if (!profile || !profile.has_paid) {
-            console.log(`⚠️ Tentative d'accès au contenu payant refusée pour ${req.user.email}`);
+        console.log(`📊 Profile récupéré:`, profile);
+        console.log(`📊 Erreur Supabase:`, error);
+
+        if (error) {
+            console.error('❌ Erreur Supabase lors de la vérification:', error);
+            return res.status(403).json({
+                error: 'Erreur lors de la vérification du paiement.',
+                details: error.message
+            });
+        }
+
+        if (!profile) {
+            console.log(`⚠️ Profil introuvable pour user_id: ${req.user.id}`);
+            return res.status(403).json({
+                error: 'Profil introuvable.',
+                message: 'Ton profil n\'a pas été trouvé. Contacte le support.',
+                redirect: '/payment.html'
+            });
+        }
+
+        if (!profile.has_paid) {
+            console.log(`⚠️ has_paid = false pour ${req.user.email} (user_id: ${req.user.id})`);
             return res.status(403).json({
                 error: 'Accès refusé.',
                 message: 'Tu dois acheter l\'ebook pour accéder à ce contenu.',
@@ -45,11 +68,11 @@ const verifyPayment = async (req, res, next) => {
             });
         }
 
-        console.log(`✅ Accès au contenu payant autorisé pour ${req.user.email}`);
+        console.log(`✅ Accès autorisé pour ${req.user.email} (has_paid: ${profile.has_paid})`);
         next();
     } catch (error) {
         console.error('❌ Erreur vérification paiement:', error);
-        res.status(403).json({ error: 'Accès refusé.' });
+        res.status(403).json({ error: 'Accès refusé.', details: error.message });
     }
 };
 
