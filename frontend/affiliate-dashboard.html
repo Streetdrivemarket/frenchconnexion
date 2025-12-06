@@ -25,6 +25,7 @@
         }
 
         header {
+            position: relative;
             text-align: center;
             margin-bottom: 40px;
             padding: 30px 0;
@@ -308,6 +309,7 @@
 <body>
     <div class="container">
         <header>
+            <a href="reader.html" style="position: absolute; left: 20px; top: 30px; color: #fff; text-decoration: none; font-size: 14px; opacity: 0.8; transition: opacity 0.3s;">← Retour au Dashboard</a>
             <span class="fleur">⚜️</span>
             <h1>FRENCH CONNEXION™</h1>
             <p class="subtitle">Dashboard Affilié</p>
@@ -409,11 +411,9 @@
         </div>
     </div>
 
+    <script src="js/config.js"></script>
     <script>
-        // API URL dynamique
-        const API_URL = window.location.hostname === 'localhost'
-            ? 'http://localhost:3000/api'
-            : 'https://ton-domaine.com/api';
+        // API_URL est défini dans config.js
         let affiliateData = null;
 
         // Vérifier l'authentification
