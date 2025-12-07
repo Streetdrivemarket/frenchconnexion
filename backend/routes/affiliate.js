@@ -53,50 +53,38 @@ const isAdmin = async (req, res, next) => {
 // ==========================================
 router.post('/register', authMiddleware, async (req, res) => {
     try {
+        console.log('📝 Tentative inscription affilié pour:', req.user.email);
+
         // Vérifier si l'utilisateur est déjà affilié
-        const { data: existing } = await supabaseAdmin
+        const { data: existing, error: existingError } = await supabaseAdmin
             .from('affiliates')
             .select('*')
             .eq('user_id', req.user.id)
             .single();
 
         if (existing) {
+            console.log('⚠️ Utilisateur déjà affilié:', existing.affiliate_code);
             return res.status(400).json({ error: 'Tu es déjà inscrit comme affilié.' });
         }
 
-        // Essayer d'utiliser un code du pool
+        // Générer un code affilié unique
         let affiliateCode;
-        const fs = require('fs');
-        const path = require('path');
-        const poolPath = path.join(__dirname, '..', '..', 'affiliate-codes-pool.json');
 
-        try {
-            if (fs.existsSync(poolPath)) {
-                const pool = JSON.parse(fs.readFileSync(poolPath, 'utf8'));
-                if (pool.codes && pool.codes.length > 0) {
-                    // Prendre le premier code disponible
-                    affiliateCode = pool.codes.shift();
-                    pool.available = pool.codes.length;
-
-                    // Sauvegarder le pool mis à jour
-                    fs.writeFileSync(poolPath, JSON.stringify(pool, null, 2));
-
-                    console.log(`✅ Code pris du pool: ${affiliateCode} (${pool.available} restants)`);
-                }
+        // Méthode simple : générer un code aléatoire
+        const generateCode = () => {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = 'FC';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-        } catch (poolError) {
-            console.log('⚠️  Impossible de lire le pool, génération via Supabase');
-        }
+            return code;
+        };
 
-        // Si pas de code du pool, générer via Supabase
-        if (!affiliateCode) {
-            const { data: codeData } = await supabaseAdmin.rpc('generate_affiliate_code');
-            affiliateCode = codeData;
-            console.log(`✅ Code généré via Supabase: ${affiliateCode}`);
-        }
+        affiliateCode = generateCode();
+        console.log('✅ Code généré:', affiliateCode);
 
         // Récupérer le nom depuis le profil
-        const { data: profile } = await supabase
+        const { data: profile } = await supabaseAdmin
             .from('profiles')
             .select('name')
             .eq('id', req.user.id)
@@ -116,7 +104,7 @@ router.post('/register', authMiddleware, async (req, res) => {
 
         if (error) {
             console.error('❌ Erreur création affilié:', error);
-            return res.status(500).json({ error: 'Erreur lors de la création.' });
+            return res.status(500).json({ error: 'Erreur lors de la création: ' + error.message });
         }
 
         console.log('✅ Affilié créé:', affiliate.affiliate_code);
