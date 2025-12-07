@@ -54,6 +54,13 @@ const isAdmin = async (req, res, next) => {
 router.post('/register', authMiddleware, async (req, res) => {
     try {
         console.log('📝 Tentative inscription affilié pour:', req.user.email);
+        console.log('📝 User ID:', req.user.id);
+
+        // Vérifier que supabaseAdmin est disponible
+        if (!supabaseAdmin) {
+            console.error('❌ supabaseAdmin non initialisé!');
+            return res.status(500).json({ error: 'Erreur config serveur: SUPABASE_SERVICE_KEY manquante' });
+        }
 
         // Vérifier si l'utilisateur est déjà affilié
         const { data: existing, error: existingError } = await supabaseAdmin
@@ -103,8 +110,10 @@ router.post('/register', authMiddleware, async (req, res) => {
             .single();
 
         if (error) {
-            console.error('❌ Erreur création affilié:', error);
-            return res.status(500).json({ error: 'Erreur lors de la création: ' + error.message });
+            console.error('❌ Erreur création affilié:', JSON.stringify(error, null, 2));
+            return res.status(500).json({
+                error: `Erreur: ${error.message || error.code || JSON.stringify(error)}`
+            });
         }
 
         console.log('✅ Affilié créé:', affiliate.affiliate_code);
