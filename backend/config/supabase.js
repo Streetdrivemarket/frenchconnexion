@@ -21,6 +21,14 @@ if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
     process.exit(1);
 }
 
+// Vérifier la clé service (admin)
+if (!process.env.SUPABASE_SERVICE_KEY) {
+    console.error('');
+    console.error('⚠️ ATTENTION: SUPABASE_SERVICE_KEY non configurée !');
+    console.error('Les opérations admin (affiliation) ne fonctionneront pas.');
+    console.error('');
+}
+
 // Vérifier que ce ne sont pas les placeholders
 if (process.env.SUPABASE_URL.includes('xxxxxxxxxxxxx') ||
     process.env.SUPABASE_ANON_KEY.includes('xxxx')) {
