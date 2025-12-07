@@ -39,46 +39,10 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * GET /api/ebooks/:slug
- * Récupère un ebook spécifique par son slug
- */
-router.get('/:slug', async (req, res) => {
-    try {
-        const { slug } = req.params;
-
-        const { data: ebook, error } = await supabase
-            .from('ebooks')
-            .select('*')
-            .eq('slug', slug)
-            .eq('is_active', true)
-            .single();
-
-        if (error || !ebook) {
-            return res.status(404).json({
-                success: false,
-                message: 'Ebook non trouvé'
-            });
-        }
-
-        res.json({
-            success: true,
-            ebook
-        });
-
-    } catch (error) {
-        console.error('❌ Erreur serveur:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Erreur serveur',
-            error: error.message
-        });
-    }
-});
-
-/**
  * GET /api/ebooks/user/purchases
  * Récupère tous les ebooks achetés par l'utilisateur connecté
  * Nécessite authentification
+ * IMPORTANT: Cette route doit être AVANT /:slug pour éviter que "user" soit interprété comme un slug
  */
 router.get('/user/purchases', async (req, res) => {
     try {
@@ -143,6 +107,7 @@ router.get('/user/purchases', async (req, res) => {
  * GET /api/ebooks/check-access/:ebookId
  * Vérifie si l'utilisateur a accès à un ebook spécifique
  * Nécessite authentification
+ * IMPORTANT: Cette route doit être AVANT /:slug
  */
 router.get('/check-access/:ebookId', async (req, res) => {
     try {
@@ -191,6 +156,44 @@ router.get('/check-access/:ebookId', async (req, res) => {
             success: false,
             message: 'Erreur serveur',
             hasAccess: false,
+            error: error.message
+        });
+    }
+});
+
+/**
+ * GET /api/ebooks/:slug
+ * Récupère un ebook spécifique par son slug
+ * IMPORTANT: Cette route dynamique doit être en DERNIER pour éviter de capturer les routes spécifiques
+ */
+router.get('/:slug', async (req, res) => {
+    try {
+        const { slug } = req.params;
+
+        const { data: ebook, error } = await supabase
+            .from('ebooks')
+            .select('*')
+            .eq('slug', slug)
+            .eq('is_active', true)
+            .single();
+
+        if (error || !ebook) {
+            return res.status(404).json({
+                success: false,
+                message: 'Ebook non trouvé'
+            });
+        }
+
+        res.json({
+            success: true,
+            ebook
+        });
+
+    } catch (error) {
+        console.error('❌ Erreur serveur:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erreur serveur',
             error: error.message
         });
     }
