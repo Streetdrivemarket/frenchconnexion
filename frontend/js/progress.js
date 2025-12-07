@@ -53,7 +53,7 @@ class ProgressManager {
                 return;
             }
 
-            const response = await fetch(`${window.API_URL}/api/progress/me`, {
+            const response = await fetch(`${window.API_URL}/progress/me`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -212,9 +212,9 @@ class ProgressManager {
 
             console.log(`🔓 Tentative déverrouillage: ${currentChapterId} → ${nextChapterId}`);
             console.log(`🔑 Token: ${token.substring(0, 20)}...`);
-            console.log(`🌐 URL: ${window.API_URL}/api/progress/unlock`);
+            console.log(`🌐 URL: ${window.API_URL}/progress/unlock`);
 
-            const response = await fetch(`${window.API_URL}/api/progress/unlock`, {
+            const response = await fetch(`${window.API_URL}/progress/unlock`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -401,7 +401,7 @@ class ProgressManager {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`${window.API_URL}/api/progress/reset`, {
+            const response = await fetch(`${window.API_URL}/progress/reset`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
