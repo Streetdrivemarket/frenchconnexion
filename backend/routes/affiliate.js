@@ -54,7 +54,7 @@ const isAdmin = async (req, res, next) => {
 router.post('/register', authMiddleware, async (req, res) => {
     try {
         // Vérifier si l'utilisateur est déjà affilié
-        const { data: existing } = await supabase
+        const { data: existing } = await supabaseAdmin
             .from('affiliates')
             .select('*')
             .eq('user_id', req.user.id)
@@ -102,8 +102,8 @@ router.post('/register', authMiddleware, async (req, res) => {
             .eq('id', req.user.id)
             .single();
 
-        // Créer l'affilié
-        const { data: affiliate, error } = await supabase
+        // Créer l'affilié (utiliser supabaseAdmin pour bypass RLS)
+        const { data: affiliate, error } = await supabaseAdmin
             .from('affiliates')
             .insert({
                 user_id: req.user.id,
@@ -142,7 +142,7 @@ router.post('/register', authMiddleware, async (req, res) => {
 router.get('/stats', authMiddleware, async (req, res) => {
     try {
         // Récupérer le profil affilié
-        const { data: affiliate, error } = await supabase
+        const { data: affiliate, error } = await supabaseAdmin
             .from('affiliates')
             .select('*')
             .eq('user_id', req.user.id)
@@ -153,7 +153,7 @@ router.get('/stats', authMiddleware, async (req, res) => {
         }
 
         // Récupérer les ventes récentes
-        const { data: sales } = await supabase
+        const { data: sales } = await supabaseAdmin
             .from('affiliate_sales')
             .select('*')
             .eq('affiliate_id', affiliate.id)
