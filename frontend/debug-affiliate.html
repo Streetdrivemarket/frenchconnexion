@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 DEBUG AFFILIATION - French Connexion™</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ff00;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            background: #1a1a1a;
+            border: 2px solid #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            color: #00ffff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .info-box {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .info-label {
+            color: #888;
+            font-weight: bold;
+        }
+
+        .info-value {
+            color: #00ff00;
+            word-break: break-all;
+        }
+
+        .btn {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #00cc00;
+            transform: scale(1.05);
+        }
+
+        .btn:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .log-container {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .log-entry {
+            padding: 5px 0;
+            border-bottom: 1px solid #111;
+        }
+
+        .log-time {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .log-success {
+            color: #00ff00;
+        }
+
+        .log-error {
+            color: #ff0000;
+        }
+
+        .log-warning {
+            color: #ffaa00;
+        }
+
+        .log-info {
+            color: #00aaff;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .status-success {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .status-error {
+            background: #ff0000;
+            color: #fff;
+        }
+
+        .status-pending {
+            background: #ffaa00;
+            color: #000;
+        }
+
+        .json-viewer {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        .json-viewer pre {
+            color: #00ff00;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .alert-success {
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            color: #00ff00;
+        }
+
+        .alert-error {
+            background: rgba(255, 0, 0, 0.2);
+            border: 2px solid #ff0000;
+            color: #ff0000;
+        }
+
+        .alert-warning {
+            background: rgba(255, 170, 0, 0.2);
+            border: 2px solid #ffaa00;
+            color: #ffaa00;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .info-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 DEBUG AFFILIATION - French Connexion™</h1>
+
+        <!-- Informations Système -->
+        <div class="section">
+            <h2>📊 Informations Système</h2>
+            <div class="info-box">
+                <div class="info-row">
+                    <span class="info-label">API URL configurée:</span>
+                    <span class="info-value" id="apiUrl">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Token présent:</span>
+                    <span class="info-value" id="hasToken">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Token (début):</span>
+                    <span class="info-value" id="tokenPreview">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Heure actuelle:</span>
+                    <span class="info-value" id="currentTime">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tests Automatiques -->
+        <div class="section">
+            <h2>🧪 Tests Automatiques</h2>
+            <div class="button-group">
+                <button class="btn" onclick="runAllTests()">🚀 LANCER TOUS LES TESTS</button>
+                <button class="btn" onclick="clearLogs()">🗑️ Effacer les logs</button>
+            </div>
+            <div id="autoTestResults"></div>
+        </div>
+
+        <!-- Tests Manuels -->
+        <div class="section">
+            <h2>🎯 Tests Manuels - API</h2>
+            <div class="button-group">
+                <button class="btn" onclick="testHealth()">1️⃣ Test API Health</button>
+                <button class="btn" onclick="testAuth()">2️⃣ Test Authentification</button>
+                <button class="btn" onclick="testAffiliateStats()">3️⃣ Test Stats Affilié</button>
+                <button class="btn" onclick="testAffiliateRegister()">4️⃣ Devenir Affilié</button>
+                <button class="btn" onclick="testLeaderboard()">5️⃣ Test Classement</button>
+            </div>
+        </div>
+
+        <!-- Données Utilisateur -->
+        <div class="section">
+            <h2>👤 Données Utilisateur</h2>
+            <div id="userData"></div>
+        </div>
+
+        <!-- Données Affiliation -->
+        <div class="section">
+            <h2>💰 Données Affiliation</h2>
+            <div id="affiliateData"></div>
+        </div>
+
+        <!-- Logs -->
+        <div class="section">
+            <h2>📝 Logs en Direct</h2>
+            <div class="log-container" id="logs"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // CONFIGURATION - PRODUCTION ONLY
+        // ==========================================
+        const API_URL = window.location.origin + '/api';
+
+        // ==========================================
+        // LOGGING
+        // ==========================================
+        function log(message, type = 'info') {
+            const logsContainer = document.getElementById('logs');
+            const entry = document.createElement('div');
+            entry.className = `log-entry log-${type}`;
+
+            const time = new Date().toLocaleTimeString('fr-FR');
+            entry.innerHTML = `<span class="log-time">[${time}]</span> ${message}`;
+
+            logsContainer.insertBefore(entry, logsContainer.firstChild);
+            console.log(`[${type.toUpperCase()}]`, message);
+        }
+
+        function clearLogs() {
+            document.getElementById('logs').innerHTML = '';
+            log('Logs effacés', 'info');
+        }
+
+        // ==========================================
+        // AFFICHAGE
+        // ==========================================
+        function displayJSON(containerId, data, title = '') {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                ${title ? `<h3 style="color: #00ffff; margin-bottom: 10px;">${title}</h3>` : ''}
+                <div class="json-viewer">
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            `;
+        }
+
+        function showAlert(type, message) {
+            const resultsDiv = document.getElementById('autoTestResults');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            resultsDiv.appendChild(alert);
+        }
+
+        // ==========================================
+        // INITIALISATION
+        // ==========================================
+        function init() {
+            const token = localStorage.getItem('token');
+
+            document.getElementById('apiUrl').textContent = API_URL;
+            document.getElementById('hasToken').textContent = token ? '✅ OUI' : '❌ NON';
+            document.getElementById('tokenPreview').textContent = token ? token.substring(0, 30) + '...' : 'Aucun';
+
+            setInterval(() => {
+                document.getElementById('currentTime').textContent = new Date().toLocaleString('fr-FR');
+            }, 1000);
+
+            log('🚀 Debug Affiliation chargé', 'success');
+            log(`📡 API URL: ${API_URL}`, 'info');
+            log(`🔑 Token présent: ${token ? 'OUI' : 'NON'}`, token ? 'success' : 'error');
+        }
+
+        // ==========================================
+        // TESTS
+        // ==========================================
+        async function testHealth() {
+            log('🏥 Test API Health...', 'info');
+
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                const data = await response.json();
+
+                log(`✅ API Health: ${response.status} - ${data.message}`, 'success');
+                displayJSON('autoTestResults', data, '✅ API Health Response');
+                return true;
+            } catch (error) {
+                log(`❌ API Health FAILED: ${error.message}`, 'error');
+                displayJSON('autoTestResults', { error: error.message }, '❌ API Health Error');
+                return false;
+            }
+        }
+
+        async function testAuth() {
+            log('🔐 Test Authentification...', 'info');
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                log('❌ Pas de token trouvé !', 'error');
+                showAlert('error', '❌ PAS DE TOKEN - Tu dois te connecter d\'abord !');
+                return false;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    log(`❌ Auth FAILED: ${response.status} - ${data.error}`, 'error');
+                    displayJSON('userData', data, '❌ Auth Error');
+                    return false;
+                }
+
+                log(`✅ Authentification OK - User: ${data.user?.email}`, 'success');
+                displayJSON('userData', data, '✅ Données Utilisateur');
+                return true;
+            } catch (error) {
+                log(`❌ Auth Exception: ${error.message}`, 'error');
+                displayJSON('userData', { error: error.message }, '❌ Auth Exception');
+                return false;
+            }
+        }
+
+        async function testAffiliateStats() {
+            log('📊 Test Stats Affilié...', 'info');
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                log('❌ Pas de token !', 'error');
+                return false;
+            }
+
+            try {
+                log(`🌐 URL: ${API_URL}/affiliate/stats`, 'info');
+                log(`🔑 Authorization: Bearer ${token.substring(0, 30)}...`, 'info');
+
+                const response = await fetch(`${API_URL}/affiliate/stats`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                log(`📡 Status HTTP: ${response.status} ${response.statusText}`, 'info');
+
+                const data = await response.json();
+
+                if (response.status === 404) {
+                    log('⚠️ Pas encore affilié (404)', 'warning');
+                    showAlert('warning', '⚠️ TU N\'ES PAS ENCORE AFFILIÉ - Clique sur "4️⃣ Devenir Affilié"');
+                    displayJSON('affiliateData', data, '⚠️ Pas Affilié');
+                    return false;
+                }
+
+                if (!response.ok) {
+                    log(`❌ Stats FAILED: ${response.status} - ${data.error}`, 'error');
+                    displayJSON('affiliateData', data, '❌ Stats Error');
+                    return false;
+                }
+
+                log(`✅ Stats chargées - Code: ${data.affiliate?.code}`, 'success');
+                displayJSON('affiliateData', data, '✅ Tes Stats Affilié');
+                return true;
+            } catch (error) {
+                log(`❌ Stats Exception: ${error.message}`, 'error');
+                displayJSON('affiliateData', { error: error.message }, '❌ Stats Exception');
+                return false;
+            }
+        }
+
+        async function testAffiliateRegister() {
+            log('📝 Test Inscription Affilié...', 'info');
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                log('❌ Pas de token !', 'error');
+                return false;
+            }
+
+            if (!confirm('⚠️ ATTENTION: Cela va créer un compte affilié si tu n\'en as pas.\n\nContinuer ?')) {
+                log('⚠️ Inscription annulée par l\'utilisateur', 'warning');
+                return false;
+            }
+
+            try {
+                log(`🌐 URL: ${API_URL}/affiliate/register`, 'info');
+
+                const response = await fetch(`${API_URL}/affiliate/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                log(`📡 Status HTTP: ${response.status} ${response.statusText}`, 'info');
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    if (data.error && data.error.includes('déjà inscrit')) {
+                        log(`ℹ️ Déjà affilié !`, 'info');
+                        showAlert('success', '✅ TU ES DÉJÀ AFFILIÉ - Teste maintenant "3️⃣ Test Stats"');
+                    } else {
+                        log(`❌ Register FAILED: ${response.status} - ${data.error}`, 'error');
+                    }
+                    displayJSON('affiliateData', data, 'Réponse Inscription');
+                    return false;
+                }
+
+                log(`✅ INSCRIPTION RÉUSSIE ! Code: ${data.affiliate?.code}`, 'success');
+                showAlert('success', `🎉 FÉLICITATIONS ! Tu es maintenant affilié avec le code: ${data.affiliate?.code}`);
+                displayJSON('affiliateData', data, '✅ Inscription Réussie');
+
+                // Recharger les stats
+                setTimeout(() => testAffiliateStats(), 1000);
+                return true;
+            } catch (error) {
+                log(`❌ Register Exception: ${error.message}`, 'error');
+                displayJSON('affiliateData', { error: error.message }, '❌ Register Exception');
+                return false;
+            }
+        }
+
+        async function testLeaderboard() {
+            log('🏆 Test Classement...', 'info');
+
+            try {
+                const response = await fetch(`${API_URL}/affiliate/leaderboard`);
+                const data = await response.json();
+
+                if (!response.ok) {
+                    log(`❌ Leaderboard FAILED: ${response.status}`, 'error');
+                    return false;
+                }
+
+                log(`✅ Classement chargé - ${data.leaderboard?.length || 0} affiliés`, 'success');
+                displayJSON('autoTestResults', data, '🏆 Top 20 Affiliés');
+                return true;
+            } catch (error) {
+                log(`❌ Leaderboard Exception: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function runAllTests() {
+            document.getElementById('autoTestResults').innerHTML = '';
+            log('🚀 ========== DÉBUT DES TESTS ==========', 'info');
+
+            const results = {
+                health: await testHealth(),
+                auth: await testAuth(),
+                stats: await testAffiliateStats(),
+                leaderboard: await testLeaderboard()
+            };
+
+            log('========== FIN DES TESTS ==========', 'info');
+
+            const allPassed = Object.values(results).every(r => r);
+            if (allPassed) {
+                showAlert('success', '✅ TOUS LES TESTS SONT PASSÉS !');
+            } else {
+                showAlert('warning', '⚠️ Certains tests ont échoué - Vérifie les logs ci-dessous');
+            }
+        }
+
+        // ==========================================
+        // AU CHARGEMENT
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            init();
+            setTimeout(() => runAllTests(), 500);
+        });
+    </script>
+</body>
+</html>

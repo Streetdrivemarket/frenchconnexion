@@ -13,79 +13,79 @@ HOOK (0-3s):
 
 PROBLÈME (3-8s):
 Il lui montre comment gagner son argent.
-Pareil pour le français. Personne va le parler à ta place.
+Pareil pour ton business. Personne va le construire à ta place.
 
 SOLUTION (8-12s):
-French Connexion™ - 49€, méthode complète.
-Tu parles français en 90 jours ou remboursé.
+French Connexion™ - 19,99€, processus complet en 9 étapes.
+De l'idée à l'action en 7 jours.
 
 CTA (12-15s):
 Lien en bio. Arrête de procrastiner.
 ```
 
-### Script TikTok #2 - "3 ans d'école"
+### Script TikTok #2 - "3 ans de rêves"
 ```
 HOOK (0-3s):
-3 ans d'école de français = 0 résultat.
+3 ans à rêver d'entrepreneuriat = 0 résultat.
 
 PROBLÈME (3-8s):
-Tu connais la grammaire mais tu peux pas commander un café à Paris.
+Tu connais la théorie mais tu as toujours pas lancé.
 Le système est cassé.
 
 SOLUTION (8-12s):
-French Connexion™ te fait parler en 90 jours.
-Pas de conjugaison inutile. Que du pratique.
+French Connexion™ te fait passer à l'action en 7 jours.
+Pas de théorie inutile. Que du pratique.
 
 CTA (12-15s):
-49€. Lien en bio. Commence aujourd'hui.
+19,99€. Lien en bio. Commence aujourd'hui.
 ```
 
-### Script TikTok #3 - "Netflix français"
+### Script TikTok #3 - "YouTube business"
 ```
 HOOK (0-3s):
-Tu regardes Netflix en français avec sous-titres?
+Tu regardes YouTube sur l'entrepreneuriat?
 
 PROBLÈME (3-8s):
-Ça fait 6 mois. Tu comprends toujours rien.
+Ça fait 6 mois. Tu as toujours rien lancé.
 Parce que tu as pas de méthode.
 
 SOLUTION (8-12s):
-French Connexion™ - système complet.
-90 jours pour parler vraiment.
+French Connexion™ - système complet en 9 étapes.
+7 jours pour passer à l'action vraiment.
 
 CTA (12-15s):
 Arrête de perdre ton temps. Lien en bio.
 ```
 
-### Script TikTok #4 - "L'excuses"
+### Script TikTok #4 - "L'excuse"
 ```
 HOOK (0-3s):
 "J'ai pas le temps" = J'ai pas de plan.
 
 PROBLÈME (3-8s):
-15 min par jour. C'est tout ce que ça prend.
+30 min par jour. C'est tout ce que ça prend.
 Mais tu scrolles TikTok 2h par jour.
 
 SOLUTION (8-12s):
-French Connexion™ - méthode 15 min/jour.
-Résultats garantis en 90 jours.
+French Connexion™ - processus clair en 9 étapes.
+Résultats visibles en 7 jours.
 
 CTA (12-15s):
-49€. Moins cher qu'un resto. Lien en bio.
+19,99€. Moins cher qu'un resto. Lien en bio.
 ```
 
-### Script TikTok #5 - "Duolingo"
+### Script TikTok #5 - "Cours en ligne"
 ```
 HOOK (0-3s):
-Duolingo depuis 400 jours. Toujours pas fluent.
+Tu achètes des cours en ligne depuis 1 an. Toujours rien lancé.
 
 PROBLÈME (3-8s):
-Parce que les apps te gardent prisonnier.
-Pas de résultats = abonnement infini.
+Parce que les formations te gardent prisonnier.
+Pas de résultats = consommation infinie.
 
 SOLUTION (8-12s):
-French Connexion™ - paiement unique 49€.
-Méthode complète. Résultats en 90 jours.
+French Connexion™ - paiement unique 19,99€.
+Méthode complète en 9 étapes. Action en 7 jours.
 
 CTA (12-15s):
 Arrête de nourrir l'algorithme. Lien en bio.
@@ -97,66 +97,66 @@ HOOK (0-3s):
 Tu dépenses 300€ en sorties par mois.
 
 PROBLÈME (3-8s):
-Mais 49€ pour apprendre le français c'est "cher".
+Mais 19,99€ pour ton business c'est "cher".
 Réfléchis 2 secondes à tes priorités.
 
 SOLUTION (8-12s):
-French Connexion™ - 49€ une fois.
-Compétence à vie. ROI infini.
+French Connexion™ - 19,99€ une fois.
+Mindset entrepreneurial à vie. ROI infini.
 
 CTA (12-15s):
 Investis en toi. Lien en bio. Maintenant.
 ```
 
-### Script TikTok #7 - "Voyage Paris"
+### Script TikTok #7 - "Lancer ton projet"
 ```
 HOOK (0-3s):
-Tu veux aller à Paris mais tu parles pas français.
+Tu veux lancer ton business mais tu passes jamais à l'action.
 
 PROBLÈME (3-8s):
-Tu vas rester dans la zone touriste.
-Payer 3x le prix. Passer pour un idiot.
+Tu vas rester dans la zone spectateur.
+Regarder les autres. Passer pour un rêveur.
 
 SOLUTION (8-12s):
-French Connexion™ - parle français en 90 jours.
-Vis Paris comme un Parisien.
+French Connexion™ - passe à l'action en 7 jours.
+Deviens acteur de ta vie.
 
 CTA (12-15s):
-49€. Ton billet pour la vraie France. Lien en bio.
+19,99€. Ton ticket pour les 1%. Lien en bio.
 ```
 
 ### Script TikTok #8 - "Respect"
 ```
 HOOK (0-3s):
-Les Français te respectent quand tu parles français.
+Les gens te respectent quand tu passes à l'action.
 
 PROBLÈME (3-8s):
-Sinon ils passent direct en anglais.
-Tu rates toute l'expérience culturelle.
+Sinon tu restes un rêveur parmi les 99%.
+Tu rates toute l'expérience entrepreneuriale.
 
 SOLUTION (8-12s):
-French Connexion™ - méthode rapide et efficace.
-90 jours pour gagner leur respect.
+French Connexion™ - méthode rapide et efficace en 9 étapes.
+7 jours pour gagner leur respect.
 
 CTA (12-15s):
-Arrête d'être un touriste. Lien en bio.
+Arrête d'être un spectateur. Lien en bio.
 ```
 
-### Script TikTok #9 - "Cerveau"
+### Script TikTok #9 - "Mindset"
 ```
 HOOK (0-3s):
-Apprendre une langue = boost ton cerveau de 40%.
+Changer ton mindset = boost ta vie de 400%.
 
 PROBLÈME (3-8s):
 Mais seulement si tu le fais bien.
-Pas avec des apps qui te font répéter "la pomme".
+Pas avec des vidéos YouTube qui te font rêver.
 
 SOLUTION (8-12s):
-French Connexion™ - méthode scientifique.
-Résultats mesurables en 90 jours.
+French Connexion™ - processus actionnable en 9 étapes.
+Résultats mesurables en 7 jours.
 
 CTA (12-15s):
-49€. Upgrade ton cerveau. Lien en bio.
+19,99€. Upgrade ton mindset. Lien en bio.
 ```
 
 ### Script TikTok #10 - "Deadline"
@@ -165,12 +165,12 @@ HOOK (0-3s):
 Sans deadline, tu vas jamais le faire.
 
 PROBLÈME (3-8s):
-"Un jour j'apprendrai le français."
+"Un jour je vais lancer mon truc."
 Un jour = jamais.
 
 SOLUTION (8-12s):
-French Connexion™ - programme 90 jours.
-Deadline claire. Résultats garantis.
+French Connexion™ - défi 7 jours + processus 9 étapes.
+Deadline claire. Action garantie.
 
 CTA (12-15s):
 Commence aujourd'hui. Pas demain. Lien en bio.
@@ -184,9 +184,9 @@ Commence aujourd'hui. Pas demain. Lien en bio.
 ```
 Yo, question rapide...
 
-Tu galères avec le français ou c'est juste moi?
+Tu galères à passer à l'action ou c'est juste moi?
 
-J'ai trouvé une méthode qui m'a fait parler en 3 mois. 49€ one-time.
+J'ai trouvé un processus qui m'a fait lancer en 7 jours. 19,99€ one-time.
 
 French Connexion™. Check le lien si t'es sérieux.
 
@@ -197,63 +197,63 @@ French Connexion™. Check le lien si t'es sérieux.
 ```
 Vrai talk...
 
-Les cours de français à l'école? Poubelle.
+Les cours de développement perso en ligne? Poubelle.
 
-French Connexion™ m'a appris plus en 90 jours que 3 ans d'école.
+French Connexion™ m'a fait agir plus en 7 jours que 3 ans de théorie.
 
-49€. Si ça marche pas, remboursé.
+19,99€. Si ça marche pas, remboursé.
 
 Lien ici: [TON LIEN]
 ```
 
 ### Script Snap #3
 ```
-Je pensais que le français c'était impossible.
+Je pensais que l'entrepreneuriat c'était impossible.
 
-Trop de conjugaison, trop compliqué.
+Trop compliqué, trop risqué.
 
 French Connexion™ m'a prouvé le contraire.
 
-Méthode simple. 15 min par jour. Ça marche.
+Processus simple en 9 étapes. 30 min par jour. Ça marche.
 
 [TON LIEN]
 ```
 
 ### Script Snap #4
 ```
-T'as déjà essayé Duolingo pendant 6 mois?
+T'as déjà acheté des formations en ligne pendant 6 mois?
 
-Pour rien apprendre?
+Pour rien lancer?
 
 Yeah, moi aussi.
 
-French Connexion™ c'est différent. Résultats réels en 90 jours.
+French Connexion™ c'est différent. Action réelle en 7 jours.
 
 Check: [TON LIEN]
 ```
 
 ### Script Snap #5
 ```
-POV: Tu veux aller à Paris mais tu parles pas français.
+POV: Tu veux lancer ton projet mais tu passes jamais à l'action.
 
 Ça craint.
 
-French Connexion™ - 90 jours pour parler.
+French Connexion™ - 7 jours pour agir.
 
-49€. Moins cher que ton vol.
+19,99€. Moins cher qu'un repas.
 
 [TON LIEN]
 ```
 
 ### Script Snap #6
 ```
-Confession: J'ai payé 500€ pour un prof particulier.
+Confession: J'ai payé 500€ pour un coaching business.
 
 Résultat: nada.
 
-French Connexion™: 49€.
+French Connexion™: 19,99€.
 
-J'ai parlé français en 3 mois.
+J'ai lancé en 7 jours.
 
 Do the math.
 
@@ -262,13 +262,13 @@ Do the math.
 
 ### Script Snap #7
 ```
-Hot take: Le français c'est pas dur.
+Hot take: L'entrepreneuriat c'est pas dur.
 
 Les méthodes traditionnelles sont juste nulles.
 
-French Connexion™ = méthode qui marche.
+French Connexion™ = processus qui marche.
 
-90 jours. Garanti.
+7 jours. Garanti.
 
 Essaye: [TON LIEN]
 ```
@@ -277,9 +277,9 @@ Essaye: [TON LIEN]
 ```
 Tu scrolles depuis 20 minutes.
 
-Imagine si tu mettais ce temps dans le français?
+Imagine si tu mettais ce temps dans ton projet?
 
-French Connexion™ - 15 min/jour suffit.
+French Connexion™ - 30 min/jour suffit.
 
 Arrête de procrastiner.
 
@@ -288,35 +288,35 @@ Arrête de procrastiner.
 
 ### Script Snap #9
 ```
-"J'ai pas le temps d'apprendre le français."
+"J'ai pas le temps de lancer mon projet."
 
 *Passe 3h sur les réseaux*
 
 Bro...
 
-French Connexion™. 15 min par jour. C'est tout.
+French Connexion™. 30 min par jour. C'est tout.
 
 [TON LIEN]
 ```
 
 ### Script Snap #10
 ```
-Les Français quand tu essayes de parler:
+Les gens quand tu leur parles de tes rêves:
 
-"Sorry, I speak English."
+"Ouais, c'est cool."
 
 Ça énerve.
 
-French Connexion™ te fait parler assez bien pour qu'ils arrêtent ça.
+French Connexion™ te fait AGIR assez vite pour qu'ils te respectent.
 
 [TON LIEN]
 ```
 
 ### Script Snap #11
 ```
-J'ai commencé French Connexion™ il y a 2 mois.
+J'ai commencé French Connexion™ il y a 7 jours.
 
-Aujourd'hui j'ai eu une conversation de 10 min en français.
+Aujourd'hui j'ai lancé mon premier projet.
 
 Ça marche vraiment.
 
@@ -325,9 +325,9 @@ Ton tour: [TON LIEN]
 
 ### Script Snap #12
 ```
-Fun fact: Parler français = skill à vie.
+Fun fact: Mindset entrepreneurial = skill à vie.
 
-49€ pour une compétence permanente.
+19,99€ pour une compétence permanente.
 
 C'est le deal du siècle.
 
@@ -338,44 +338,44 @@ French Connexion™.
 
 ### Script Snap #13
 ```
-Tout le monde: "Le français c'est romantique!"
+Tout le monde: "L'entrepreneuriat c'est dur!"
 
-Moi avant: *Comprend rien*
+Moi avant: *Procrastinait*
 
-Moi après French Connexion™: *Smooth*
+Moi après French Connexion™: *J'agis*
 
-90 jours pour y arriver.
+7 jours pour y arriver.
 
 [TON LIEN]
 ```
 
 ### Script Snap #14
 ```
-Update: Je regarde Netflix français sans sous-titres maintenant.
+Update: Je lance des projets sans peur maintenant.
 
 French Connexion™ m'a unlock ce level.
 
-3 mois de travail. Ça vaut le coup.
+7 jours de travail. Ça vaut le coup.
 
 [TON LIEN]
 ```
 
 ### Script Snap #15
 ```
-Parler français sur ton CV?
+Mindset d'entrepreneur sur ton profil?
 
 Ça change tout.
 
-French Connexion™ - 90 jours pour ajouter cette ligne.
+French Connexion™ - 7 jours pour devenir cette personne.
 
-49€. Investissement rentable.
+19,99€. Investissement rentable.
 
 [TON LIEN]
 ```
 
 ### Script Snap #16
 ```
-Question: Pourquoi tu apprends pas le français?
+Question: Pourquoi tu lances pas ton projet?
 
 Réponse honnête: Pas de bonne méthode?
 
@@ -388,11 +388,11 @@ Simple.
 
 ### Script Snap #17
 ```
-Les apps te font payer tous les mois.
+Les formations te font payer tous les mois.
 
-French Connexion™: 49€ une fois. C'est tout.
+French Connexion™: 19,99€ une fois. C'est tout.
 
-Méthode complète. Résultats garantis.
+Processus complet. Action garantie.
 
 No brainer.
 
@@ -401,7 +401,7 @@ No brainer.
 
 ### Script Snap #18
 ```
-Je pensais être trop vieux pour apprendre une langue.
+Je pensais être trop vieux pour entrepreneuriat.
 
 French Connexion™ m'a prouvé le contraire.
 
@@ -414,11 +414,11 @@ Essaye: [TON LIEN]
 ```
 Vibe check: T'as des objectifs ou juste des rêves?
 
-Apprendre le français = objectif.
+Lancer ton business = objectif.
 
-French Connexion™ = plan.
+French Connexion™ = plan en 9 étapes.
 
-90 jours = deadline.
+7 jours = deadline.
 
 [TON LIEN]
 ```
@@ -427,7 +427,7 @@ French Connexion™ = plan.
 ```
 Last call pour arrêter de procrastiner.
 
-French Connexion™. 49€. 90 jours.
+French Connexion™. 19,99€. 7 jours pour agir.
 
 Ou tu continues à dire "un jour".
 
@@ -444,14 +444,14 @@ Ton choix.
 ```
 🎯 TU VEUX QUOI VRAIMENT?
 
-Parler français ou juste en parler?
+Lancer ton business ou juste en parler?
 
 Il y a ceux qui parlent.
 Et ceux qui FONT.
 
-French Connexion™ - 90 jours pour passer du rêve à la réalité.
+French Connexion™ - 7 jours pour passer du rêve à l'action.
 
-49€. Un café par semaine pendant 2 mois.
+19,99€. Un café par jour pendant une semaine.
 
 La vraie question: Tu es sérieux ou pas?
 
@@ -460,12 +460,12 @@ La vraie question: Tu es sérieux ou pas?
 
 ### Message Motivation #2
 ```
-⚡ DANS 90 JOURS...
+⚡ DANS 7 JOURS...
 
 Tu peux soit:
 
 A) Être exactement au même niveau qu'aujourd'hui
-B) Parler français couramment
+B) Avoir lancé ton premier projet
 
 Même temps qui passe.
 Résultats différents.
@@ -481,7 +481,7 @@ Qu'est-ce que tu choisis?
 ```
 💪 ARRÊTE DE TE MENTIR
 
-"Je vais commencer la semaine prochaine."
+"Je vais lancer la semaine prochaine."
 "Quand j'aurai plus de temps."
 "Après les vacances."
 
@@ -490,7 +490,7 @@ FAUX.
 Tu auras jamais le moment parfait.
 Le moment parfait c'est MAINTENANT.
 
-French Connexion™. Commence aujourd'hui.
+French Connexion™. Passe à l'action aujourd'hui.
 
 [TON LIEN]
 ```
@@ -499,14 +499,14 @@ French Connexion™. Commence aujourd'hui.
 ```
 🔥 TON FUTUR TOI
 
-Dans 3 mois, tu vas soit:
+Dans 7 jours, tu vas soit:
 
 Remercier ton toi d'aujourd'hui
 Ou regretter de pas avoir commencé
 
 French Connexion™ - l'investissement que ton futur toi te supplie de faire.
 
-49€. 90 jours. Pas d'excuses.
+19,99€. 7 jours. Pas d'excuses.
 
 [TON LIEN]
 ```
@@ -515,9 +515,9 @@ French Connexion™ - l'investissement que ton futur toi te supplie de faire.
 ```
 🎪 LE CIRQUE DES EXCUSES
 
-"C'est trop cher" - 49€ = 2 pizzas
-"J'ai pas le temps" - 15 min/jour
-"C'est trop dur" - Méthode simplifiée
+"C'est trop cher" - 19,99€ = 1 pizza
+"J'ai pas le temps" - 30 min/jour
+"C'est trop dur" - Processus simplifié en 9 étapes
 "Ça marche pas" - Garantie remboursement
 
 Next excuse?
@@ -531,12 +531,12 @@ French Connexion™ élimine toutes tes raisons de pas essayer.
 ```
 ⏰ LE TEMPS PASSE DE TOUTE FAÇON
 
-Il y a 90 jours, tu aurais pu commencer.
-Aujourd'hui tu parlerais français.
+Il y a 7 jours, tu aurais pu commencer.
+Aujourd'hui tu aurais lancé.
 
 Mais tu as pas commencé.
 
-Même erreur dans 90 jours?
+Même erreur dans 7 jours?
 
 French Connexion™. Arrête le cycle.
 
@@ -545,17 +545,17 @@ French Connexion™. Arrête le cycle.
 
 ### Message Motivation #7
 ```
-🚀 UPGRADE TON CERVEAU
+🚀 UPGRADE TON MINDSET
 
-Apprendre le français c'est pas juste une langue.
+Changer ton mindset c'est pas juste une attitude.
 
 C'est:
-- Boost cognitif
-- Opportunités pro
-- Voyages enrichis
-- Confiance x10
+- Boost de confiance
+- Opportunités business
+- Vie transformée
+- Action x10
 
-French Connexion™ - 49€ pour devenir une meilleure version de toi.
+French Connexion™ - 19,99€ pour devenir une meilleure version de toi.
 
 [TON LIEN]
 ```
@@ -569,7 +569,7 @@ Investissement: Grandit. ROI infini.
 
 French Connexion™ = Investissement.
 
-Compétence à vie. 49€.
+Mindset entrepreneurial à vie. 19,99€.
 
 Tu dépenses plus en conneries cette semaine.
 
@@ -584,8 +584,8 @@ Tu seras pas toujours motivé.
 
 Mais French Connexion™ te donne le SYSTÈME.
 
-90 jours. Structure claire.
-15 min par jour.
+9 étapes. Structure claire.
+30 min par jour.
 
 La discipline fait le reste.
 
@@ -604,7 +604,7 @@ Ils agissent quand les autres parlent.
 
 French Connexion™ - pour ceux qui veulent gagner.
 
-49€. 90 jours. Résultats garantis.
+19,99€. 7 jours. Action garantie.
 
 Tu es un gagnant ou un spectateur?
 
@@ -619,25 +619,25 @@ Tu es un gagnant ou un spectateur?
 ```
 AVANT:
 Marc, 22 ans, étudiant.
-3 ans de français à l'école.
-Comprend rien dans les films français.
+3 ans à consommer du contenu business.
+Toujours pas lancé un seul projet.
 Se sent idiot.
 
 DÉCLIC:
-"Pourquoi je paie pour des cours qui marchent pas?"
+"Pourquoi je regarde des vidéos qui changent rien?"
 Découvre French Connexion™.
-49€. Se dit "fuck it, j'essaye".
+19,99€. Se dit "fuck it, j'essaye".
 
 APRÈS:
-90 jours plus tard.
-Première conversation Zoom avec un Français.
-30 minutes sans bloquer.
+7 jours plus tard.
+Premier projet lancé en ligne.
+Premières ventes en 48h.
 "J'aurais dû faire ça il y a 3 ans."
 
 RÉSULTAT:
-Économisé 500€ de cours privés.
-Parle français couramment.
-Prévu un semestre à Lyon.
+Stop procrastination.
+Projet actif qui génère.
+Confiance x10.
 
 [TON LIEN]
 ```
@@ -646,54 +646,54 @@ Prévu un semestre à Lyon.
 ```
 AVANT:
 Sarah, 35 ans, manager.
-Opportunité de job à Paris.
-Salaire +40%.
-Refuse car elle parle pas français.
+Opportunité de lancer son side business.
+Revenus potentiels +40%.
+Refuse car elle a peur de l'inconnu.
 Regrets énormes.
 
 DÉCLIC:
-"Je vais pas rater ma vie à cause d'une langue."
+"Je vais pas rater ma vie à cause de la peur."
 Trouve French Connexion™.
 Sceptique mais désespérée.
 
 APRÈS:
-12 semaines de méthode.
-Niveau conversationnel solide.
-Redemande le poste.
-L'obtient.
+7 jours de méthode.
+Mindset transformé.
+Lance son projet.
+Ça marche.
 
 RÉSULTAT:
-Vit à Paris.
-Salaire augmenté.
-"Meilleur investissement de 49€ de ma vie."
+Side business actif.
+Revenus augmentés.
+"Meilleur investissement de 19,99€ de ma vie."
 
 [TON LIEN]
 ```
 
-### Story #3 - "Le romantique"
+### Story #3 - "Le rêveur"
 ```
 AVANT:
 Alex, 28 ans.
-Rencontre une Française incroyable à New York.
-Elle rentre à Paris dans 6 mois.
-Lui parle pas français.
-Relation compliquée.
+Idée de business incroyable depuis 2 ans.
+Jamais lancée.
+Voit d'autres copier son idée.
+Frustration énorme.
 
 DÉCLIC:
-"Si je la perds à cause de ça, je vais me détester."
+"Si je lance pas maintenant, je vais me détester."
 French Connexion™.
-Mission: parler français avant son départ.
+Mission: lancer en 7 jours.
 
 APRÈS:
-3 mois de travail acharné.
-15 min chaque matin.
-Jour du départ: conversation complète en français.
-Elle pleure (de joie).
+7 jours de travail focalisé.
+30 min chaque matin.
+Jour 7: projet lancé en ligne.
+Premières réactions positives.
 
 RÉSULTAT:
-Il la suit à Paris 6 mois après.
-Fiancés maintenant.
-"French Connexion™ a sauvé ma relation."
+Business actif depuis 3 mois.
+Premières ventes récurrentes.
+"French Connexion™ a transformé ma vie."
 
 [TON LIEN]
 ```
@@ -702,24 +702,24 @@ Fiancés maintenant.
 ```
 AVANT:
 Tom, 30 ans, designer freelance.
-Clients anglophones uniquement.
-Marché saturé.
+Fait du client service uniquement.
+Pas de produits propres.
 Revenus plafonnés.
 
 DÉCLIC:
-"Il y a 70 millions de francophones."
-"Je rate un marché entier."
+"Je suis prisonnier des clients."
+"Je dois créer mes propres produits."
 Investit dans French Connexion™.
 
 APRÈS:
-90 jours pour parler business français.
-Ouvre son service aux clients français.
-Premier client français après 2 semaines.
+7 jours pour lancer son premier produit digital.
+Mise en ligne immédiate.
+Premières ventes après 2 semaines.
 
 RÉSULTAT:
 Revenus +60% en 6 mois.
-Portfolio international.
-"49€ pour débloquer un nouveau marché. Insane ROI."
+Produits passifs qui tournent.
+"19,99€ pour débloquer ma liberté. Insane ROI."
 
 [TON LIEN]
 ```
@@ -728,24 +728,24 @@ Portfolio international.
 ```
 AVANT:
 David, 42 ans, 2 enfants.
-Femme française.
-Kids bilingues.
-Lui comprend rien quand ils parlent français.
-Se sent exclu de sa propre famille.
+Job corporate qu'il déteste.
+Kids voient papa malheureux chaque jour.
+Rêve de monter son business depuis 10 ans.
+Se sent coincé.
 
 DÉCLIC:
-Fille de 8 ans: "Papa, pourquoi tu parles pas français?"
+Fils de 8 ans: "Papa, pourquoi tu fais ce job si tu l'aimes pas?"
 Ça fait mal.
 French Connexion™ le soir même.
 
 APRÈS:
-3 mois de pratique.
-Premier film français en famille.
-Il comprend tout.
+7 jours de focus.
+Premiers pas vers son projet.
+Il lance enfin.
 Les enfants sont fiers.
 
 RÉSULTAT:
-Famille plus connectée.
+Projet side actif.
 Confiance retrouvée.
 "J'aurais dû faire ça il y a 10 ans."
 
@@ -760,14 +760,14 @@ Confiance retrouvée.
 ```
 Hey!
 
-Je sais que tu voulais apprendre le français.
+Je sais que tu voulais lancer ton projet.
 
-J'ai trouvé cette méthode qui m'a vraiment aidé:
+J'ai trouvé ce processus qui m'a vraiment aidé:
 [TON LIEN]
 
-C'est French Connexion™, 49€ one-time, méthode 90 jours.
+C'est French Connexion™, 19,99€ one-time, processus 9 étapes.
 
-Beaucoup plus efficace que les apps classiques.
+Beaucoup plus efficace que les formations classiques.
 
 Check si ça t'intéresse. Sans pression!
 ```
@@ -776,11 +776,11 @@ Check si ça t'intéresse. Sans pression!
 ```
 Salut,
 
-Tu cherchais une bonne méthode pour le français non?
+Tu cherchais une bonne méthode pour passer à l'action non?
 
 Regarde ça: [TON LIEN]
 
-French Connexion™ - 49€, programme complet.
+French Connexion™ - 19,99€, programme complet.
 J'ai des bons retours dessus.
 
 Dis-moi ce que t'en penses!
@@ -790,16 +790,16 @@ Dis-moi ce que t'en penses!
 ```
 Yo!
 
-Tu te souviens t'avais dit que tu voulais apprendre le français?
+Tu te souviens t'avais dit que tu voulais lancer ton business?
 
 Je suis tombé sur French Connexion™:
 [TON LIEN]
 
 Ce qui m'a convaincu:
-- 49€ (pas d'abonnement)
-- Méthode complète 90 jours
+- 19,99€ (pas d'abonnement)
+- Processus complet en 9 étapes
 - Garantie remboursement
-- Focus sur parler vraiment
+- Focus sur l'action vraiment
 
 Ça a l'air solide. Partage si ça peut t'aider!
 ```
@@ -808,17 +808,17 @@ Ce qui m'a convaincu:
 ```
 Salut!
 
-J'ai commencé à apprendre le français avec cette méthode:
+J'ai commencé à passer à l'action avec ce processus:
 [TON LIEN]
 
 French Connexion™.
 
 Franchement c'est différent de tout ce que j'ai essayé.
-Pas de bullshit, que du pratique.
+Pas de bullshit, que de l'action.
 
 Si tu cherches toujours une bonne méthode, check ça.
 
-Je te tiens au courant de mes progrès!
+Je te tiens au courant de mes résultats!
 ```
 
 ---
@@ -831,13 +831,13 @@ Je comprends!
 
 Mais réfléchis 2 secondes:
 
-- Duolingo Plus: 13€/mois = 156€/an
-- Prof particulier: 30-50€/heure
-- École de langue: 500-2000€
+- Formations en ligne: 50-200€/mois
+- Coach business: 300-1000€/séance
+- Programmes premium: 500-5000€
 
-French Connexion™: 49€ ONE TIME.
+French Connexion™: 19,99€ ONE TIME.
 
-Méthode complète. À vie.
+Processus complet. À vie.
 
 C'est littéralement l'option la moins chère.
 
@@ -852,15 +852,15 @@ Personne sait avant d'essayer!
 
 Mais regarde les faits:
 
-✓ Méthode testée sur des milliers d'étudiants
-✓ Programme structuré 90 jours
-✓ Résultats mesurables
+✓ Processus testé sur des milliers de personnes
+✓ Programme structuré en 9 étapes
+✓ Résultats mesurables en 7 jours
 ✓ Garantie remboursement
 
-Si ça marche pas, tu récupères tes 49€.
+Si ça marche pas, tu récupères tes 19,99€.
 
 Mais statistiquement?
-Ceux qui suivent le programme parlent français en 90 jours.
+Ceux qui suivent le processus passent à l'action en 7 jours.
 
 La vraie question:
 Tu veux rester dans le doute ou essayer?
@@ -872,18 +872,18 @@ C'est l'excuse #1.
 
 Vrai talk: T'as le temps.
 
-French Connexion™ = 15 min/jour.
+French Connexion™ = 30 min/jour.
 
 Tu scrolles TikTok combien de temps?
 Tu regardes Netflix combien de temps?
 
-15 minutes.
-Tout le monde a 15 minutes.
+30 minutes.
+Tout le monde a 30 minutes.
 
 C'est pas une question de temps.
 C'est une question de priorité.
 
-Le français est une priorité ou pas?
+Ton business est une priorité ou pas?
 ```
 
 ### Objection: "Les méthodes en ligne ça marche jamais"
@@ -894,13 +894,13 @@ Tu as raison!
 
 C'est pour ça que French Connexion™ est différent:
 
-❌ Pas de gamification inutile
+❌ Pas de théorie inutile
 ❌ Pas d'abonnement piège
 ❌ Pas de promesses magiques
 
-✓ Méthode structurée
-✓ Focus sur parler réellement
-✓ Résultats en 90 jours ou remboursé
+✓ Processus structuré en 9 étapes
+✓ Focus sur l'action réellement
+✓ Résultats en 7 jours ou remboursé
 
 Si c'était comme les autres, il y aurait pas de garantie.
 
@@ -918,8 +918,8 @@ Statistiques:
 - Le meilleur moment c'était hier
 - Le deuxième meilleur moment c'est maintenant
 
-Dans 90 jours, tu seras soit:
-- En train de parler français
+Dans 7 jours, tu seras soit:
+- En train d'avoir lancé
 - En train de te dire "j'aurais dû commencer"
 
 Le temps passe pareil.
@@ -927,7 +927,7 @@ Le temps passe pareil.
 La seule différence?
 TON ACTION AUJOURD'HUI.
 
-French Connexion™. 49€.
+French Connexion™. 19,99€.
 Commence maintenant.
 
 Pas demain. Pas lundi. Maintenant.
@@ -939,11 +939,11 @@ LOL.
 
 Sérieux?
 
-Le cerveau apprend à tout âge.
+L'entrepreneuriat n'a pas d'âge.
 
-French Connexion™ a des étudiants de 15 à 65 ans.
+French Connexion™ a des membres de 15 à 65 ans.
 
-Tous parlent français en 90 jours.
+Tous passent à l'action en 7 jours.
 
 Tu sais pourquoi?
 
@@ -951,7 +951,7 @@ Parce que l'âge c'est une excuse.
 
 Pas une raison.
 
-Si tu veux apprendre, tu peux apprendre.
+Si tu veux lancer, tu peux lancer.
 
 Point.
 
@@ -986,9 +986,9 @@ Alors on arrête les excuses?
 
 ---
 
-**VERSION:** 1.0
+**VERSION:** 2.0 - CORRIGÉ POUR ENTREPRENEURIAT
 **DERNIÈRE MAJ:** Décembre 2025
-**FRENCH CONNEXION™** - Parle français en 90 jours ou remboursé.
+**FRENCH CONNEXION™** - Passe à l'action en 7 jours ou remboursé.
 
 ---
 

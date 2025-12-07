@@ -462,20 +462,8 @@
     </div>
 
     <script>
-        // API URL dynamique
-        function getApiUrl() {
-            const hostname = window.location.hostname;
-
-            // Développement local
-            if (hostname === 'localhost' || hostname === '127.0.0.1') {
-                return 'http://localhost:3000/api';
-            }
-
-            // Production - utiliser le même domaine que le frontend avec /api
-            return `${window.location.origin}/api`;
-        }
-
-        const API_URL = getApiUrl();
+        // API URL - Même domaine
+        const API_URL = window.location.origin + '/api';
         let affiliateData = null;
 
         // Vérifier l'authentification

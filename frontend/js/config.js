@@ -1,22 +1,9 @@
 // Configuration globale
 // ⚠️ IMPORTANT: Remplace ces valeurs avec tes propres clés avant de déployer en production
 
-// Déterminer l'URL de l'API automatiquement
-function getApiUrl() {
-    const hostname = window.location.hostname;
-
-    // Développement local
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        return 'http://localhost:3000';
-    }
-
-    // Production - Backend API Vercel
-    return 'https://french-connexion-api.vercel.app';
-}
-
-// Exposer l'API URL globalement
-window.API_URL = getApiUrl();
-const API_URL = window.API_URL;
+// API URL - PRODUCTION ONLY (même domaine que le frontend)
+const API_URL = window.location.origin;
+window.API_URL = API_URL;
 
 // Stripe publishable key - MODE LIVE PRODUCTION ⚠️
 const STRIPE_PUBLISHABLE_KEY = 'pk_live_51Safd5FKeI89dgT28Zwt8FznPowY2Z7N0Mdls0AeSn3WEjIgULBlwcYfvFDousgjPEk7Zxl9ssqNlCcImPOmx5LC00yH2Djj9g';

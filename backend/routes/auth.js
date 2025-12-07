@@ -241,12 +241,19 @@ const sessionHandler = async (req, res) => {
             return res.status(401).json({ error: 'Session invalide.' });
         }
 
-        // Récupérer le profil
-        const { data: profile } = await supabase
+        // Récupérer le profil avec service role pour bypass RLS
+        const { data: profile, error: profileError } = await supabaseAdmin
             .from('profiles')
             .select('*')
             .eq('id', user.id)
             .single();
+
+        console.log('📋 Profil récupéré:', {
+            id: user.id,
+            email: user.email,
+            has_paid: profile?.has_paid,
+            profileError
+        });
 
         res.json({
             user: {
