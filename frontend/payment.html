@@ -448,64 +448,6 @@
             font-weight: 700;
         }
 
-        .urgency-banner {
-            margin: 30px 0;
-            padding: 20px;
-            background-color: #ffffff;
-            color: #000000;
-            border: 3px solid #ffffff;
-            text-align: center;
-        }
-
-        .urgency-title {
-            font-size: 14px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .urgency-timer {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            font-family: monospace;
-        }
-
-        .urgency-message {
-            font-size: 11px;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            opacity: 0.8;
-        }
-
-        .scarcity-alert {
-            margin: 20px 0;
-            padding: 15px;
-            border: 2px solid #ffffff;
-            text-align: center;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .scarcity-alert .icon {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        .scarcity-alert .text {
-            font-size: 12px;
-            letter-spacing: 1px;
-            line-height: 1.5;
-        }
-
-        .scarcity-alert .count {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin: 10px 0;
-        }
-
         .auth-footer {
             margin-top: 30px;
             text-align: center;
@@ -561,21 +503,10 @@
         <h1>Investis En Toi</h1>
         <p class="subtitle">Accès à vie • <span class="price-highlight">19,99€</span></p>
 
-        <div class="urgency-banner">
-            <div class="urgency-title">⚠️ Offre à Durée Limitée</div>
-            <div class="urgency-timer" id="countdown-timer">23:45:12</div>
-            <div class="urgency-message">Le prix passe à 29,99€ après expiration du timer</div>
-        </div>
-
-        <div class="scarcity-alert">
-            <div class="icon">🔥</div>
-            <div class="text">Seulement <span class="count" id="spots-remaining">17</span> places restantes à ce prix ce mois</div>
-        </div>
-
         <div class="payment-summary">
             <div class="summary-header">Récapitulatif</div>
             <div class="summary-item">
-                <span>French Connexion™ Ebook</span>
+                <span>THE 1% SECRET™</span>
                 <span>19,99€</span>
             </div>
             <div class="summary-total">
@@ -599,7 +530,7 @@
             <h3>Valeur totale du pack</h3>
 
             <div class="value-item">
-                <div class="value-item-name">📖 Ebook French Connexion™ (50+ pages)</div>
+                <div class="value-item-name">📖 THE 1% SECRET™ (50+ pages)</div>
                 <div class="value-item-price">47€</div>
             </div>
 
@@ -682,7 +613,7 @@
 
             <div class="faq-item">
                 <div class="faq-question">❓ Qu'est-ce que je recevrai exactement ?</div>
-                <div class="faq-answer">L'ebook complet French Connexion™ (50+ pages) avec le processus en 9 étapes, les 20 questions diagnostiques, le défi 7 jours, et toutes les ressources pour passer à l'action. Accès plateforme web + mises à jour gratuites à vie.</div>
+                <div class="faq-answer">L'ebook complet THE 1% SECRET™ (50+ pages) avec le processus en 9 étapes, les 20 questions diagnostiques, le défi 7 jours, et toutes les ressources pour passer à l'action. Accès plateforme web + mises à jour gratuites à vie.</div>
             </div>
 
             <div class="faq-item">
@@ -738,48 +669,5 @@
 
     <script src="js/config.js"></script>
     <script src="js/payment.js"></script>
-    <script>
-        // Timer de compte à rebours (24h qui se reset chaque jour)
-        function updateCountdown() {
-            const now = new Date();
-            const tomorrow = new Date();
-            tomorrow.setHours(24, 0, 0, 0);
-
-            const diff = tomorrow - now;
-
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            const timerElement = document.getElementById('countdown-timer');
-            if (timerElement) {
-                timerElement.textContent =
-                    String(hours).padStart(2, '0') + ':' +
-                    String(minutes).padStart(2, '0') + ':' +
-                    String(seconds).padStart(2, '0');
-            }
-        }
-
-        // Places restantes (nombre aléatoire entre 12 et 25 qui persiste pendant la session)
-        function initializeSpots() {
-            let spots = sessionStorage.getItem('spotsRemaining');
-            if (!spots) {
-                spots = Math.floor(Math.random() * (25 - 12 + 1)) + 12;
-                sessionStorage.setItem('spotsRemaining', spots);
-            }
-
-            const spotsElement = document.getElementById('spots-remaining');
-            if (spotsElement) {
-                spotsElement.textContent = spots;
-            }
-        }
-
-        // Mise à jour toutes les secondes
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        // Initialiser les places
-        initializeSpots();
-    </script>
 </body>
 </html>
