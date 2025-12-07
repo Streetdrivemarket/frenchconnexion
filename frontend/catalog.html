@@ -327,18 +327,26 @@
         // Charger les achats de l'utilisateur
         async function loadUserPurchases(token) {
             try {
+                console.log('🔑 TOKEN REÇU:', token ? token.substring(0, 20) + '...' : 'NULL');
+                console.log('🌐 URL APPELÉE:', `${API_URL}/ebooks/user/purchases`);
+
                 const response = await fetch(`${API_URL}/ebooks/user/purchases`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
 
+                console.log('📡 STATUS:', response.status);
+
                 const data = await response.json();
+                console.log('📦 DATA:', data);
+
                 if (data.success) {
                     userPurchases = data.purchases || [];
+                    console.log('✅ ACHATS CHARGÉS:', userPurchases.length);
                 }
             } catch (error) {
-                console.error('Erreur chargement achats:', error);
+                console.error('❌ Erreur chargement achats:', error);
             }
         }
 
