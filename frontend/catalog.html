@@ -302,33 +302,27 @@
         </div>
     </div>
 
-    <script type="module">
-        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-        const SUPABASE_URL = 'https://vxtowvzxbnkslhpgydwp.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4dG93dnp4Ym5rc2xocGd5ZHdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU2ODEwMTUsImV4cCI6MjA1MTI1NzAxNX0.FMzYG4JGVMJoACh_3NZJ3HFVzlmB__zCwbkJ_WkTY64';
-
-        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        const API_URL = window.location.hostname === 'localhost'
-            ? 'http://localhost:3000/api'
-            : `${window.location.origin}/api`;
+    <script src="js/config.js"></script>
+    <script>
+        // API_URL est déjà défini dans config.js via window.API_URL
+        const API_URL = window.API_URL || `${window.location.origin}/api`;
 
         let currentUser = null;
         let userPurchases = [];
 
         // Vérifier l'authentification
-        async function checkAuth() {
-            const { data: { session } } = await supabase.auth.getSession();
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
 
-            if (!session) {
+            if (!token || !user) {
                 window.location.href = 'login.html';
                 return null;
             }
 
-            currentUser = session.user;
+            currentUser = JSON.parse(user);
             document.getElementById('userEmail').textContent = `Connecté: ${currentUser.email}`;
-            return session.access_token;
+            return token;
         }
 
         // Charger les achats de l'utilisateur
@@ -435,14 +429,15 @@
         }
 
         // Déconnexion
-        window.logout = async function() {
-            await supabase.auth.signOut();
+        window.logout = function() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
             window.location.href = 'login.html';
         };
 
         // Initialisation
         async function init() {
-            const token = await checkAuth();
+            const token = checkAuth();
             if (!token) return;
 
             await loadUserPurchases(token);

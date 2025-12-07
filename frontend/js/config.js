@@ -2,7 +2,7 @@
 // ⚠️ IMPORTANT: Remplace ces valeurs avec tes propres clés avant de déployer en production
 
 // API URL - PRODUCTION ONLY (même domaine que le frontend)
-const API_URL = window.location.origin;
+const API_URL = `${window.location.origin}/api`;
 window.API_URL = API_URL;
 
 // Stripe publishable key - MODE LIVE PRODUCTION ⚠️
