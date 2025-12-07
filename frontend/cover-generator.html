@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Generator - THE 1% SECRET</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .cover {
+            width: 800px;
+            height: 1200px;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            border: 3px solid #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .top {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .fleur {
+            font-size: 60px;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .title-main {
+            font-size: 80px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: #ffffff;
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .title-main .one-percent {
+            color: #ff0000;
+            font-size: 100px;
+            display: block;
+        }
+
+        .title-secret {
+            font-size: 60px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: #ffffff;
+            margin-top: 10px;
+        }
+
+        .middle {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon {
+            font-size: 180px;
+            margin: 40px 0;
+            filter: drop-shadow(0 0 30px rgba(255,0,0,0.5));
+        }
+
+        .tagline {
+            font-size: 22px;
+            letter-spacing: 2px;
+            line-height: 1.6;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .tagline strong {
+            color: #ff0000;
+            font-weight: 700;
+        }
+
+        .bottom {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand {
+            font-size: 24px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #ffffff;
+            font-weight: 700;
+            border-top: 2px solid #ffffff;
+            padding-top: 20px;
+        }
+
+        .instructions {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            border: 2px solid #fff;
+            max-width: 300px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h3>📸 INSTRUCTIONS</h3>
+        <ol>
+            <li>Clique droit sur la cover</li>
+            <li>Sélectionne "Enregistrer l'image sous..."</li>
+            <li>Nom: <strong>the-1-percent-secret-cover.jpg</strong></li>
+            <li>Upload dans <code>/frontend/images/</code></li>
+        </ol>
+        <p><strong>OU</strong></p>
+        <p>Fais une capture d'écran de la cover (sans les instructions)</p>
+    </div>
+
+    <div class="cover">
+        <div class="top">
+            <div class="fleur">⚜</div>
+            <div class="title-main">
+                <span class="one-percent">THE 1%</span>
+            </div>
+            <div class="title-secret">SECRET™</div>
+        </div>
+
+        <div class="middle">
+            <div class="icon">🔒</div>
+            <div class="tagline">
+                Le processus qui sépare<br>
+                <strong>ceux qui agissent</strong><br>
+                de ceux qui rêvent
+            </div>
+        </div>
+
+        <div class="bottom">
+            <div class="brand">FRENCH CONNEXION</div>
+        </div>
+    </div>
+
+    <script>
+        // Permet de télécharger la cover directement
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                alert('📸 Fais une capture d\'écran de la cover !\n\nWindows: Windows + Shift + S\nMac: Cmd + Shift + 4');
+            }
+        });
+    </script>
+</body>
+</html>
