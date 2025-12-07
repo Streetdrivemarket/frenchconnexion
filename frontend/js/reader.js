@@ -141,19 +141,39 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const user = getUser();
 
-    // Vérifier l'accès payant
-    if (!user.has_paid) {
-        alert('Tu dois acheter l\'ebook pour y accéder.');
-        window.location.href = 'payment.html';
-        return;
-    }
+    // Récupérer l'ebook_id depuis l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const ebookId = urlParams.get('ebook_id');
 
-    // Vérifier l'accès via l'API
+    // Si pas d'ebook_id, utiliser l'ID de French Connexion par défaut (rétrocompatibilité)
+    const defaultEbookId = '00000000-0000-0000-0000-000000000001';
+    const currentEbookId = ebookId || defaultEbookId;
+
+    console.log('📖 Chargement ebook:', currentEbookId);
+
+    // Vérifier l'accès à CET ebook spécifique
     try {
-        await apiRequest('/reader/access');
+        const token = getAuthToken();
+        const accessResponse = await fetch(`${API_URL}/ebooks/check-access/${currentEbookId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const accessData = await accessResponse.json();
+
+        if (!accessData.hasAccess) {
+            alert('Tu dois acheter cet ebook pour y accéder.');
+            window.location.href = `catalog.html`;
+            return;
+        }
+
+        console.log('✅ Accès autorisé à l\'ebook');
+
     } catch (error) {
-        alert('Accès refusé. Vérifie ton paiement.');
-        window.location.href = 'payment.html';
+        console.error('❌ Erreur vérification accès:', error);
+        alert('Erreur lors de la vérification de l\'accès.');
+        window.location.href = 'catalog.html';
         return;
     }
 

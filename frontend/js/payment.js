@@ -12,11 +12,90 @@ document.addEventListener('DOMContentLoaded', async () => {
     const user = getUser();
     console.log('👤 Utilisateur:', user);
 
-    // Vérifier si l'utilisateur a déjà payé
-    if (user && user.has_paid) {
-        console.log('✅ Utilisateur a déjà payé, redirection vers reader');
-        window.location.href = 'reader.html';
+    // Récupérer l'ebook_id depuis l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const ebookId = urlParams.get('ebook_id');
+
+    if (!ebookId) {
+        console.error('❌ ID ebook manquant');
+        const errorMsg = document.getElementById('error-message');
+        errorMsg.textContent = 'Aucun ebook sélectionné. Retourne au catalogue.';
+        errorMsg.style.display = 'block';
+        setTimeout(() => {
+            window.location.href = 'catalog.html';
+        }, 2000);
         return;
+    }
+
+    console.log('📖 Chargement de l\'ebook:', ebookId);
+
+    // Charger les informations de l'ebook
+    let currentEbook = null;
+    try {
+        const ebookResponse = await fetch(`${API_URL}/ebooks`);
+        const ebookData = await ebookResponse.json();
+
+        if (!ebookData.success) {
+            throw new Error('Erreur chargement ebook');
+        }
+
+        currentEbook = ebookData.ebooks.find(e => e.id === ebookId);
+
+        if (!currentEbook) {
+            throw new Error('Ebook non trouvé');
+        }
+
+        console.log('✅ Ebook chargé:', currentEbook.title);
+
+        // Mettre à jour le titre de la page
+        document.querySelector('h1').textContent = currentEbook.title;
+        document.querySelector('.subtitle').textContent = currentEbook.short_description || currentEbook.description || '';
+
+        // Mettre à jour les prix affichés
+        const priceText = `${parseFloat(currentEbook.price).toFixed(2)}€`;
+        document.querySelectorAll('.price-highlight').forEach(el => {
+            el.textContent = priceText;
+        });
+        document.getElementById('button-text').textContent = `Payer ${priceText}`;
+
+        // Mettre à jour le résumé de paiement
+        const summaryItem = document.querySelector('.summary-item .item-price');
+        if (summaryItem) {
+            summaryItem.textContent = priceText;
+        }
+        const summaryTotal = document.querySelector('.summary-total .total-price');
+        if (summaryTotal) {
+            summaryTotal.textContent = priceText;
+        }
+
+    } catch (error) {
+        console.error('❌ Erreur chargement ebook:', error);
+        const errorMsg = document.getElementById('error-message');
+        errorMsg.textContent = error.message || 'Erreur lors du chargement de l\'ebook';
+        errorMsg.style.display = 'block';
+        setTimeout(() => {
+            window.location.href = 'catalog.html';
+        }, 2000);
+        return;
+    }
+
+    // Vérifier si l'utilisateur a déjà acheté CET ebook
+    try {
+        const token = getAuthToken();
+        const accessResponse = await fetch(`${API_URL}/ebooks/check-access/${ebookId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const accessData = await accessResponse.json();
+
+        if (accessData.hasAccess) {
+            console.log('✅ Utilisateur a déjà acheté cet ebook, redirection vers reader');
+            window.location.href = `reader.html?ebook_id=${ebookId}`;
+            return;
+        }
+    } catch (error) {
+        console.warn('⚠️ Erreur vérification accès:', error);
     }
 
     // Vérifier que la clé Stripe est configurée
@@ -102,7 +181,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Créer une intention de paiement
                 const response = await apiRequest('/payment/create-payment-intent', {
                     method: 'POST',
-                    body: JSON.stringify({ affiliateRef: affiliateRef })
+                    body: JSON.stringify({
+                        affiliateRef: affiliateRef,
+                        ebook_id: ebookId
+                    })
                 });
 
                 console.log('✅ Intention de paiement créée:', response.clientSecret.substring(0, 20) + '...');
@@ -146,9 +228,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 successMessage.textContent = '✅ Paiement réussi ! Redirection...';
                 successMessage.style.display = 'block';
 
-                // Rediriger vers la page de succès
+                // Rediriger vers le lecteur avec l'ebook acheté
                 setTimeout(() => {
-                    window.location.href = 'payment-success.html';
+                    window.location.href = `reader.html?ebook_id=${ebookId}`;
                 }, 1500);
 
             } catch (error) {
@@ -156,7 +238,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 errorMessage.textContent = error.message || 'Erreur lors du traitement du paiement.';
                 errorMessage.style.display = 'block';
                 submitBtn.disabled = false;
-                buttonText.textContent = 'Payer 19,99€';
+                buttonText.textContent = `Payer ${parseFloat(currentEbook.price).toFixed(2)}€`;
                 spinner.style.display = 'none';
             }
         });

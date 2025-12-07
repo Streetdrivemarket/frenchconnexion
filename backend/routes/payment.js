@@ -30,23 +30,46 @@ const authMiddleware = async (req, res, next) => {
 router.post('/create-checkout-session', authMiddleware, async (req, res) => {
     try {
         const user = req.user;
-        const { affiliateRef } = req.body;
+        const { affiliateRef, ebook_id } = req.body;
 
-        // Vérifier si l'utilisateur a déjà payé
-        const { data: profile } = await supabase
-            .from('profiles')
-            .select('has_paid')
-            .eq('id', user.id)
+        // Valider que l'ebook_id est fourni
+        if (!ebook_id) {
+            return res.status(400).json({
+                error: 'ID de l\'ebook manquant.',
+                message: 'Veuillez sélectionner un ebook.'
+            });
+        }
+
+        // Récupérer les informations de l'ebook
+        const { data: ebook, error: ebookError } = await supabase
+            .from('ebooks')
+            .select('*')
+            .eq('id', ebook_id)
+            .eq('is_active', true)
             .single();
 
-        if (profile && profile.has_paid) {
+        if (ebookError || !ebook) {
+            return res.status(404).json({
+                error: 'Ebook non trouvé.',
+                message: 'Cet ebook n\'existe pas ou n\'est plus disponible.'
+            });
+        }
+
+        // Vérifier si l'utilisateur a déjà acheté CET ebook
+        const { data: existingPurchase } = await supabase
+            .from('user_purchases')
+            .select('*')
+            .eq('user_id', user.id)
+            .eq('ebook_id', ebook_id)
+            .single();
+
+        if (existingPurchase) {
             return res.status(400).json({
                 error: 'Tu as déjà acheté cet ebook.',
                 message: 'Tu peux y accéder directement depuis le lecteur.'
             });
         }
 
-        const price = parseFloat(process.env.EBOOK_PRICE) || 20.00;
         const currency = process.env.CURRENCY || 'eur';
 
         // Créer une session de paiement Stripe
@@ -57,22 +80,23 @@ router.post('/create-checkout-session', authMiddleware, async (req, res) => {
                     price_data: {
                         currency: currency,
                         product_data: {
-                            name: 'French Connexion™ Ebook',
-                            description: 'Accès à vie à l\'ebook French Connexion - Le Processus Complet',
-                            images: [],
+                            name: ebook.title,
+                            description: ebook.description || ebook.short_description || '',
+                            images: ebook.cover_image_url ? [ebook.cover_image_url] : [],
                         },
-                        unit_amount: Math.round(price * 100),
+                        unit_amount: Math.round(ebook.price * 100),
                     },
                     quantity: 1,
                 },
             ],
             mode: 'payment',
             success_url: `${process.env.FRONTEND_URL}/reader.html?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.FRONTEND_URL}/payment.html?canceled=true`,
+            cancel_url: `${process.env.FRONTEND_URL}/payment.html?canceled=true&ebook_id=${ebook_id}`,
             customer_email: user.email,
             metadata: {
                 user_id: user.id,
                 user_email: user.email,
+                ebook_id: ebook_id,
                 affiliate_ref: affiliateRef || ''
             }
         });
@@ -147,11 +171,12 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
 async function handleCheckoutCompleted(session) {
     try {
         const userId = session.metadata.user_id;
+        const ebookId = session.metadata.ebook_id;
         const affiliateRef = session.metadata.affiliate_ref;
 
-        console.log(`✅ Checkout complété pour user ${userId}`);
+        console.log(`✅ Checkout complété pour user ${userId}, ebook ${ebookId}`);
 
-        // Enregistrer le paiement
+        // Enregistrer le paiement dans la table payments
         const { error: paymentError } = await supabase
             .from('payments')
             .insert({
@@ -167,7 +192,24 @@ async function handleCheckoutCompleted(session) {
             console.error('❌ Erreur enregistrement paiement:', paymentError);
         }
 
-        // Mettre à jour le profil
+        // Enregistrer l'achat dans user_purchases (NOUVEAU)
+        const { error: purchaseError } = await supabaseAdmin
+            .from('user_purchases')
+            .insert({
+                user_id: userId,
+                ebook_id: ebookId,
+                price_paid: session.amount_total / 100,
+                payment_intent_id: session.payment_intent,
+                stripe_session_id: session.id
+            });
+
+        if (purchaseError) {
+            console.error('❌ Erreur enregistrement achat:', purchaseError);
+        } else {
+            console.log(`✅ Achat ebook enregistré: user ${userId} → ebook ${ebookId}`);
+        }
+
+        // Mettre à jour le profil (pour rétrocompatibilité)
         const { error: profileError } = await supabase
             .from('profiles')
             .update({ has_paid: true })
@@ -249,7 +291,19 @@ async function handleRefund(charge) {
             .single();
 
         if (payment) {
-            // Révoquer l'accès
+            // Supprimer l'achat de user_purchases (NOUVEAU)
+            const { error: deleteError } = await supabaseAdmin
+                .from('user_purchases')
+                .delete()
+                .eq('payment_intent_id', paymentIntentId);
+
+            if (deleteError) {
+                console.error('❌ Erreur suppression achat:', deleteError);
+            } else {
+                console.log(`✅ Achat supprimé pour user ${payment.user_id}`);
+            }
+
+            // Révoquer l'accès (pour rétrocompatibilité)
             await supabaseAdmin
                 .from('profiles')
                 .update({ has_paid: false })
@@ -324,41 +378,65 @@ async function handleAffiliateCommission(affiliateRef, buyerEmail, amount, payme
 router.post('/create-payment-intent', authMiddleware, async (req, res) => {
     try {
         const user = req.user;
-        const { affiliateRef } = req.body || {};
+        const { affiliateRef, ebook_id } = req.body || {};
 
-        if (affiliateRef) {
-            console.log('💰 Code affilié reçu:', affiliateRef);
+        // Valider que l'ebook_id est fourni
+        if (!ebook_id) {
+            return res.status(400).json({
+                error: 'ID de l\'ebook manquant.',
+                message: 'Veuillez sélectionner un ebook.'
+            });
         }
-        console.log('💳 Création d\'une intention de paiement pour:', user.email);
 
-        // Vérifier si l'utilisateur a déjà payé
-        const { data: profile } = await supabase
-            .from('profiles')
-            .select('has_paid')
-            .eq('id', user.id)
+        // Récupérer les informations de l'ebook
+        const { data: ebook, error: ebookError } = await supabase
+            .from('ebooks')
+            .select('*')
+            .eq('id', ebook_id)
+            .eq('is_active', true)
             .single();
 
-        if (profile && profile.has_paid) {
+        if (ebookError || !ebook) {
+            return res.status(404).json({
+                error: 'Ebook non trouvé.',
+                message: 'Cet ebook n\'existe pas ou n\'est plus disponible.'
+            });
+        }
+
+        // Vérifier si l'utilisateur a déjà acheté CET ebook
+        const { data: existingPurchase } = await supabase
+            .from('user_purchases')
+            .select('*')
+            .eq('user_id', user.id)
+            .eq('ebook_id', ebook_id)
+            .single();
+
+        if (existingPurchase) {
             return res.status(400).json({
                 error: 'Tu as déjà acheté cet ebook.',
                 message: 'Tu peux y accéder directement depuis le lecteur.'
             });
         }
 
-        const price = parseFloat(process.env.EBOOK_PRICE) || 20.00;
+        if (affiliateRef) {
+            console.log('💰 Code affilié reçu:', affiliateRef);
+        }
+        console.log(`💳 Création d'une intention de paiement pour: ${user.email}, ebook: ${ebook.title}`);
+
         const currency = process.env.CURRENCY || 'eur';
 
         // Créer une intention de paiement
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: Math.round(price * 100), // Montant en centimes
+            amount: Math.round(ebook.price * 100), // Montant en centimes
             currency: currency,
             metadata: {
                 user_id: user.id,
                 user_email: user.email,
-                product: 'French Connexion Ebook',
+                ebook_id: ebook_id,
+                product: ebook.title,
                 affiliate_ref: affiliateRef || ''
             },
-            description: 'French Connexion™ Ebook - Accès à vie'
+            description: `${ebook.title} - Accès à vie`
         });
 
         console.log('✅ Payment Intent créé:', paymentIntent.id);
@@ -392,6 +470,7 @@ router.post('/verify-payment', authMiddleware, async (req, res) => {
 
         if (paymentIntent.status === 'succeeded') {
             const affiliateRef = paymentIntent.metadata.affiliate_ref;
+            const ebookId = paymentIntent.metadata.ebook_id;
 
             // Enregistrer le paiement
             const { error: paymentError } = await supabase
@@ -408,7 +487,25 @@ router.post('/verify-payment', authMiddleware, async (req, res) => {
                 console.error('❌ Erreur enregistrement paiement:', paymentError);
             }
 
-            // Mettre à jour le profil
+            // Enregistrer l'achat dans user_purchases (NOUVEAU)
+            if (ebookId) {
+                const { error: purchaseError } = await supabaseAdmin
+                    .from('user_purchases')
+                    .insert({
+                        user_id: user.id,
+                        ebook_id: ebookId,
+                        price_paid: paymentIntent.amount / 100,
+                        payment_intent_id: paymentIntent.id
+                    });
+
+                if (purchaseError) {
+                    console.error('❌ Erreur enregistrement achat:', purchaseError);
+                } else {
+                    console.log(`✅ Achat ebook enregistré: user ${user.id} → ebook ${ebookId}`);
+                }
+            }
+
+            // Mettre à jour le profil (pour rétrocompatibilité)
             const { error: profileError } = await supabase
                 .from('profiles')
                 .update({

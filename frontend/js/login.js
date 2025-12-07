@@ -75,21 +75,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const profileData = await profileResponse.json();
                     localStorage.setItem('user', JSON.stringify(profileData.user));
 
-                    // Rediriger selon le statut de paiement
-                    if (profileData.user.has_paid) {
-                        window.location.href = 'reader.html';
-                    } else {
-                        window.location.href = 'payment.html';
-                    }
+                    // Rediriger vers le catalogue
+                    window.location.href = 'catalog.html';
                 } else {
-                    // Si l'API échoue, rediriger quand même
-                    console.warn('⚠️ Impossible de récupérer le profil, redirection vers payment');
-                    window.location.href = 'payment.html';
+                    // Si l'API échoue, rediriger quand même vers le catalogue
+                    console.warn('⚠️ Impossible de récupérer le profil, redirection vers catalog');
+                    window.location.href = 'catalog.html';
                 }
             } catch (apiError) {
                 console.error('❌ Erreur API:', apiError);
-                // Rediriger quand même
-                window.location.href = 'payment.html';
+                // Rediriger quand même vers le catalogue
+                window.location.href = 'catalog.html';
             }
 
         } catch (error) {

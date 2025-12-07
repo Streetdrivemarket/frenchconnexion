@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue - French Connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .fleur-de-lys {
+            font-size: 40px;
+            color: #ffffff;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .user-info {
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+        }
+
+        .catalog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .ebooks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .ebook-card {
+            border: 2px solid #ffffff;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: #000000;
+        }
+
+        .ebook-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .ebook-cover {
+            width: 100%;
+            height: 200px;
+            background-color: #1a1a1a;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .ebook-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ebook-title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
+
+        .ebook-description {
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            min-height: 60px;
+        }
+
+        .ebook-price {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .ebook-status {
+            font-size: 11px;
+            letter-spacing: 0.8px;
+            margin-bottom: 15px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .status-owned {
+            background-color: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+
+        .status-available {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .ebook-action {
+            width: 100%;
+            padding: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: 2px solid #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-buy {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .btn-buy:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .btn-read {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .btn-read:hover {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 100px 20px;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        .error {
+            text-align: center;
+            padding: 100px 20px;
+            color: #ff0000;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .empty-state-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-text {
+            font-size: 14px;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 30px 15px;
+            }
+
+            .logo {
+                font-size: 24px;
+                letter-spacing: 2px;
+            }
+
+            .fleur-de-lys {
+                font-size: 30px;
+            }
+
+            .section-title {
+                font-size: 16px;
+            }
+
+            .ebooks-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .logout-btn {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="logout-btn" onclick="logout()">Déconnexion</button>
+
+    <div class="header">
+        <div class="logo-container">
+            <span class="fleur-de-lys">⚜</span>
+            <div class="logo">French Connexion</div>
+            <span class="fleur-de-lys">⚜</span>
+        </div>
+        <div class="subtitle">Catalogue des Ebooks</div>
+        <div class="user-info" id="userEmail"></div>
+    </div>
+
+    <div class="catalog-container">
+        <div id="availableSection">
+            <h2 class="section-title">Ebooks Disponibles</h2>
+            <div id="availableEbooks" class="ebooks-grid"></div>
+        </div>
+
+        <div id="ownedSection" style="margin-top: 60px; display: none;">
+            <h2 class="section-title">Mes Ebooks</h2>
+            <div id="ownedEbooks" class="ebooks-grid"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+        const SUPABASE_URL = 'https://vxtowvzxbnkslhpgydwp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ4dG93dnp4Ym5rc2xocGd5ZHdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU2ODEwMTUsImV4cCI6MjA1MTI1NzAxNX0.FMzYG4JGVMJoACh_3NZJ3HFVzlmB__zCwbkJ_WkTY64';
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        const API_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3000/api'
+            : 'https://french-connexion-ebook-2e0xd2y05-streetdrives-projects.vercel.app/api';
+
+        let currentUser = null;
+        let userPurchases = [];
+
+        // Vérifier l'authentification
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+
+            if (!session) {
+                window.location.href = 'login.html';
+                return null;
+            }
+
+            currentUser = session.user;
+            document.getElementById('userEmail').textContent = `Connecté: ${currentUser.email}`;
+            return session.access_token;
+        }
+
+        // Charger les achats de l'utilisateur
+        async function loadUserPurchases(token) {
+            try {
+                const response = await fetch(`${API_URL}/ebooks/user/purchases`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    userPurchases = data.purchases || [];
+                }
+            } catch (error) {
+                console.error('Erreur chargement achats:', error);
+            }
+        }
+
+        // Vérifier si l'utilisateur possède un ebook
+        function userOwnsEbook(ebookId) {
+            return userPurchases.some(purchase => purchase.ebook_id === ebookId);
+        }
+
+        // Charger tous les ebooks disponibles
+        async function loadEbooks() {
+            try {
+                const response = await fetch(`${API_URL}/ebooks`);
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Erreur chargement ebooks');
+                }
+
+                const ebooks = data.ebooks || [];
+
+                if (ebooks.length === 0) {
+                    document.getElementById('availableEbooks').innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📚</div>
+                            <div class="empty-state-text">Aucun ebook disponible pour le moment</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Séparer les ebooks possédés et non possédés
+                const owned = [];
+                const available = [];
+
+                ebooks.forEach(ebook => {
+                    if (userOwnsEbook(ebook.id)) {
+                        owned.push(ebook);
+                    } else {
+                        available.push(ebook);
+                    }
+                });
+
+                // Afficher les ebooks disponibles à l'achat
+                if (available.length > 0) {
+                    document.getElementById('availableEbooks').innerHTML = available.map(ebook => createEbookCard(ebook, false)).join('');
+                } else {
+                    document.getElementById('availableSection').style.display = 'none';
+                }
+
+                // Afficher les ebooks possédés
+                if (owned.length > 0) {
+                    document.getElementById('ownedSection').style.display = 'block';
+                    document.getElementById('ownedEbooks').innerHTML = owned.map(ebook => createEbookCard(ebook, true)).join('');
+                }
+
+            } catch (error) {
+                console.error('Erreur:', error);
+                document.getElementById('availableEbooks').innerHTML = `
+                    <div class="error">
+                        ❌ ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Créer une carte ebook
+        function createEbookCard(ebook, owned) {
+            const price = parseFloat(ebook.price).toFixed(2);
+            const coverImage = ebook.cover_image_url
+                ? `<img src="${ebook.cover_image_url}" alt="${ebook.title}">`
+                : '📖';
+
+            return `
+                <div class="ebook-card">
+                    <div class="ebook-cover">${coverImage}</div>
+                    <h3 class="ebook-title">${ebook.title}</h3>
+                    <p class="ebook-description">${ebook.short_description || ebook.description || ''}</p>
+                    ${owned
+                        ? `<div class="ebook-status status-owned">✓ Ebook acheté</div>
+                           <a href="reader.html?ebook_id=${ebook.id}" class="ebook-action btn-read">Lire maintenant</a>`
+                        : `<div class="ebook-price">${price}€</div>
+                           <div class="ebook-status status-available">Non acheté</div>
+                           <a href="payment.html?ebook_id=${ebook.id}" class="ebook-action btn-buy">Acheter - ${price}€</a>`
+                    }
+                </div>
+            `;
+        }
+
+        // Déconnexion
+        window.logout = async function() {
+            await supabase.auth.signOut();
+            window.location.href = 'login.html';
+        };
+
+        // Initialisation
+        async function init() {
+            const token = await checkAuth();
+            if (!token) return;
+
+            await loadUserPurchases(token);
+            await loadEbooks();
+        }
+
+        init();
+    </script>
+</body>
+</html>
