@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Vérifier si l'utilisateur a déjà acheté CET ebook
     try {
-        const token = getAuthToken();
+        const token = getToken();
         const accessResponse = await fetch(`${API_URL}/ebooks/check-access/${ebookId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`

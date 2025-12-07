@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Vérifier l'accès à CET ebook spécifique
     try {
-        const token = getAuthToken();
+        const token = getToken();
         const accessResponse = await fetch(`${API_URL}/ebooks/check-access/${currentEbookId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
