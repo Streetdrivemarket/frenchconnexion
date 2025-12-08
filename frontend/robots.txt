@@ -1,0 +1,47 @@
+# robots.txt - French Connexion
+# https://www.frenchconnexion.club/robots.txt
+
+User-agent: *
+Allow: /
+
+# Pages à ne pas indexer (privées/authentification requise)
+Disallow: /reader.html
+Disallow: /payment.html
+Disallow: /payment-success.html
+Disallow: /reset-password.html
+Disallow: /forgot-password.html
+Disallow: /affiliate-dashboard.html
+Disallow: /affiliate-content-library.html
+Disallow: /affiliate-kit.html
+Disallow: /affiliate-training.html
+
+# Pages de debug/test
+Disallow: /debug*.html
+Disallow: /test*.html
+
+# Dossiers système
+Disallow: /js/
+Disallow: /css/
+
+# Autoriser les images
+Allow: /images/
+Allow: /favicon.svg
+
+# Sitemap
+Sitemap: https://www.frenchconnexion.club/sitemap.xml
+
+# Délai entre crawls (en secondes)
+Crawl-delay: 1
+
+# User agents spécifiques
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
